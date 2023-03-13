@@ -1,17 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import App from "./App";
+import { Provider } from "react-redux";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import store from "./components/redux/store/store";
+
+// const theme = createTheme({
+//     palette: {
+//         primary: {
+//             main: "#013e87",
+//         },
+//         myCustomColor: {
+//             main: red[400],
+//             light: red[100],
+//             dark: red[800],
+//         },
+//     },
+//     typography: {
+//         h1: {
+//             fontSize: "3rem",
+//             fontWeight: 600,
+//         },
+//         h2: {
+//             fontSize: "1.75rem",
+//             fontWeight: 600,
+//         },
+//     },
+// });
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
