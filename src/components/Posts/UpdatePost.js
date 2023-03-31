@@ -1,11 +1,13 @@
 import {
     Alert,
+    Box,
     Button,
     Container,
     Paper,
     TextInput,
     Textarea,
 } from "@mantine/core";
+import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
 import React, { useEffect } from "react";
 import {
     fetchDetailPostAction,
@@ -15,6 +17,7 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IconAlertCircle } from "@tabler/icons-react";
+import ReactQuill from "react-quill";
 import { Redirect } from "react-router-dom";
 
 const UpdatePost = (props) => {
@@ -32,6 +35,7 @@ const UpdatePost = (props) => {
 
     useEffect(() => {
         dispatch(fetchDetailPostAction(id));
+        window.scrollTo(0, 0);
     }, [id, dispatch]);
 
     //select post
@@ -94,7 +98,7 @@ const UpdatePost = (props) => {
                         {...form.getInputProps("title")}
                     />
 
-                    <Textarea
+                    {/* <Textarea
                         placeholder="Deskripsi"
                         label="Deskripsi"
                         withAsterisk
@@ -106,7 +110,20 @@ const UpdatePost = (props) => {
                         //     setValueDesc(e.target.value);
                         // }}
                         {...form.getInputProps("description")}
-                    />
+                    /> */}
+
+                    <Box mt={20}>
+                        <EditorToolbar toolbarId={"t2"} />
+                        <ReactQuill
+                            theme="snow"
+                            // value={userInfo.information}
+                            // onChange={oninformation}
+                            placeholder={"Tulis sesuatu..."}
+                            modules={modules("t2")}
+                            formats={formats}
+                            {...form.getInputProps("description")}
+                        />
+                    </Box>
 
                     {loading ? (
                         <Button mt={10} fullWidth disabled>

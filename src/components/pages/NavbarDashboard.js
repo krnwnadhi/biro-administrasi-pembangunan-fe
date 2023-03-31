@@ -23,7 +23,10 @@ const mockdata = [
     {
         label: "Dashboard",
         icon: IconGauge,
-        links: [{ label: "Dashboard", link: "/dashboard" }],
+        links: [
+            { label: "Home", link: "/" },
+            { label: "Dashboard", link: "/dashboard" },
+        ],
     },
     {
         label: "Post",
@@ -136,7 +139,7 @@ export default function NavbarDashboard() {
                 <Group position="apart">
                     {/* <Logo width={120} /> */}
                     LOGO
-                    {/* <Code sx={{ fontWeight: 700 }}>v3.1.2</Code> */}
+                    <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
                 </Group>
             </Navbar.Section>
 

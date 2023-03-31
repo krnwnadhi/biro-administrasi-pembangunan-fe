@@ -9,6 +9,7 @@ import {
     Paper,
     Text,
     Title,
+    TypographyStylesProvider,
 } from "@mantine/core";
 import { IconPencil, IconTrash } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
@@ -98,7 +99,7 @@ const PostDetailsPublic = (props) => {
 
                         <Divider my="xl" variant="dotted" />
 
-                        <Title my="sm" order={1} align="center">
+                        <Title my="sm" order={1}>
                             {postDetail?.title}
                         </Title>
 
@@ -149,9 +150,17 @@ const PostDetailsPublic = (props) => {
 
                         <Divider my="xl" variant="dotted" />
 
-                        <Text ta="justify" fz="lg">
+                        {/* <Text ta="justify" fz="lg">
                             {postDetail?.description}
-                        </Text>
+                        </Text> */}
+
+                        <TypographyStylesProvider>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: postDetail?.description,
+                                }}
+                            />
+                        </TypographyStylesProvider>
                     </>
                 )}
             </Container>

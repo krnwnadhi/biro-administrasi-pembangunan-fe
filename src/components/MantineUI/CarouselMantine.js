@@ -1,61 +1,5 @@
-// import Autoplay from "embla-carousel-autoplay";
-// import { Carousel } from "@mantine/carousel";
-// import { createStyles } from "@mantine/core";
-// import { useRef } from "react";
-
-// const useStyles = createStyles((theme) => ({
-//     img: {
-//         // position: "relative",
-//         backgroundImage: "url(https://source.unsplash.com/random)",
-//         backgroundSize: "cover",
-//         backgroundPosition: "center",
-//     },
-// }));
-
-// export default function CarouselMantine() {
-//     const { classes } = useStyles();
-//     const autoplay = useRef(Autoplay({ delay: 3000 }));
-
-//     return (
-//         <Carousel
-//             sx={{ maxWidth: 520 }}
-//             mx="auto"
-//             mt={20}
-//             withIndicators
-//             height={400}
-//             slideSize="70%"
-//             slideGap="xl"
-//             // loop
-//             // dragFree
-//             plugins={[autoplay.current]}
-//             onMouseEnter={autoplay.current.stop}
-//             onMouseLeave={autoplay.current.reset}
-//             // styles={{
-//             //     control: {
-//             //         "&[data-inactive]": {
-//             //             opacity: 0,
-//             //             cursor: "default",
-//             //         },
-//             //     },
-//             // }}
-//         >
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-//             <Carousel.Slide className={classes.img} />
-
-//             {/* ...other slides */}
-//         </Carousel>
-//     );
-// }
-
 import {
+    Badge,
     Button,
     Paper,
     Text,
@@ -64,17 +8,20 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
+import DateFormatter from "../../utils/dateFormatter";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { basePostURL } from "../../utils/baseURL";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useMediaQuery } from "@mantine/hooks";
 
 const useStyles = createStyles((theme) => ({
     card: {
-        height: 275,
+        height: 350,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -92,7 +39,7 @@ const useStyles = createStyles((theme) => ({
         fontWeight: 900,
         color: theme.black,
         lineHeight: 1.2,
-        fontSize: 32,
+        fontSize: 28,
         marginTop: theme.spacing.xs,
     },
 
@@ -104,7 +51,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-function Card({ image, title, category, _id }) {
+function Card({ image, title, category, createdAt, _id }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -127,12 +74,28 @@ function Card({ image, title, category, _id }) {
             className={classes.card}
         >
             <div>
-                <Text className={classes.category} size="xs">
-                    {category}
-                </Text>
+                {/* <Badge
+                    variant="gradient"
+                    gradient={{ from: "orange", to: "red" }}
+                    mb={10}
+                >
+                    Terbaru
+                </Badge> */}
                 <Title order={3} className={classes.title}>
                     {title}
                 </Title>
+                <Text size="sm" color="dark">
+                    <DateFormatter date={createdAt} />
+                </Text>
+                <Badge
+                    color="red"
+                    size="sm"
+                    radius="sm"
+                    variant="filled"
+                    className={classes.category}
+                >
+                    {category}
+                </Badge>
             </div>
             <Button
                 mb={20}
@@ -140,6 +103,8 @@ function Card({ image, title, category, _id }) {
                 // to={`/posts/${_id}`}
                 // to={`/berita/${_id}`}
                 to={"/berita"}
+                target="_blank"
+                rel="noopener noreferrer"
                 // to={"/posts"}
                 radius="md"
                 size="md"
@@ -161,15 +126,21 @@ export default function CarouselMantine() {
 
     const post = useSelector((state) => state?.post);
     const { postList = [], loading, appError, serverError } = post;
-    console.log(postList);
+    // console.log(postList);
+
+    const { result = [] } = postList;
+    // console.log(result);
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-    const slides = postList.map((item) => (
-        <Carousel.Slide key={item._id}>
-            <Card {...item} />
-        </Carousel.Slide>
-    ));
+    const slides = [...result]
+        .sort((a, b) => (a > b ? 1 : -1))
+        .map((item) => (
+            <Carousel.Slide key={item._id}>
+                <Card {...item} />
+            </Carousel.Slide>
+        ))
+        .slice(0, 5);
 
     return (
         <Carousel
@@ -183,7 +154,7 @@ export default function CarouselMantine() {
             align="start"
             slidesToScroll={mobile ? 1 : 2}
             loop
-            slides={slides}
+            // slides={slides}
             withIndicators
             plugins={[autoplay.current]}
             onMouseEnter={autoplay.current.stop}
@@ -196,6 +167,8 @@ export default function CarouselMantine() {
                     },
                 },
             }}
+            // slidesInView={3}
+            // inViewThreshold={0.5}
         >
             {slides}
         </Carousel>

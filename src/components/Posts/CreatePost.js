@@ -1,6 +1,12 @@
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import "react-quill/dist/quill.snow.css";
+
 import {
     Alert,
+    Box,
     Button,
+    Center,
     Container,
     Divider,
     Group,
@@ -8,29 +14,45 @@ import {
     Loader,
     Paper,
     Select,
-    SimpleGrid,
     Text,
     TextInput,
     Textarea,
     useMantineTheme,
 } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
 import {
     IconAlertCircle,
-    IconChevronLeft,
     IconPhoto,
     IconUpload,
     IconX,
 } from "@tabler/icons-react";
-import { Link, Redirect } from "react-router-dom";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
+import ReactQuill from "react-quill";
+import { Redirect } from "react-router-dom";
 import { createPostAction } from "../redux/slices/posts/postSlice";
 import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
-import { useEffect } from "react";
+
+// import Viewer from "../pages/Viewer";
+
+// import EditorToolbar, { formats, modules } from "./EditorToolbar";
+
+// import { EditorState, convertToRaw } from "draft-js";
+
+// import { Editor } from "react-draft-wysiwyg";
+
+// import draftToHtml from "draftjs-to-html";
 
 export default function CreatePost() {
+    const [editorMarkdownValue, setEditorMarkdownValue] = useState("");
+
+    const onEditorContentChanged = (content) => {
+        // setEditorHtmlValue(content.html);
+        setEditorMarkdownValue(content.markdown);
+    };
     const theme = useMantineTheme();
 
     const dispatch = useDispatch();
@@ -98,34 +120,88 @@ export default function CreatePost() {
 
                 <Divider labelPosition="center" my="xl" />
 
-                <form onSubmit={formOnSubmit}>
-                    {appError || serverError ? (
-                        <Alert
-                            icon={<IconAlertCircle size={16} />}
-                            title="Error!"
-                            color="red"
-                        >
-                            Tidak ada Token! Silahkan login kembali.
-                        </Alert>
-                    ) : null}
-                    <TextInput
-                        withAsterisk
-                        label="Judul"
-                        placeholder="Judul Artikel"
-                        {...form.getInputProps("title")}
-                    />
+                {loading ? (
+                    <Center style={{ minHeight: "80vh" }}>
+                        <Loader mt={20} size="lg" variant="dots" />
+                    </Center>
+                ) : (
+                    <form onSubmit={formOnSubmit}>
+                        {appError || serverError ? (
+                            <Alert
+                                icon={<IconAlertCircle size={16} />}
+                                title="Error!"
+                                color="red"
+                            >
+                                Tidak ada Token! Silahkan login kembali.
+                            </Alert>
+                        ) : null}
 
-                    <Textarea
+                        <TextInput
+                            withAsterisk
+                            label="Judul"
+                            aria-label="My input"
+                            placeholder="Judul Artikel"
+                            {...form.getInputProps("title")}
+                        />
+
+                        {/* <Textarea
                         mt={10}
                         withAsterisk
                         label="Deskripsi"
                         placeholder="Deskripsi Artikel"
                         {...form.getInputProps("description")}
-                    />
+                    /> */}
+                        {/* <Text mt={10}>Deskripsi</Text> */}
+                        <Box mt={20}>
+                            <EditorToolbar toolbarId={"t2"} />
+                            <ReactQuill
+                                theme="snow"
+                                // value={userInfo.information}
+                                // onChange={oninformation}
+                                placeholder={"Tulis sesuatu..."}
+                                modules={modules("t2")}
+                                formats={formats}
+                                {...form.getInputProps("description")}
+                            />
+                        </Box>
 
-                    {loading ? (
-                        <Loader mt={20} size="lg" variant="dots" />
-                    ) : (
+                        {/* <Viewer value={editorMarkdownValue} /> */}
+
+                        {/* <div
+                        style={{
+                            minHeight: "300px",
+                            border: "1px solid lightgray",
+                            marginTop: "10px",
+                            padding: "5px",
+                        }}
+                    >
+                        <Editor
+                            editorState={editorState}
+                            onEditorStateChange={(newState) => {
+                                setEditorState(newState);
+                            }}
+                            // onEditorStateChange={setEditorState}
+                            // {...form.getInputProps("description")}
+                        />
+                    </div>
+
+                    <div>
+                        <Textarea
+                            value={draftToHtml(
+                                convertToRaw(editorState.getCurrentContent())
+                            )}
+                            onChange={(event) => {
+                                setEditorState(event.currentTarget.value);
+                                // console.log(event);
+                            }}
+                        />
+                    </div> */}
+
+                        {/* {loading ? (
+                            <Center>
+                                <Loader mt={20} size="lg" variant="dots" />
+                            </Center>
+                        ) : ( */}
                         <Select
                             mt={10}
                             // required
@@ -143,69 +219,76 @@ export default function CreatePost() {
                             maxDropdownHeight={120}
                             {...form.getInputProps("category")}
                         />
-                    )}
+                        {/* )} */}
 
-                    <Dropzone
-                        mt={20}
-                        onDrop={(image) => {
-                            form.setFieldValue("image", image[0]);
-                        }}
-                        maxSize={1 * 1024 ** 2}
-                        accept={IMAGE_MIME_TYPE}
-                        name={form.values.image}
-                    >
-                        <Group
-                            position="center"
-                            spacing="xl"
-                            style={{ minHeight: 75, pointerEvents: "none" }}
+                        <Dropzone
+                            mt={20}
+                            onDrop={(image) => {
+                                form.setFieldValue("image", image[0]);
+                            }}
+                            maxSize={1 * 1024 ** 2}
+                            accept={IMAGE_MIME_TYPE}
+                            name={form.values.image}
                         >
-                            <Dropzone.Accept>
-                                <IconUpload
-                                    size={50}
-                                    stroke={1.5}
-                                    color={
-                                        theme.colors[theme.primaryColor][
-                                            theme.colorScheme === "dark" ? 4 : 6
-                                        ]
-                                    }
-                                />
-                            </Dropzone.Accept>
-                            <Dropzone.Reject>
-                                <IconX
-                                    size={50}
-                                    stroke={1.5}
-                                    color={
-                                        theme.colors.red[
-                                            theme.colorScheme === "dark" ? 4 : 6
-                                        ]
-                                    }
-                                />
-                            </Dropzone.Reject>
-                            <Dropzone.Idle>
-                                <IconPhoto size={50} stroke={1.5} />
-                            </Dropzone.Idle>
+                            <Group
+                                position="center"
+                                spacing="xl"
+                                style={{ minHeight: 75, pointerEvents: "none" }}
+                            >
+                                <Dropzone.Accept>
+                                    <IconUpload
+                                        size={50}
+                                        stroke={1.5}
+                                        color={
+                                            theme.colors[theme.primaryColor][
+                                                theme.colorScheme === "dark"
+                                                    ? 4
+                                                    : 6
+                                            ]
+                                        }
+                                    />
+                                </Dropzone.Accept>
+                                <Dropzone.Reject>
+                                    <IconX
+                                        size={50}
+                                        stroke={1.5}
+                                        color={
+                                            theme.colors.red[
+                                                theme.colorScheme === "dark"
+                                                    ? 4
+                                                    : 6
+                                            ]
+                                        }
+                                    />
+                                </Dropzone.Reject>
+                                <Dropzone.Idle>
+                                    <IconPhoto size={50} stroke={1.5} />
+                                </Dropzone.Idle>
 
-                            <div>
-                                <Text size="md" inline>
-                                    Seret gambar ke sini atau klik untuk memilih
-                                    file
-                                </Text>
-                                <Text size="xs" color="dimmed" inline mt={7}>
-                                    File hanya ber-ektensi JPEG/JPG. File tidak
-                                    boleh lebih dari 1MB.
-                                </Text>
-                            </div>
-                        </Group>
-                    </Dropzone>
-
-                    <Text size="sm" color="red" ta="center">
-                        {appErrorPost
-                            ? "File terlalu besar, Silahkan refresh browser dahulu"
-                            : null}
-                    </Text>
-
-                    <Group position="apart" mt="xl">
-                        {/* <Button
+                                <div>
+                                    <Text size="md" inline>
+                                        Seret gambar ke sini atau klik untuk
+                                        memilih file
+                                    </Text>
+                                    <Text
+                                        size="xs"
+                                        color="dimmed"
+                                        inline
+                                        mt={7}
+                                    >
+                                        File hanya ber-ektensi JPEG/JPG. File
+                                        tidak boleh lebih dari 1MB.
+                                    </Text>
+                                </div>
+                            </Group>
+                        </Dropzone>
+                        <Text size="sm" color="red" ta="center">
+                            {appErrorPost
+                                ? "File terlalu besar, Silahkan refresh browser dahulu"
+                                : null}
+                        </Text>
+                        <Group position="apart" mt="xl">
+                            {/* <Button
                             compact
                             component={Link}
                             color="gray"
@@ -216,21 +299,22 @@ export default function CreatePost() {
                         >
                             <Text>Post</Text>
                         </Button> */}
-                        {loadingPost ? (
-                            <Button disabled compact loading>
-                                Loading...
-                            </Button>
-                        ) : (
-                            <Button
-                                disabled={!form.isValid()}
-                                type="submit"
-                                compact
-                            >
-                                Tambah
-                            </Button>
-                        )}
-                    </Group>
-                </form>
+                            {loadingPost ? (
+                                <Button disabled compact loading>
+                                    Loading...
+                                </Button>
+                            ) : (
+                                <Button
+                                    disabled={!form.isValid()}
+                                    type="submit"
+                                    compact
+                                >
+                                    Tambah
+                                </Button>
+                            )}
+                        </Group>
+                    </form>
+                )}
             </Container>
         </Paper>
     );

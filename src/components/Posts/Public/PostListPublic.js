@@ -1,248 +1,27 @@
-// import {
-//     ActionIcon,
-//     Badge,
-//     Button,
-//     Group,
-//     Image,
-//     List,
-//     Loader,
-//     Paper,
-//     Table,
-//     Text,
-//     useMantineTheme,
-// } from "@mantine/core";
-// import { IconPencil, IconPlus } from "@tabler/icons-react";
-// import { useDispatch, useSelector } from "react-redux";
-
-// import DateFormatter from "../../../utils/dateFormatter";
-// import { Link } from "react-router-dom";
-// import React from "react";
-// import { fetchAllCategoryAction } from "../../redux/slices/category/categorySlice";
-// import { fetchAllPostAction } from "../../redux/slices/posts/postSlice";
-// import { useEffect } from "react";
-
-// const PostListPublic = (req, res) => {
-//     // console.log(req);
-//     const dispatch = useDispatch();
-
-//     useEffect(() => {
-//         dispatch(fetchAllPostAction(""));
-//     }, [dispatch]);
-
-//     useEffect(() => {
-//         dispatch(fetchAllCategoryAction());
-//     }, [dispatch]);
-
-//     const theme = useMantineTheme();
-
-//     const jobColors = {
-//         sosial: "blue",
-//         ekonomi: "cyan",
-//         teknologi: "pink",
-//     };
-
-//     const post = useSelector((state) => state?.post);
-
-//     const { postList = [], loading, appError, serverError } = post;
-//     // console.log(postList);
-
-//     const category = useSelector((state) => state?.category);
-//     const {
-//         // appError: appErrorCat,
-//         categoryList,
-//         // loading: loadingCat,
-//         // serverError: serverErrorCat,
-//     } = category;
-//     // console.log(categoryList);
-
-//     // const allCategories = categoryList?.map((category) => {
-//     //     return {
-//     //         label: category?.title,
-//     //         value: category?.title,
-//     //     };
-//     // });
-
-//     return (
-//         <Paper p="xl" radius={0} style={{ minHeight: "92vh" }}>
-//             <Text mb={30}>Daftar Post</Text>
-//             <Button
-//                 component={Link}
-//                 to="/tambah-post"
-//                 variant=""
-//                 leftIcon={<IconPlus size={14} />}
-//                 mb={10}
-//             >
-//                 Tambah
-//             </Button>
-//             <div>
-//                 <div onClick={() => dispatch(fetchAllPostAction(""))}>
-//                     Reset Kategori
-//                 </div>
-//                 {categoryList?.map((category) => (
-//                     <List key={category._id}>
-//                         <List.Item
-//                             sx={{
-//                                 width: 100,
-//                                 // backgroundColor: "gray"
-//                             }}
-//                             onClick={() =>
-//                                 dispatch(fetchAllPostAction(category?.title))
-//                             }
-//                         >
-//                             {category?.title}
-//                         </List.Item>
-//                     </List>
-//                 ))}
-//             </div>
-//             <div>
-//                 {loading ? (
-//                     <Loader size="xl" variant="dots" />
-//                 ) : appError || serverError ? (
-//                     <h2>
-//                         {appError}
-//                         {serverError}
-//                     </h2>
-//                 ) : postList?.length <= 0 ? (
-//                     <h2>Tidak ada Post</h2>
-//                 ) : (
-//                     <Table
-//                         striped
-//                         highlightOnHover
-//                         verticalSpacing="sm"
-//                         horizontalSpacing="xl"
-//                         withBorder
-//                         withColumnBorders
-//                         mt={10}
-//                         sx={{ width: "100%" }}
-//                     >
-//                         <thead>
-//                             <tr>
-//                                 {/* <th>Author</th> */}
-//                                 <th>Judul</th>
-//                                 <th style={{ width: "40%" }}>Deskripsi</th>
-//                                 <th>Kategori</th>
-//                                 <th>Gambar</th>
-//                                 <th>Dibuat</th>
-//                                 <th>Aksi</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {postList &&
-//                                 postList.map((post) => (
-//                                     <tr key={post?._id}>
-//                                         {/* <td>
-//                                             <Group>
-//                                                 <Avatar
-//                                                     size={40}
-//                                                     radius={40}
-//                                                     src={
-//                                                         post?.user?.profilePhoto
-//                                                     }
-//                                                 />
-//                                                 <div>
-//                                                     <Text
-//                                                         size="sm"
-//                                                         weight={500}
-//                                                     >
-//                                                         {post?.user?.fullName}
-//                                                     </Text>
-//                                                     <Text
-//                                                         color="dimmed"
-//                                                         size="xs"
-//                                                     >
-//                                                         {post?.user?.email}
-//                                                     </Text>
-//                                                 </div>
-//                                             </Group>
-//                                         </td> */}
-//                                         <td>
-//                                             <Text size="sm" weight={500}>
-//                                                 {post?.title}
-//                                             </Text>
-//                                         </td>
-//                                         <td>
-//                                             <Text lineClamp={1}>
-//                                                 {post?.description}
-//                                             </Text>
-//                                         </td>
-//                                         <td>
-//                                             <Badge
-//                                                 color={
-//                                                     jobColors[
-//                                                         post?.title.toLowerCase()
-//                                                     ]
-//                                                 }
-//                                                 variant={
-//                                                     theme.colorScheme === "dark"
-//                                                         ? "light"
-//                                                         : "outline"
-//                                                 }
-//                                             >
-//                                                 {post?.category}
-//                                             </Badge>
-//                                         </td>
-//                                         <td>
-//                                             <Image
-//                                                 src={post?.image}
-//                                                 width={50}
-//                                                 fit="contain"
-//                                                 alt="Gambar Rusak"
-//                                             />
-//                                         </td>
-//                                         <td>
-//                                             <DateFormatter
-//                                                 date={post?.createdAt}
-//                                             />
-//                                         </td>
-//                                         <td>
-//                                             <Group spacing={0} position="left">
-//                                                 <ActionIcon
-//                                                     component={Link}
-//                                                     // to={`/update-kategori/${post?._id}`}
-//                                                     to={`/posts/update/${post?._id}`}
-//                                                     color="blue"
-//                                                 >
-//                                                     <IconPencil
-//                                                         size={16}
-//                                                         stroke={1.5}
-//                                                     />
-//                                                 </ActionIcon>
-//                                             </Group>
-//                                         </td>
-//                                     </tr>
-//                                 ))}
-//                         </tbody>
-//                     </Table>
-//                 )}
-//             </div>
-//         </Paper>
-//     );
-// };
-
-// export default PostListPublic;
-
 import {
-    AspectRatio,
     Avatar,
     Box,
+    Button,
     Card,
     Center,
-    Container,
-    Divider,
     Group,
     Image,
     Loader,
+    Pagination,
     SimpleGrid,
     Text,
+    TextInput,
     createStyles,
     useMantineTheme,
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import DateFormatter from "../../../utils/dateFormatter";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { basePostURL } from "../../../utils/baseURL";
 import { fetchAllPostAction } from "../../redux/slices/posts/postSlice";
-import { useEffect } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 
 const useStyles = createStyles((theme) => ({
@@ -277,7 +56,63 @@ export default function PostListPublic() {
 
     const post = useSelector((state) => state?.post);
     const { postList = [], appError, serverError, loading } = post;
-    console.log(postList);
+
+    const [postItem, setPostItem] = useState([postList]);
+    const [load, setLoad] = useState(false);
+    const [page, setPage] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [pages, setPages] = useState(0);
+    const [rows, setRows] = useState(0);
+    const [keyword, setKeyword] = useState("");
+    const [query, setQuery] = useState("");
+
+    // console.log(postItem);
+
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        getPost();
+        window.scrollTo(0, 0);
+
+        return () => {
+            abortController.abort();
+        };
+    }, [page, keyword]);
+
+    const getPost = async () => {
+        const response = await axios.get(
+            `${basePostURL}?search_query=${keyword}&page=${page}&limit=${limit}`
+        );
+        // console.log(response);
+        setPostItem(response.data.result);
+        setPage(response.data.page);
+        setPages(response.data.totalItem);
+        setRows(response.data.totalPage);
+    };
+
+    const handlePageChange = (event) => {
+        setPage(event);
+        console.log(event);
+    };
+
+    const searchData = (e) => {
+        e.preventDefault();
+        setLoad(true);
+        setTimeout(() => {
+            setPage(0);
+            setKeyword(query);
+            setLoad(false);
+        }, 1000);
+    };
+
+    const resetData = (e) => {
+        e.preventDefault();
+        setQuery("");
+    };
+
+    const handleTextInput = (e) => {
+        setQuery(e.target.value);
+    };
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
@@ -296,16 +131,37 @@ export default function PostListPublic() {
                     padding: theme.spacing.xl,
                     borderRadius: theme.radius.md,
                     // cursor: "pointer",
-
-                    // "&:hover": {
-                    //     backgroundColor:
-                    //         theme.colorScheme === "dark"
-                    //             ? theme.colors.dark[5]
-                    //             : theme.colors.gray[2],
-                    // },
                 })}
             >
                 Home / Berita
+                <Group mb={30} position="center">
+                    <TextInput
+                        placeholder="Cari Artikel Berita"
+                        value={query}
+                        onChange={handleTextInput}
+                    />
+                    {load ? (
+                        <Button
+                            loading={
+                                load ? (
+                                    <Loader size="md" variant="dots" />
+                                ) : null
+                            }
+                        >
+                            Mencari
+                        </Button>
+                    ) : (
+                        <Button onClick={searchData}>Cari Berita</Button>
+                    )}
+                    <Button
+                        onClick={resetData}
+                        disabled={!query}
+                        variant="outline"
+                        color="red"
+                    >
+                        Reset
+                    </Button>
+                </Group>
                 <SimpleGrid
                     p="xl"
                     verticalSpacing="xl"
@@ -317,7 +173,7 @@ export default function PostListPublic() {
                     ]}
                 >
                     {loading ? (
-                        <Center inline>
+                        <Center style={{ minHeight: "70vh" }}>
                             <Loader size="xl" variant="dots" />
                         </Center>
                     ) : appError || serverError ? (
@@ -325,89 +181,107 @@ export default function PostListPublic() {
                             {appError}
                             {serverError}
                         </h2>
-                    ) : postList?.length <= 0 ? (
+                    ) : postItem?.length <= 0 ? (
                         <h2>Tidak ada Post</h2>
                     ) : (
-                        [...postList]
-                            .sort((a, b) => (a > b ? 1 : -1))
-                            .map((item) => {
-                                return (
-                                    <Card
-                                        key={item._id}
-                                        withBorder
-                                        radius="md"
-                                        // p={0}
-                                        className={classes.card}
-                                        shadow="xl"
-                                    >
-                                        <Group noWrap spacing={0}>
-                                            <Image
-                                                src={item.image}
-                                                height={mobile ? 140 : 240}
-                                                width={mobile ? 140 : 240}
-                                                radius="xl"
-                                            />
-                                            <div className={classes.body}>
-                                                <Text
-                                                    transform="uppercase"
-                                                    color="dimmed"
-                                                    weight={700}
-                                                    size="xs"
-                                                >
-                                                    {item.category}
-                                                </Text>
-                                                <Text
-                                                    component={Link}
-                                                    to={`/berita/${item._id}`}
-                                                    className={classes.title}
-                                                    mt="xs"
-                                                    mb="md"
-                                                >
-                                                    {item.title}
-                                                </Text>
-                                                {/* <Divider /> */}
-                                                <Group
-                                                    noWrap
-                                                    spacing="xs"
-                                                    mt={20}
-                                                >
-                                                    {/* <Group spacing="xs" noWrap> */}
-                                                    <Avatar
-                                                        size={20}
-                                                        src={
-                                                            item.user
-                                                                .profilePhoto
+                        postItem
+                            // .sort((a, b) => (a > b ? 1 : -1))
+                            ?.map((item, index) => {
+                                if (item.length !== 0) {
+                                    return (
+                                        <Card
+                                            key={index}
+                                            withBorder
+                                            radius="md"
+                                            className={classes.card}
+                                            shadow="xl"
+                                        >
+                                            <Group noWrap spacing={0}>
+                                                <Image
+                                                    src={item?.image}
+                                                    height={mobile ? 140 : 240}
+                                                    width={mobile ? 140 : 240}
+                                                    radius="xl"
+                                                />
+                                                <div className={classes.body}>
+                                                    <Text
+                                                        transform="uppercase"
+                                                        color="dimmed"
+                                                        weight={700}
+                                                        size="xs"
+                                                    >
+                                                        {item?.category}
+                                                    </Text>
+                                                    <Text
+                                                        component={Link}
+                                                        to={`/berita/${item._id}`}
+                                                        className={
+                                                            classes.title
                                                         }
-                                                    />
-                                                    <Text size="xs">
-                                                        {item.user.fullName}
-                                                    </Text>
-                                                    {/* </Group> */}
-                                                    <Text
-                                                        size="xs"
-                                                        color="dimmed"
+                                                        mt="xs"
+                                                        mb="md"
                                                     >
-                                                        •
+                                                        {item?.title}
                                                     </Text>
-                                                    <Text
-                                                        size="xs"
-                                                        color="dimmed"
+                                                    {/* <Divider /> */}
+                                                    <Group
+                                                        noWrap
+                                                        spacing="xs"
+                                                        mt={20}
                                                     >
-                                                        <DateFormatter
-                                                            date={
-                                                                item?.createdAt
+                                                        {/* <Group spacing="xs" noWrap> */}
+                                                        <Avatar
+                                                            size={20}
+                                                            src={
+                                                                item?.user
+                                                                    ?.profilePhoto
                                                             }
                                                         />
-                                                    </Text>
-                                                </Group>
-                                            </div>
-                                        </Group>
-                                    </Card>
-                                );
+                                                        <Text size="xs">
+                                                            {
+                                                                item?.user
+                                                                    ?.fullName
+                                                            }
+                                                        </Text>
+                                                        {/* </Group> */}
+                                                        <Text
+                                                            size="xs"
+                                                            color="dimmed"
+                                                        >
+                                                            •
+                                                        </Text>
+                                                        <Text
+                                                            size="xs"
+                                                            color="dimmed"
+                                                        >
+                                                            <DateFormatter
+                                                                date={
+                                                                    item?.createdAt
+                                                                }
+                                                            />
+                                                        </Text>
+                                                    </Group>
+                                                </div>
+                                            </Group>
+                                        </Card>
+                                    );
+                                } else {
+                                    return console.log(" ");
+                                }
                             })
                     )}
                 </SimpleGrid>
-                <SimpleGrid
+                <Center>
+                    <Box p={20}>
+                        <Pagination
+                            onChange={handlePageChange}
+                            total={rows}
+                            withControls
+                            withEdges
+                        />
+                    </Box>
+                </Center>
+                {/* <SimpleGrid
                     p="xl"
                     verticalSpacing="xl"
                     cols={2}
@@ -434,7 +308,7 @@ export default function PostListPublic() {
                             frameBorder="0"
                         />
                     </AspectRatio>
-                </SimpleGrid>
+                </SimpleGrid> */}
             </Box>
             {/* </Container> */}
         </>

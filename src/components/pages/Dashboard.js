@@ -147,7 +147,6 @@ function Dashboard(/*{ children }*/) {
             {/* <ScrollArea> */}
             {/* <TableMantine /> */}
             <PostList />
-
             {/* </ScrollArea> */}
         </AppShell>
     );

@@ -158,7 +158,10 @@ export const deletePostAction = createAsyncThunk(
 //slices
 const postSlices = createSlice({
     name: "post",
-    initialState: {},
+    initialState: {
+        // total: 0,
+        // page: 1,
+    },
     extraReducers: (builder) => {
         //create post
         builder.addCase(createPostAction.pending, (state, action) => {
