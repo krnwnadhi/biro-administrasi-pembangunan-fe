@@ -4,6 +4,7 @@ import {
     Button,
     Card,
     Center,
+    CloseButton,
     Group,
     Image,
     Loader,
@@ -133,13 +134,24 @@ export default function PostListPublic() {
                     // cursor: "pointer",
                 })}
             >
-                Home / Berita
+                <Text mb={20}>Home / Berita</Text>
                 <Group mb={30} position="center">
-                    <TextInput
-                        placeholder="Cari Artikel Berita"
-                        value={query}
-                        onChange={handleTextInput}
-                    />
+                    <div style={{ width: 200 }}>
+                        <TextInput
+                            placeholder="Cari Artikel Berita"
+                            value={query}
+                            onChange={handleTextInput}
+                            rightSection={
+                                query ? (
+                                    <CloseButton
+                                        onClick={resetData}
+                                        disabled={!query}
+                                        aria-label="Close modal"
+                                    />
+                                ) : null
+                            }
+                        />
+                    </div>
                     {load ? (
                         <Button
                             loading={
@@ -153,14 +165,6 @@ export default function PostListPublic() {
                     ) : (
                         <Button onClick={searchData}>Cari Berita</Button>
                     )}
-                    <Button
-                        onClick={resetData}
-                        disabled={!query}
-                        variant="outline"
-                        color="red"
-                    >
-                        Reset
-                    </Button>
                 </Group>
                 <SimpleGrid
                     p="xl"
