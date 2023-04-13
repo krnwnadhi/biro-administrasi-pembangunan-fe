@@ -36,16 +36,6 @@ import { Redirect } from "react-router-dom";
 import { createPostAction } from "../redux/slices/posts/postSlice";
 import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
 
-// import Viewer from "../pages/Viewer";
-
-// import EditorToolbar, { formats, modules } from "./EditorToolbar";
-
-// import { EditorState, convertToRaw } from "draft-js";
-
-// import { Editor } from "react-draft-wysiwyg";
-
-// import draftToHtml from "draftjs-to-html";
-
 export default function CreatePost() {
     const [editorMarkdownValue, setEditorMarkdownValue] = useState("");
 
@@ -63,6 +53,7 @@ export default function CreatePost() {
 
     //get category data from store
     const category = useSelector((state) => state?.category);
+
     const { categoryList = [], loading, appError, serverError } = category;
 
     const allCategories = categoryList?.map((category) => {

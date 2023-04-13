@@ -90,14 +90,14 @@ const PostDetailsPublic = (props) => {
                     <>
                         <Text>{appError || serverError}</Text>
 
-                        <Image
+                        {/* <Image
                             src={postDetail?.image}
                             radius="xl"
                             height={500}
                             fit="contain"
-                        />
+                        /> */}
 
-                        <Divider my="xl" variant="dotted" />
+                        {/* <Divider my="xl" variant="dotted" /> */}
 
                         <Title my="sm" order={1}>
                             {postDetail?.title}

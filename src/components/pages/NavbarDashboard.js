@@ -46,16 +46,16 @@ const mockdata = [
         label: "Dokumen",
         icon: IconFile,
         links: [
-            { label: "Daftar Dokumen", link: "#" },
-            { label: "Tambah Dokumen", link: "#" },
+            { label: "Daftar Dokumen", link: "/dashboard/documents" },
+            { label: "Tambah Dokumen", link: "/dashboard/tambah-document" },
         ],
     },
     {
         label: "Galeri",
         icon: IconPhotoSearch,
         links: [
-            { label: "Album", link: "#" },
-            { label: "Tambah Galeri", link: "#" },
+            // { label: "Album", link: "/dashboard/gallery" },
+            // { label: "Tambah Galeri", link: "/dashboard/tambah-gallery" },
         ],
     },
 
@@ -139,7 +139,7 @@ export default function NavbarDashboard() {
                 <Group position="apart">
                     {/* <Logo width={120} /> */}
                     LOGO
-                    <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+                    <Code sx={{ fontWeight: 700 }}>v1.0.0</Code>
                 </Group>
             </Navbar.Section>
 

@@ -7,11 +7,21 @@ import AddCategory from "./components/Categories/AddCategory";
 import AdminRoute from "./components/Navigation/ProtectedRoutes/AdminRoute";
 import CategoryList from "./components/Categories/CategoryList";
 import Contact from "./components/pages/Contact";
+import CreateDocument from "./components/Documents/CreateDocument";
+import CreateGallery from "./components/Gallery/CreateGallery";
 import CreatePost from "./components/Posts/CreatePost";
 import Dashboard from "./components/pages/Dashboard";
 import DashboardAddPost from "./components/pages/DashboardAddPost";
 import DashboardListPost from "./components/pages/DashboardListPost";
+import DocumentDetails from "./components/Documents/DocumentDetails";
+import DocumentDetailsPublic from "./components/Documents/public/DocumentDetailsPublic";
+import DocumentList from "./components/Documents/DocumentList";
+import DocumentListPublic from "./components/Documents/public/DocumentListPublic";
 import FooterMantine from "./components/MantineUI/FooterMantine";
+import GalleryDetails from "./components/Gallery/GalleryDetails";
+import GalleryDetailsPublic from "./components/Gallery/public/GalleryDetailsPublic";
+import GalleryList from "./components/Gallery/GalleryList";
+import GalleryListPublic from "./components/Gallery/public/GalleryListPublic";
 import HomePage from "./components/pages/HomePage";
 import Informasi from "./components/pages/Informasi";
 import { ModalsProvider } from "@mantine/modals";
@@ -72,24 +82,34 @@ const App = () => {
                                     <Switch>
                                         <Route
                                             exact
+                                            path="/signin"
+                                            component={SignInMantine}
+                                        />
+
+                                        <Route
+                                            exact
                                             path="/"
                                             component={HomePage}
                                         />
+
                                         <Route
                                             exact
                                             path="/profil"
                                             component={Profile}
                                         />
+
                                         <Route
                                             exact
                                             path="/informasi"
                                             component={Informasi}
                                         />
+
                                         <Route
                                             exact
                                             path="/kontak"
                                             component={Contact}
                                         />
+
                                         <Route
                                             exact
                                             path="/about"
@@ -122,12 +142,6 @@ const App = () => {
 
                                         <AdminRoute
                                             exact
-                                            path="/dashboard/daftar-post"
-                                            component={PostList}
-                                        />
-
-                                        <AdminRoute
-                                            exact
                                             path="/dashboard/tambah-kategori"
                                             component={AddCategory}
                                         />
@@ -142,6 +156,12 @@ const App = () => {
                                             exact
                                             path="/dashboard/update-kategori/:id"
                                             component={UpdateCategory}
+                                        />
+
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/daftar-post"
+                                            component={PostList}
                                         />
 
                                         <AdminRoute
@@ -174,11 +194,65 @@ const App = () => {
                                             component={UpdatePost}
                                         />
 
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/gallery"
+                                            component={GalleryList}
+                                        />
+
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/tambah-gallery"
+                                            component={CreateGallery}
+                                        />
+
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/gallery/:id"
+                                            component={GalleryDetails}
+                                        />
+
                                         <Route
                                             exact
-                                            path="/signin"
-                                            component={SignInMantine}
+                                            path="/gallery"
+                                            component={GalleryListPublic}
                                         />
+
+                                        <Route
+                                            exact
+                                            path="/gallery/:id"
+                                            component={GalleryDetailsPublic}
+                                        />
+
+                                        {/* <AdminRoute
+                                            exact
+                                            path="/dashboard/documents/:id"
+                                            component={DocumentDetails}
+                                        /> */}
+
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/documents"
+                                            component={DocumentList}
+                                        />
+
+                                        <AdminRoute
+                                            exact
+                                            path="/dashboard/tambah-document"
+                                            component={CreateDocument}
+                                        />
+
+                                        <Route
+                                            exact
+                                            path="/documents"
+                                            component={DocumentListPublic}
+                                        />
+
+                                        {/* <Route
+                                            exact
+                                            path="/documents/:id"
+                                            component={DocumentDetailsPublic}
+                                        /> */}
 
                                         {/* {isAdmin && ( */}
                                         {/* <Route
