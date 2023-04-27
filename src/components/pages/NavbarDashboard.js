@@ -63,7 +63,7 @@ const mockdata = [
         label: "Video",
         icon: IconVideo,
         links: [
-            { label: "Daftar Video", link: "#" },
+            { label: "Daftar Video", link: "/video" },
             { label: "Tambah Video", link: "#" },
         ],
     },

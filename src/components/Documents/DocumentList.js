@@ -1,71 +1,21 @@
 import {
     ActionIcon,
-    Avatar,
-    Box,
     Button,
-    Card,
-    Center,
-    CloseButton,
     Container,
-    Divider,
     Group,
-    Image,
-    List,
-    Loader,
-    Pagination,
-    Paper,
-    SimpleGrid,
     Table,
     Text,
-    TextInput,
-    createStyles,
-    useMantineTheme,
 } from "@mantine/core";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { IconChevronLeft, IconTrash } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
-import { IconTrash } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import download from "downloadjs";
-import { fetchAllGalleryAction } from "../redux/slices/gallery/gallerySlice";
-import { useMediaQuery } from "@mantine/hooks";
-
-// import DateFormatter from "../../../utils/dateFormatter";
-
-const useStyles = createStyles((theme) => ({
-    card: {
-        backgroundColor:
-            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-        "&:hover": {
-            transform: "scale(1.02)",
-        },
-        transition: "transform 500ms ease",
-    },
-
-    title: {
-        fontWeight: 700,
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-        lineHeight: 1.2,
-    },
-
-    body: {
-        padding: theme.spacing.xl,
-    },
-}));
 
 const DocumentList = () => {
-    const { classes } = useStyles();
-    const dispatch = useDispatch();
-    // const { _id } = useParams();
-
-    useEffect(() => {
-        dispatch(fetchAllGalleryAction());
-        window.scrollTo(0, 0);
-    }, [dispatch]);
-
     const [filesList, setFilesList] = useState([]);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -83,12 +33,13 @@ const DocumentList = () => {
         getFilesList();
     }, []);
 
-    const downloadFile = async (id, path, mimetype) => {
+    const downloadFile = async (id, file_path, mimetype) => {
         try {
             const result = await axios.get(`${baseDocumentURL}/${id}`, {
                 responseType: "blob",
             });
-            const split = path.split("/");
+
+            const split = file_path.split("/");
             const filename = split[split.length - 1];
 
             setErrorMsg("");
@@ -97,6 +48,8 @@ const DocumentList = () => {
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 setErrorMsg("Error while downloading file. Try again later");
+            } else if (error.response.status === 500) {
+                setErrorMsg("File not found. Try again later");
             }
         }
     };
@@ -111,7 +64,14 @@ const DocumentList = () => {
                 >
                     Tambah Dokumen
                 </Button>
-                <Table>
+                {errorMsg && <p>{errorMsg}</p>}
+                <Table
+                    highlightOnHover
+                    withBorder
+                    withColumnBorders
+                    horizontalSpacing="md"
+                    verticalSpacing="md"
+                >
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -133,10 +93,9 @@ const DocumentList = () => {
                                     <tr key={_id}>
                                         <td>{title}</td>
                                         <td>{description}</td>
-                                        <td>
+                                        <td style={{ textAlign: "center" }}>
                                             <a
                                                 href="#/"
-                                                // to={`${baseDocumentURL}/${_id}`}
                                                 onClick={() =>
                                                     downloadFile(
                                                         _id,
@@ -151,9 +110,6 @@ const DocumentList = () => {
                                         <td>
                                             <ActionIcon
                                                 color="red"
-                                                // loading={loading}
-                                                // onClick={openDeleteModal}
-                                                // onClick={handleDelete}
                                                 onClick={async () => {
                                                     await axios.delete(
                                                         `${baseDocumentURL}/${_id}`
@@ -188,7 +144,20 @@ const DocumentList = () => {
                         )}
                     </tbody>
                 </Table>
-                {errorMsg && <p>{errorMsg}</p>}
+
+                <Group position="apart" mt="xl">
+                    <Button
+                        compact
+                        component={Link}
+                        color="gray"
+                        to="/dashboard"
+                        variant="subtle"
+                        leftIcon={<IconChevronLeft size={12} />}
+                        size="xs"
+                    >
+                        <Text>Dashboard</Text>
+                    </Button>
+                </Group>
             </Container>
         </div>
     );

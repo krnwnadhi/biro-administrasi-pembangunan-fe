@@ -38,6 +38,7 @@ import Profile from "./components/pages/Profile";
 import SignInMantine from "./components/pages/SignInMantine";
 import UpdateCategory from "./components/Categories/UpdateCategory";
 import UpdatePost from "./components/Posts/UpdatePost";
+import VideoList from "./components/video/VideoList";
 
 const App = () => {
     const [colorScheme, setColorScheme] = useLocalStorage({
@@ -224,11 +225,11 @@ const App = () => {
                                             component={GalleryDetailsPublic}
                                         />
 
-                                        {/* <AdminRoute
+                                        <AdminRoute
                                             exact
                                             path="/dashboard/documents/:id"
                                             component={DocumentDetails}
-                                        /> */}
+                                        />
 
                                         <AdminRoute
                                             exact
@@ -247,6 +248,12 @@ const App = () => {
                                             path="/documents"
                                             component={DocumentListPublic}
                                         />
+
+                                        {/* <Route
+                                            exact
+                                            path="/video"
+                                            component={VideoList}
+                                        /> */}
 
                                         {/* <Route
                                             exact

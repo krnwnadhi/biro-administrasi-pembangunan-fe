@@ -1,54 +1,29 @@
 import {
-    Alert,
-    Box,
     Button,
-    Center,
     Container,
     Divider,
     FileInput,
     Group,
-    Image,
-    Loader,
     Paper,
-    Select,
     Text,
     TextInput,
-    Textarea,
     useMantineTheme,
 } from "@mantine/core";
-import {
-    IconAlertCircle,
-    IconChevronLeft,
-    IconPhoto,
-    IconUpload,
-    IconX,
-} from "@tabler/icons-react";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 
+import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 export default function CreateDocument(props) {
-    // const [file, setFile] = useState(null);
-    const [previewSrc, setPreviewSrc] = useState("");
-    const [loading, setLoading] = useState(false);
-
     const [errorMsg, setErrorMsg] = useState("");
-    const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
-    const dropzoneRef = useRef();
 
     const theme = useMantineTheme();
 
     const history = useHistory();
-
-    // useEffect(() => {
-    //     dropzoneRef.current.focus();
-    // }, []);
 
     const form = useForm({
         initialValues: {
@@ -69,7 +44,6 @@ export default function CreateDocument(props) {
 
     const formOnSubmit = form.onSubmit(async (values, event) => {
         event.preventDefault();
-        // console.log(values);
 
         try {
             if (
@@ -78,9 +52,9 @@ export default function CreateDocument(props) {
             ) {
                 if (form.values.files) {
                     const formData = new FormData();
-                    formData.append("files", form.values.files);
                     formData.append("title", form.values.title);
                     formData.append("description", form.values.description);
+                    formData.append("files", form.values.files);
 
                     setErrorMsg("");
 
@@ -100,9 +74,6 @@ export default function CreateDocument(props) {
             error.response && setErrorMsg(error.response.data);
         }
     });
-
-    // Redirect
-    // if (isCreated) return <Redirect to="/dashboard/gallery" />;
 
     return (
         <Paper radius="md" p="xl">
@@ -141,18 +112,35 @@ export default function CreateDocument(props) {
                         label="Files"
                         description="Input files berekstensi pdf/excel."
                         placeholder="Silahkan Pilih Files"
-                        // multiple
                         clearable
                         required
                         withAsterisk
-                        accept="pdf, xls, xlsx"
+                        accept=".pdf, .xls, .xlsx"
                         error={errorMsg}
                         {...form.getInputProps("files")}
                     />
 
-                    <Button disabled={!form.isValid()} type="submit" compact>
-                        Tambah
-                    </Button>
+                    <Group position="apart" mt="xl">
+                        <Button
+                            compact
+                            component={Link}
+                            color="gray"
+                            to="/dashboard/documents"
+                            variant="subtle"
+                            leftIcon={<IconChevronLeft size={12} />}
+                            size="xs"
+                        >
+                            <Text>Dokumen</Text>
+                        </Button>
+
+                        <Button
+                            disabled={!form.isValid()}
+                            type="submit"
+                            compact
+                        >
+                            Tambah
+                        </Button>
+                    </Group>
                 </form>
             </Container>
         </Paper>
