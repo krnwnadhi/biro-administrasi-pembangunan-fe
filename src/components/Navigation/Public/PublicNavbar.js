@@ -2,6 +2,7 @@ import {
     ActionIcon,
     Box,
     Burger,
+    Button,
     Center,
     Collapse,
     Divider,
@@ -9,7 +10,7 @@ import {
     Group,
     Header,
     HoverCard,
-    Menu,
+    Image,
     ScrollArea,
     SimpleGrid,
     Text,
@@ -19,19 +20,20 @@ import {
     createStyles,
 } from "@mantine/core";
 import {
-    IconArrowsLeftRight,
+    IconBinaryTree,
     IconBook,
     IconBrandFacebook,
     IconBrandInstagram,
     IconBrandTwitter,
     IconBrandYoutube,
-    IconChartPie3,
+    IconBuilding,
+    IconBuildingArch,
     IconChevronDown,
-    IconCode,
-    IconCoin,
-    IconFingerprint,
-    IconNotification,
-    IconTrash,
+    IconExternalLink,
+    IconFileInfo,
+    IconLayoutDashboard,
+    IconPhotoCheck,
+    IconVideo,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -68,7 +70,7 @@ const useStyles = createStyles((theme) => ({
     subLink: {
         width: "100%",
         padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-        borderRadius: theme.radius.md,
+        borderRadius: theme.radius.lg,
 
         ...theme.fn.hover({
             backgroundColor:
@@ -115,40 +117,68 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-const mockdata = [
+const dataProfil = [
     {
-        icon: IconCode,
-        title: "Open source",
-        description: "This Pokémon's cry is very loud and distracting",
+        icon: IconBuildingArch,
+        title: "Selayang Pandang",
+        description:
+            "Gambaran Umum Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/profil/selayangpandang",
     },
     {
-        icon: IconCoin,
-        title: "Free for everyone",
-        description: "The fluid of Smeargle's tail secretions changes",
+        icon: IconBuilding,
+        title: "Visi & Misi",
+        description:
+            "Visi & Misi Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/profil/visimisi",
     },
     {
-        icon: IconBook,
-        title: "Documentation",
-        description: "Yanma is capable of seeing 360 degrees without",
-    },
-    {
-        icon: IconFingerprint,
-        title: "Security",
-        description: "The shell's rounded shape and the grooves on its.",
-    },
-    {
-        icon: IconChartPie3,
-        title: "Analytics",
-        description: "This Pokémon uses its flying ability to quickly chase",
-    },
-    {
-        icon: IconNotification,
-        title: "Notifications",
-        description: "Combusken battles with the intensely hot flames it spews",
+        icon: IconBinaryTree,
+        title: "Struktur Organisasi",
+        description:
+            "Struktur Organisasi & Pejabat Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/profil/struktur",
     },
 ];
 
-export default function PublicNavbar() {
+const dataInformasi = [
+    {
+        icon: IconBook,
+        title: "Berita dan Kegiatan",
+        description: "Berita Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/berita",
+    },
+    {
+        icon: IconFileInfo,
+        title: "Dokumen",
+        description: "Dokumen Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/dokumen",
+    },
+    {
+        icon: IconPhotoCheck,
+        title: "Galeri",
+        description: "Galeri Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/galeri",
+    },
+    {
+        icon: IconVideo,
+        title: "Video",
+        description:
+            "Video Lambang Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/https://www.youtube.com/c/KotaJambi",
+    },
+];
+
+const dataLayanan = [
+    {
+        icon: IconBuildingArch,
+        title: "SIMANTAP",
+        description: "SIMANTAP Biro Adminsistrasi Pembangunan Provinsi Jambi",
+        link: "/profil",
+    },
+];
+
+export default function AdminNavbar() {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
         useDisclosure(false);
     const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -157,44 +187,95 @@ export default function PublicNavbar() {
         useDisclosure(false);
     const { classes, theme } = useStyles();
 
-    const withouSidebarRoutes = ["404", "/signin", "/signup", "/dashboard"];
+    const withouSidebarRoutes = [
+        "404",
+        "/signin",
+        "/signup",
+        "/dashboard",
+        "/kategori",
+    ];
 
     const { pathname } = useLocation();
     if (withouSidebarRoutes.some((item) => pathname.includes(item)))
         return null;
 
-    const links = mockdata.map((item) => (
+    const linksProfil = dataProfil.map((item) => (
         <UnstyledButton className={classes.subLink} key={item.title}>
             <Group noWrap align="flex-start">
                 <ThemeIcon size={34} variant="default" radius="md">
                     <item.icon size={22} color={theme.fn.primaryColor()} />
                 </ThemeIcon>
-                <div>
+                <UnstyledButton component={Link} to={item.link}>
                     <Text size="sm" weight={500}>
                         {item.title}
                     </Text>
                     <Text size="xs" color="dimmed">
                         {item.description}
                     </Text>
-                </div>
+                </UnstyledButton>
+            </Group>
+        </UnstyledButton>
+    ));
+
+    const linksInformasi = dataInformasi.map((item) => (
+        <UnstyledButton className={classes.subLink} key={item.title}>
+            <Group noWrap align="flex-start">
+                <ThemeIcon size={34} variant="default" radius="md">
+                    <item.icon size={22} color={theme.fn.primaryColor()} />
+                </ThemeIcon>
+                <UnstyledButton component={Link} to={item.link}>
+                    <Text size="sm" weight={500}>
+                        {item.title}
+                    </Text>
+                    <Text size="xs" color="dimmed">
+                        {item.description}
+                    </Text>
+                </UnstyledButton>
+            </Group>
+        </UnstyledButton>
+    ));
+    const linksLayanan = dataLayanan.map((item) => (
+        <UnstyledButton className={classes.subLink} key={item.title}>
+            <Group noWrap align="flex-start">
+                <ThemeIcon size={34} variant="default" radius="md">
+                    <item.icon size={22} color={theme.fn.primaryColor()} />
+                </ThemeIcon>
+                <UnstyledButton component={Link} to={item.link}>
+                    <Text size="sm" weight={500}>
+                        {item.title}
+                    </Text>
+                    <Text size="xs" color="dimmed">
+                        {item.description}
+                    </Text>
+                </UnstyledButton>
             </Group>
         </UnstyledButton>
     ));
 
     return (
         <Box pb={60}>
-            <Header fixed="false" height={60} px="md">
+            <Header fixed="false" height={60} px="xl">
                 <Group position="apart" sx={{ height: "100%" }}>
-                    <Text
-                        sx={{
-                            color:
+                    <ActionIcon component={Link} to={`/`} color="blue">
+                        <Image
+                            ml={200}
+                            width={250}
+                            height={65}
+                            // fit="cover"
+                            src={
                                 theme.colorScheme === "dark"
-                                    ? theme.white
-                                    : theme.black,
-                        }}
-                    >
-                        Logo Biro AdPemb
-                    </Text>
+                                    ? "https://res.cloudinary.com/degzbxlnx/image/upload/v1690361888/biro-administrasi-pembangunan-setda-provinsi-jambi_wnnxqw.png"
+                                    : "https://res.cloudinary.com/degzbxlnx/image/upload/v1690361888/biro-administrasi-pembangunan-setda-provinsi-jambi_1_obbwwu.png"
+                            }
+                            alt="With custom placeholder"
+                            withPlaceholder
+                            placeholder={
+                                <Text size="sm">
+                                    Biro Administrasi Pembangunan
+                                </Text>
+                            }
+                        />
+                    </ActionIcon>
                     <Group
                         sx={{ height: "100%" }}
                         spacing={0}
@@ -226,18 +307,21 @@ export default function PublicNavbar() {
                             </HoverCard.Target>
 
                             <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                                <SimpleGrid cols={2} spacing={4}>
-                                    {links}
+                                <SimpleGrid cols={1} spacing={4}>
+                                    {linksProfil}
                                 </SimpleGrid>
                             </HoverCard.Dropdown>
                         </HoverCard>
 
-                        <Menu
+                        <HoverCard
                             transition="scale-y"
-                            trigger="hover"
-                            exitTransitionDuration={0}
+                            width={600}
+                            position="bottom"
+                            radius="md"
+                            shadow="md"
+                            withinPortal
                         >
-                            <Menu.Target>
+                            <HoverCard.Target>
                                 <UnstyledButton className={classes.link}>
                                     <Center inline>
                                         <Box component="span" mr={5}>
@@ -249,29 +333,23 @@ export default function PublicNavbar() {
                                         />
                                     </Center>
                                 </UnstyledButton>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                <Menu.Label>Danger zone</Menu.Label>
-                                <Menu.Item
-                                    icon={<IconArrowsLeftRight size={14} />}
-                                >
-                                    Transfer my data
-                                </Menu.Item>
-                                <Menu.Item
-                                    color="red"
-                                    icon={<IconTrash size={14} />}
-                                >
-                                    Delete my account
-                                </Menu.Item>
-                            </Menu.Dropdown>
-                        </Menu>
+                            </HoverCard.Target>
 
-                        <Menu
+                            <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                                <SimpleGrid cols={1} spacing={4}>
+                                    {linksInformasi}
+                                </SimpleGrid>
+                            </HoverCard.Dropdown>
+                        </HoverCard>
+                        <HoverCard
                             transition="scale-y"
-                            trigger="hover"
-                            exitTransitionDuration={0}
+                            width={600}
+                            position="bottom"
+                            radius="md"
+                            shadow="md"
+                            withinPortal
                         >
-                            <Menu.Target>
+                            <HoverCard.Target>
                                 <UnstyledButton className={classes.link}>
                                     <Center inline>
                                         <Box component="span" mr={5}>
@@ -283,25 +361,26 @@ export default function PublicNavbar() {
                                         />
                                     </Center>
                                 </UnstyledButton>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                <Menu.Item
-                                    icon={<IconArrowsLeftRight size={14} />}
-                                >
-                                    Transfer my data
-                                </Menu.Item>
-                                <Menu.Item icon={<IconTrash size={14} />}>
-                                    Delete my account
-                                </Menu.Item>
-                            </Menu.Dropdown>
-                        </Menu>
+                            </HoverCard.Target>
 
-                        <Link to="/kontak" className={classes.link}>
-                            Kontak
-                        </Link>
-                        {/* <Link to="/dashboard" className={classes.link}>
-                            Dashboard
-                        </Link> */}
+                            <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                                <SimpleGrid cols={1} spacing={4}>
+                                    {linksLayanan}
+                                </SimpleGrid>
+                            </HoverCard.Dropdown>
+                        </HoverCard>
+
+                        {/* <Tooltip transition="slide-up" label="Dashboard">
+                            <UnstyledButton
+                                component={Link}
+                                to="/dashboard"
+                                className={classes.link}
+                            >
+                                <ActionIcon variant="transparent">
+                                    <IconLayoutDashboard size={18} />
+                                </ActionIcon>
+                            </UnstyledButton>
+                        </Tooltip> */}
                     </Group>
 
                     <Group
@@ -311,19 +390,12 @@ export default function PublicNavbar() {
                         noWrap
                     >
                         <DarkModeBtn />
+
+                        <Divider orientation="vertical" />
+
                         <ActionIcon size="lg" color="dark">
                             <Tooltip transition="slide-up" label="Facebook">
                                 <IconBrandFacebook size={18} stroke={1.5} />
-                            </Tooltip>
-                        </ActionIcon>
-                        <ActionIcon size="lg" color="dark">
-                            <Tooltip transition="slide-up" label="Twitter">
-                                <IconBrandTwitter size={18} stroke={1.5} />
-                            </Tooltip>
-                        </ActionIcon>
-                        <ActionIcon size="lg" color="dark">
-                            <Tooltip transition="slide-up" label="Youtube">
-                                <IconBrandYoutube size={18} stroke={1.5} />
                             </Tooltip>
                         </ActionIcon>
                         <ActionIcon size="lg" color="dark">
@@ -331,6 +403,16 @@ export default function PublicNavbar() {
                                 <IconBrandInstagram size={18} stroke={1.5} />
                             </Tooltip>
                         </ActionIcon>
+                        <ActionIcon size="lg" color="dark">
+                            <Tooltip transition="slide-up" label="Youtube">
+                                <IconBrandYoutube size={18} stroke={1.5} />
+                            </Tooltip>
+                        </ActionIcon>
+                        {/* <ActionIcon size="lg" color="dark">
+                            <Tooltip transition="slide-up" label="Twitter">
+                                <IconBrandTwitter size={18} stroke={1.5} />
+                            </Tooltip>
+                        </ActionIcon> */}
                     </Group>
                     <Burger
                         opened={drawerOpened}
@@ -347,10 +429,17 @@ export default function PublicNavbar() {
                 onClose={closeDrawer}
                 size="70%"
                 padding="md"
-                title="Logo Biro AdPemb"
+                title="Logo Biro"
                 className={classes.hiddenDesktop}
                 zIndex={1000000}
                 transition="pop"
+                overlayColor={
+                    theme.colorScheme === "dark"
+                        ? theme.colors.dark[9]
+                        : theme.colors.gray[2]
+                }
+                overlayOpacity={0.55}
+                overlayBlur={3}
             >
                 <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
                     <Divider
@@ -363,6 +452,7 @@ export default function PublicNavbar() {
                     <a href="/" className={classes.link}>
                         Home
                     </a>
+
                     <UnstyledButton
                         className={classes.link}
                         onClick={toggleLinks}
@@ -377,7 +467,7 @@ export default function PublicNavbar() {
                             />
                         </Center>
                     </UnstyledButton>
-                    <Collapse in={linksOpened}>{links}</Collapse>
+                    <Collapse in={linksOpened}>{linksProfil}</Collapse>
 
                     <UnstyledButton
                         className={classes.link}
@@ -394,23 +484,7 @@ export default function PublicNavbar() {
                         </Center>
                     </UnstyledButton>
 
-                    <Collapse in={linksOpenedTwo}>
-                        <UnstyledButton className={classes.subLink}>
-                            <Text size="sm" weight={500} color="dimmed" mx={10}>
-                                Testing #1
-                            </Text>
-                        </UnstyledButton>
-                        <UnstyledButton className={classes.subLink} mx={10}>
-                            <Text size="sm" weight={500} color="dimmed">
-                                Testing #2
-                            </Text>
-                        </UnstyledButton>
-                        <UnstyledButton className={classes.subLink} mx={10}>
-                            <Text size="sm" weight={500} color="dimmed">
-                                Testing #3
-                            </Text>
-                        </UnstyledButton>
-                    </Collapse>
+                    <Collapse in={linksOpenedTwo}>{linksInformasi}</Collapse>
 
                     <UnstyledButton
                         className={classes.link}
@@ -427,26 +501,15 @@ export default function PublicNavbar() {
                         </Center>
                     </UnstyledButton>
 
-                    <Collapse in={linksOpenedThree}>
-                        <UnstyledButton className={classes.subLink}>
-                            <Text size="sm" weight={500} color="dimmed" mx={10}>
-                                Testing #4
-                            </Text>
-                        </UnstyledButton>
-                        <UnstyledButton className={classes.subLink} mx={10}>
-                            <Text size="sm" weight={500} color="dimmed">
-                                Testing #5
-                            </Text>
-                        </UnstyledButton>
-                        <UnstyledButton className={classes.subLink} mx={10}>
-                            <Text size="sm" weight={500} color="dimmed">
-                                Testing #6
-                            </Text>
-                        </UnstyledButton>
-                    </Collapse>
+                    <Collapse in={linksOpenedThree}>{linksLayanan}</Collapse>
+
                     <a href="/kontak" className={classes.link}>
                         Kontak
                     </a>
+
+                    {/* <a href="/dashboard" className={classes.link}>
+                        Dashboard
+                    </a> */}
 
                     <Divider
                         my="xl"
@@ -463,8 +526,8 @@ export default function PublicNavbar() {
                             </Tooltip>
                         </ActionIcon>
                         <ActionIcon size="lg">
-                            <Tooltip label="Twitter">
-                                <IconBrandTwitter size={18} stroke={1.5} />
+                            <Tooltip label="Instagram">
+                                <IconBrandInstagram size={18} stroke={1.5} />
                             </Tooltip>
                         </ActionIcon>
                         <ActionIcon size="lg">
@@ -472,11 +535,11 @@ export default function PublicNavbar() {
                                 <IconBrandYoutube size={18} stroke={1.5} />
                             </Tooltip>
                         </ActionIcon>
-                        <ActionIcon size="lg">
-                            <Tooltip label="Instagram">
-                                <IconBrandInstagram size={18} stroke={1.5} />
+                        {/* <ActionIcon size="lg">
+                            <Tooltip label="Twitter">
+                                <IconBrandTwitter size={18} stroke={1.5} />
                             </Tooltip>
-                        </ActionIcon>
+                        </ActionIcon> */}
                     </Group>
                 </ScrollArea>
             </Drawer>

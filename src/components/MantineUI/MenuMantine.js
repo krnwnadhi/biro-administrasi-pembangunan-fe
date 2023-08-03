@@ -69,33 +69,9 @@ export default function MenuMantine() {
 
             <Menu.Dropdown>
                 <Menu.Item
-                    icon={<IconUserCircle size={14} />}
-                    component={Link}
-                    to="/profil"
-                >
-                    Profil
-                </Menu.Item>
-
-                <Menu.Item
-                    icon={<IconList size={14} />}
-                    component={Link}
-                    to="/posts"
-                >
-                    Daftar Post
-                </Menu.Item>
-
-                <Menu.Item
-                    icon={<IconList size={14} />}
-                    component={Link}
-                    to="/kategori"
-                >
-                    Daftar Kategori
-                </Menu.Item>
-
-                <Menu.Item
                     onClick={() => dispatch(logoutUserAction())}
                     component={Link}
-                    to="/"
+                    to="/signin"
                     icon={<IconLogout size={14} />}
                 >
                     Log Out

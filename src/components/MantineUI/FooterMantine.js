@@ -86,10 +86,13 @@ import {
     Container,
     Divider,
     Group,
+    Image,
+    Space,
     Text,
     createStyles,
 } from "@mantine/core";
 import {
+    IconBrandFacebook,
     IconBrandInstagram,
     IconBrandTwitter,
     IconBrandYoutube,
@@ -110,13 +113,13 @@ const useStyles = createStyles((theme) => ({
                 ? theme.colors.dark[5]
                 : theme.colors.gray[4]
         }`,
-        // position: "fixed",
-        // overflow: "hidden",
-        // zIndex: 10,
-        // bottom: 0,
     },
 
     logo: {
+        "&:hover": {
+            transform: "scale(1.01)",
+        },
+        transition: "transform 500ms ease",
         maxWidth: 200,
 
         [theme.fn.smallerThan("sm")]: {
@@ -211,47 +214,27 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
     {
-        title: "Layanan",
+        title: "Profil",
         links: [
             {
-                label: "Profil",
-                link: "/profil",
+                label: "Selayang Pandang",
+                link: "/profil/selayangpandang",
             },
             {
-                label: "Layanan #2",
-                link: "#",
+                label: "Visi & Misi",
+                link: "/profil/visimisi",
             },
             {
-                label: "Layanan #3",
-                link: "#",
-            },
-            {
-                label: "Layanan #4",
-                link: "/tambah-post",
-            },
-            {
-                label: "Layanan #5",
-                link: "/tambah-post",
+                label: "Struktur Organisasi",
+                link: "/profil/struktur",
             },
         ],
     },
     {
-        title: "Situs Terkait",
+        title: "Layanan",
         links: [
             {
-                label: "Situs Terkait #1",
-                link: "#",
-            },
-            {
-                label: "Situs Terkait #2",
-                link: "#",
-            },
-            {
-                label: "Situs Terkait #3",
-                link: "#",
-            },
-            {
-                label: "Situs Terkait #4",
+                label: "SIMANTAP",
                 link: "#",
             },
         ],
@@ -260,7 +243,7 @@ const data = [
         title: "Kontak",
         links: [
             {
-                label: "{No. Telp.}",
+                label: "No. Telp.",
                 link: "#",
             },
         ],
@@ -268,7 +251,7 @@ const data = [
 ];
 
 export default function FooterMantine() {
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
 
     const withouSidebarRoutes = [
         "404",
@@ -311,7 +294,25 @@ export default function FooterMantine() {
         <footer className={classes.footer}>
             <Container className={classes.inner}>
                 <div className={classes.logo}>
-                    LOGO ADPEMB
+                    <Image
+                        ml={-10}
+                        width={290}
+                        height={65}
+                        fit="cover"
+                        src={
+                            theme.colorScheme === "dark"
+                                ? "https://res.cloudinary.com/degzbxlnx/image/upload/v1690361888/biro-administrasi-pembangunan-setda-provinsi-jambi_wnnxqw.png"
+                                : "https://res.cloudinary.com/degzbxlnx/image/upload/v1690361888/biro-administrasi-pembangunan-setda-provinsi-jambi_1_obbwwu.png"
+                        }
+                        alt="With custom placeholder"
+                        withPlaceholder
+                        placeholder={
+                            <Text size="sm">Biro Administrasi Pembangunan</Text>
+                        }
+                    />
+
+                    <Space h="lg" />
+
                     <Text
                         size="xs"
                         color="dimmed"
@@ -319,7 +320,9 @@ export default function FooterMantine() {
                     >
                         ALAMAT
                     </Text>
+
                     <Divider />
+
                     <Text
                         size="xs"
                         color="dimmed"
@@ -333,7 +336,6 @@ export default function FooterMantine() {
             </Container>
             <Container className={classes.afterFooter}>
                 <Text color="dimmed" size="sm">
-                    {/* © 2020 mantine.dev. All rights reserved.  */}
                     Copyright © 2023 Biro Adminitrasi Pembangunan Provinsi Jambi
                 </Text>
 
@@ -344,13 +346,13 @@ export default function FooterMantine() {
                     noWrap
                 >
                     <ActionIcon size="lg">
-                        <IconBrandTwitter size={18} stroke={1.5} />
+                        <IconBrandInstagram size={18} stroke={1.5} />
+                    </ActionIcon>
+                    <ActionIcon size="lg">
+                        <IconBrandFacebook size={18} stroke={1.5} />
                     </ActionIcon>
                     <ActionIcon size="lg">
                         <IconBrandYoutube size={18} stroke={1.5} />
-                    </ActionIcon>
-                    <ActionIcon size="lg">
-                        <IconBrandInstagram size={18} stroke={1.5} />
                     </ActionIcon>
                 </Group>
             </Container>

@@ -1,97 +1,231 @@
 import {
-    Badge,
     Box,
-    Button,
     Card,
-    Group,
+    Center,
+    Container,
+    Divider,
     Image,
-    List,
-    Loader,
     Paper,
     SimpleGrid,
+    Space,
     Text,
+    createStyles,
     useMantineTheme,
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 
-import CarouselMantine from "../MantineUI/CarouselMantine";
+import CarouselOne from "../MantineUI/CarouselOne";
 import HeroHeaderMantine from "../MantineUI/HeroHeaderMantine";
-import { Link } from "react-router-dom";
-import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useEffect } from "react";
+import { useMediaQuery } from "@mantine/hooks";
+
+// import CarouselMantine from "../MantineUI/CarouselMantine";
+
+// import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
+
+const useStyles = createStyles((theme) => ({
+    card: {
+        transition: "transform 150ms ease, box-shadow 100ms ease",
+        "&:hover": {
+            boxShadow: theme.shadows.sm,
+            transform: "scale(1.01)",
+        },
+    },
+    boxOne: {
+        backgroundColor:
+            theme.colorScheme === "dark"
+                ? theme.colors.dark[6]
+                : theme.colors.gray[0],
+        padding: theme.spacing.xl,
+        paddingBottom: 50,
+        marginBottom: theme.radius.xl,
+
+        "&:hover": {
+            backgroundColor:
+                theme.colorScheme === "dark"
+                    ? theme.colors.dark[5]
+                    : theme.colors.gray[1],
+        },
+    },
+    boxTwo: {
+        padding: theme.spacing.xl,
+        paddingBottom: 50,
+        marginBottom: theme.radius.xl,
+    },
+}));
 
 const HomePage = () => {
     const dispatch = useDispatch();
+    const { classes } = useStyles();
 
     useEffect(() => {
         dispatch(fetchAllPostAction(""));
         window.scrollTo(0, 0);
     }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(fetchAllCategoryAction());
-        // window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
-        window.scrollTo(0, 0);
-    }, [dispatch]);
-
     const theme = useMantineTheme();
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
 
-    const jobColors = {
-        sosial: "blue",
-        ekonomi: "cyan",
-        teknologi: "pink",
-    };
+    // const jobColors = {
+    //     sosial: "blue",
+    //     ekonomi: "cyan",
+    //     teknologi: "pink",
+    // };
 
-    const post = useSelector((state) => state?.post);
-    const { postList = [], loading, appError, serverError } = post;
+    // const post = useSelector((state) => state?.post);
+    // const { postList = [], loading, appError, serverError } = post;
 
-    const category = useSelector((state) => state?.category);
-    const {
-        // appError: appErrorCat,
-        categoryList = [],
-        // loading: loadingCat,
-        // serverError: serverErrorCat,
-    } = category;
-    // console.log(categoryList);
+    // const category = useSelector((state) => state?.category);
+    // const {
+    //     // appError: appErrorCat,
+    //     categoryList = [],
+    //     // loading: loadingCat,
+    //     // serverError: serverErrorCat,
+    // } = category;
+    // // console.log(categoryList);
 
-    const allCategories = categoryList?.map((category) => {
-        return {
-            label: category?.title,
-            value: category?.title,
-        };
-    });
+    // const allCategories = categoryList?.map((category) => {
+    //     return {
+    //         label: category?.title,
+    //         value: category?.title,
+    //     };
+    // });
 
     return (
         <>
-            <Paper
-            // p="xl"
-            // radius={0}
-            >
+            <Paper>
                 <HeroHeaderMantine />
 
-                <Box
-                    sx={(theme) => ({
-                        backgroundColor:
-                            theme.colorScheme === "dark"
-                                ? theme.colors.dark[6]
-                                : theme.colors.gray[2],
-                        // textAlign: "center",
-                        padding: theme.spacing.xl,
-                        paddingTop: 100,
-                        paddingBottom: 120,
-                        // cursor: "pointer",
-                        // marginTop: theme.radius.xl,
+                <Space h="xl" />
 
-                        "&:hover": {
-                            backgroundColor:
-                                theme.colorScheme === "dark"
-                                    ? theme.colors.dark[5]
-                                    : theme.colors.gray[3],
-                        },
-                    })}
-                >
-                    <CarouselMantine />
+                <Box className={classes.boxTwo}>
+                    <Container size="xl">
+                        <Divider
+                            my="xs"
+                            label="TENTANG"
+                            color="blue"
+                            fs="italic"
+                            fz="xl"
+                            fw={700}
+                        />
+
+                        <Space h="xl" />
+
+                        <SimpleGrid
+                            cols={2}
+                            spacing={150}
+                            breakpoints={[
+                                {
+                                    maxWidth: 1050,
+                                    cols: 1,
+                                    verticalSpacing: "xl",
+                                },
+                            ]}
+                        >
+                            <Text color="dimmed" size={mobile ? "sm" : "md"}>
+                                <Text
+                                    fs={70}
+                                    fw={900}
+                                    size={mobile ? 30 : 40}
+                                    color={theme.colors.blue[9]}
+                                >
+                                    Biro Adm. Pembangunan
+                                    <Text
+                                        fs={70}
+                                        fw={900}
+                                        size={mobile ? 25 : 35}
+                                        color={theme.colors.blue[9]}
+                                    >
+                                        Provinsi Jambi
+                                    </Text>
+                                </Text>
+                                <Space h="xl" />
+                                Biro Administrasi Pembangunan merupakan salah
+                                satu Biro pada Sekretariat Daerah Prov Jambi
+                                yang bertugas membantu Asisten Perekonomian dan
+                                Pembangunan dalam penyiapan pengoordinasian
+                                perumusan kebijakan daerah, pengoordinasian
+                                pelaksanaan tugas Perangkat Daerah, pemantauan
+                                dan evaluasi pelaksanaan kebijakan daerah di
+                                bidang pengendalian administrasi pelaksanaan
+                                pembangunan daerah, pengendalian administrasi
+                                pelaksanaan pembangunan wilayah, pelaksanaan
+                                tugas Simpul Kerjasama Pemerintah dengan Badan
+                                Usaha (KPBU) dalam penyediaan infrastruktur, dan
+                                pelaporan pelaksanaan pembangunan.
+                            </Text>
+
+                            <Card
+                                shadow="lg"
+                                p="lg"
+                                radius="md"
+                                className={classes.card}
+                            >
+                                <Card.Section>
+                                    <Image
+                                        height={mobile ? "auto" : 370}
+                                        radius="md"
+                                        src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"
+                                        alt="With custom placeholder"
+                                        withPlaceholder
+                                        placeholder={
+                                            <Text size="sm">
+                                                Gubernur & Wakil Gubernur
+                                                Provinsi Jambi.png
+                                            </Text>
+                                        }
+                                    />
+                                </Card.Section>
+                            </Card>
+                        </SimpleGrid>
+                    </Container>
+                </Box>
+
+                <Box className={classes.boxOne}>
+                    <Container size="xl" px="xs">
+                        <Divider
+                            my="xs"
+                            label="BERITA & KEGIATAN"
+                            color="blue"
+                            fs="italic"
+                            fz="xl"
+                            fw={700}
+                        />
+                        <CarouselOne />
+                    </Container>
+                </Box>
+
+                <Space h="xl" />
+
+                <Box className={classes.boxTwo}>
+                    <Container size="xl" px="xs">
+                        <Divider
+                            my="xs"
+                            label="GALERI"
+                            color="blue"
+                            fs="italic"
+                            fz="xl"
+                            fw={700}
+                        />
+                        <Center>GALERI</Center>
+                    </Container>
+                </Box>
+
+                <Space h="xl" />
+
+                <Box className={classes.boxOne}>
+                    <Container size="xl" px="xs">
+                        <Divider
+                            my="xs"
+                            label="LAYANAN"
+                            color="blue"
+                            fs="italic"
+                            fz="xl"
+                            fw={700}
+                        />
+                        <Center>SIMANTAP</Center>
+                    </Container>
                 </Box>
 
                 {/* KATEGORI */}
@@ -114,92 +248,6 @@ const HomePage = () => {
                         </List>
                     ))}
                 </div> */}
-
-                {/* POST */}
-
-                {/* {loading ? (
-                    <Loader size="xl" variant="dots" />
-                ) : appError || serverError ? (
-                    <h2>
-                        {appError}
-                        {serverError}
-                    </h2>
-                ) : postList?.length <= 0 ? (
-                    <h2>Tidak ada Post</h2>
-                ) : (
-                    <SimpleGrid
-                        cols={4}
-                        spacing="lg"
-                        breakpoints={[
-                            { maxWidth: 980, cols: 3, spacing: "md" },
-                            { maxWidth: 755, cols: 2, spacing: "sm" },
-                            { maxWidth: 600, cols: 1, spacing: "sm" },
-                        ]}
-                    >
-                        {postList &&
-                            postList.map((post) => (
-                                <div key={post._id}>
-                                    <Card
-                                        shadow="md"
-                                        p="lg"
-                                        radius="md"
-                                        withBorder
-                                    >
-                                        <Card.Section
-                                            component={Link}
-                                            to={`/posts/${post?._id}`}
-                                        >
-                                            <Image
-                                                src={post?.image}
-                                                height={160}
-                                                alt="Norway"
-                                            />
-                                        </Card.Section>
-
-                                        <Group position="apart" mt="md" mb="xs">
-                                            <Text weight={500}>
-                                                {post?.title}
-                                            </Text>
-                                            <Badge
-                                                color={
-                                                    jobColors[
-                                                        post?.title.toLowerCase()
-                                                    ]
-                                                }
-                                                variant={
-                                                    theme.colorScheme === "dark"
-                                                        ? "light"
-                                                        : "outline"
-                                                }
-                                            >
-                                                {post?.category}
-                                            </Badge>
-                                        </Group>
-
-                                        <Text
-                                            size="sm"
-                                            color="dimmed"
-                                            lineClamp={2}
-                                        >
-                                            {post?.description}
-                                        </Text>
-
-                                        <Button
-                                            variant="light"
-                                            color="blue"
-                                            fullWidth
-                                            mt="md"
-                                            radius="md"
-                                            component={Link}
-                                            to={`/posts/${post?._id}`}
-                                        >
-                                            Selengkapnya
-                                        </Button>
-                                    </Card>
-                                </div>
-                            ))}
-                    </SimpleGrid>
-                )} */}
             </Paper>
         </>
     );

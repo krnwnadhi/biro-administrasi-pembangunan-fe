@@ -1,13 +1,23 @@
 import {
     ActionIcon,
     Alert,
+    AppShell,
+    Aside,
+    Box,
+    Burger,
     Button,
     Container,
     Divider,
+    Footer,
     Group,
+    Header,
+    MediaQuery,
+    Navbar,
     Paper,
+    ScrollArea,
     Text,
     TextInput,
+    useMantineTheme,
 } from "@mantine/core";
 import {
     IconAlertCircle,
@@ -21,11 +31,15 @@ import {
     updateCategoryAction,
 } from "../redux/slices/category/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-import { useEffect } from "react";
+import DarkModeBtn from "../MantineUI/DarkModeBtn";
+import NavbarDashboard from "../pages/NavbarDashboard";
 import { useForm } from "@mantine/form";
 
 export default function UpdateCategory() {
+    const theme = useMantineTheme();
+    const [opened, setOpened] = useState(false);
     const dispatch = useDispatch();
     const params = useParams();
     const id = params.id;
@@ -56,89 +70,154 @@ export default function UpdateCategory() {
     );
 
     //redirect
-    if (isEdited || isDeleted) return <Redirect push to="/kategori" />;
+    if (isEdited || isDeleted)
+        return <Redirect push to="/dashboard/kategori" />;
 
     return (
-        <Paper radius="md" p="xl">
-            <Container size={420} my={170}>
-                <Text
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                    size="lg"
-                    weight={500}
+        <AppShell
+            styles={{
+                main: {
+                    background:
+                        theme.colorScheme === "dark"
+                            ? theme.colors.dark[8]
+                            : theme.colors.gray[0],
+                },
+            }}
+            navbarOffsetBreakpoint="sm"
+            asideOffsetBreakpoint="sm"
+            navbar={
+                <Navbar
+                    p="sm"
+                    width={{ sm: 150, lg: 280 }}
+                    hiddenBreakpoint="sm"
+                    hidden={!opened}
                 >
-                    Update Kategori
-                </Text>
-
-                <Divider labelPosition="center" my="xl" />
-
-                <form onSubmit={formOnSubmit}>
-                    {appError || serverError ? (
-                        <Alert
-                            icon={<IconAlertCircle size={16} />}
-                            title="Error!"
-                            color="red"
+                    <Divider mt={10} />
+                    <Navbar.Section
+                        grow
+                        component={ScrollArea}
+                        mx="-xs"
+                        px="xs"
+                    >
+                        <Box py="md">
+                            <NavbarDashboard />
+                        </Box>
+                    </Navbar.Section>
+                </Navbar>
+            }
+            footer={
+                <Footer
+                    sx={{ display: "flex", justifyContent: "center" }}
+                    height={60}
+                    p="md"
+                >
+                    <Text size="sm">
+                        Copyright © 2023{" "}
+                        <Text component={Link} to="/" weight="bold">
+                            Biro Adminitrasi Pembangunan Provinsi Jambi
+                        </Text>
+                    </Text>
+                </Footer>
+            }
+            header={
+                <Header height={{ base: 50, md: 70 }} p="md">
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            height: "100%",
+                        }}
+                    >
+                        <MediaQuery
+                            largerThan="sm"
+                            styles={{ display: "none" }}
                         >
-                            Tidak ada Token! Silahkan login kembali.
-                        </Alert>
-                    ) : null}
-                    <TextInput
-                        withAsterisk
-                        label="Kategori"
-                        placeholder="Cth: Teknologi"
-                        // value={form.values.title}
-                        // onChange={(event) =>
-                        //     form.setFieldValue(
-                        //         "title",
-                        //         event.currentTarget.value
-                        //     )
-                        // }
-                        // onChange={form.setValues((prev) => ({ ...prev }))}
+                            <Burger
+                                opened={opened}
+                                onClick={() => setOpened((o) => !o)}
+                                size="sm"
+                                color={theme.colors.gray[6]}
+                                mr="xl"
+                            />
+                        </MediaQuery>
+                        <Text ml={10}>Biro Administrasi Pembangunan</Text>
+                        <DarkModeBtn />
+                    </div>
+                </Header>
+            }
+        >
+            <Paper radius="md" p="xl">
+                <Container size={420} my={170}>
+                    <Text
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                        size="lg"
+                        weight={500}
+                    >
+                        Update Kategori
+                    </Text>
 
-                        {...form.getInputProps("title")}
-                    />
+                    <Divider labelPosition="center" my="xl" />
 
-                    <Group position="apart" mt="xl">
-                        <Button
-                            compact
-                            component={Link}
-                            color="gray"
-                            to="/kategori"
-                            variant="subtle"
-                            leftIcon={<IconChevronLeft size={12} />}
-                            size="xs"
-                        >
-                            <Text>Kategori</Text>
-                        </Button>
-                        {loading ? (
-                            <Button disabled compact loading>
-                                Loading...
-                            </Button>
-                        ) : (
-                            <Group>
-                                <Button
-                                    // disabled={!form.isValid()}
-                                    type="submit"
-                                    compact
-                                    color="green"
-                                >
-                                    Update
+                    <form onSubmit={formOnSubmit}>
+                        {appError || serverError ? (
+                            <Alert
+                                icon={<IconAlertCircle size={16} />}
+                                title="Error!"
+                                color="red"
+                            >
+                                Tidak ada Token! Silahkan login kembali.
+                            </Alert>
+                        ) : null}
+                        <TextInput
+                            withAsterisk
+                            label="Kategori"
+                            placeholder="Contoh: Teknologi"
+                            value={form.values.title}
+                            onChange={(event) =>
+                                form.setFieldValue(
+                                    "title",
+                                    event.currentTarget.value
+                                )
+                            }
+                            disabled
+                            // onChange={form.setValues((prev) => ({ ...prev }))}
+
+                            // {...form.getInputProps("title")}
+                        />
+
+                        <Group position="center" mt="xl">
+                            {loading ? (
+                                <Button disabled compact loading>
+                                    Loading...
                                 </Button>
-                                <ActionIcon
-                                    color="red"
-                                    onClick={() =>
-                                        dispatch(deleteCategoryAction(id))
-                                    }
-                                >
-                                    <IconTrash size={16} stroke={1.5} />
-                                </ActionIcon>
-                            </Group>
-                        )}
-                    </Group>
-                </form>
-            </Container>
-        </Paper>
+                            ) : (
+                                <Group>
+                                    <Button
+                                        // disabled={!form.isValid()}
+                                        type="submit"
+                                        color="green"
+                                        disabled
+                                    >
+                                        Update
+                                    </Button>
+                                    <ActionIcon
+                                        color="red"
+                                        onClick={() =>
+                                            dispatch(deleteCategoryAction(id))
+                                        }
+                                    >
+                                        <IconTrash size={16} stroke={1.5} />
+                                    </ActionIcon>
+                                </Group>
+                            )}
+                        </Group>
+                    </form>
+                </Container>
+            </Paper>
+        </AppShell>
     );
 }

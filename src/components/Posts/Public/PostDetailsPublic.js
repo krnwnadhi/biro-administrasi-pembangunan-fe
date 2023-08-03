@@ -1,43 +1,78 @@
 import {
     ActionIcon,
+    Anchor,
+    Breadcrumbs,
     Center,
     Container,
+    CopyButton,
     Divider,
+    Grid,
     Group,
-    Image,
     Loader,
+    NavLink,
     Paper,
+    Space,
     Text,
+    ThemeIcon,
     Title,
+    Tooltip,
     TypographyStylesProvider,
+    useMantineTheme,
 } from "@mantine/core";
-import { IconPencil, IconTrash } from "@tabler/icons-react";
-import { Link, Redirect } from "react-router-dom";
+import {
+    IconCalendar,
+    IconCheck,
+    IconCopy,
+    IconEye,
+    IconUser,
+} from "@tabler/icons-react";
 import React, { useEffect } from "react";
 import {
-    deletePostAction,
+    fetchAllPostAction,
     fetchDetailPostAction,
 } from "../../redux/slices/posts/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import DateFormatter from "../../../utils/dateFormatter";
-import { openConfirmModal } from "@mantine/modals";
-import { showNotification } from "@mantine/notifications";
+import { IconCategory2 } from "@tabler/icons-react";
+import ReadMore from "../ReadMore";
+import { useMediaQuery } from "@mantine/hooks";
 
 const PostDetailsPublic = (props) => {
-    console.log(props);
+    // console.log(props);
     // const id = props.computedMatch.params.id;
     const id = props.match.params.id;
+
     const dispatch = useDispatch();
+
+    const theme = useMantineTheme();
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
+
+    // useEffect(() => {
+    //     dispatch(fetchDetailPostAction(""));
+    // }, [id, dispatch]);
 
     useEffect(() => {
         dispatch(fetchDetailPostAction(id));
+        // dispatch(fetchAllPostAction());
         window.scrollTo(0, 0);
     }, [id, dispatch]);
 
     const post = useSelector((state) => state?.post);
+    console.log("postAll", post);
+    // const postAll = useSelector((state) => state?.post);
+    // console.log("postAll", postAll);
 
     const { appError, loading, postDetail = [], serverError, isDeleted } = post;
+    // console.log("postDetail", postDetail);
+
+    // const postDetailList = () => {
+    //     postDetail?.result?.map((item, index) => {
+    //         return item.id === id;
+    //     });
+    // };
+
+    // postDetailList();
 
     //get login user
     // const user = useSelector((state) => state?.users);
@@ -50,117 +85,158 @@ const PostDetailsPublic = (props) => {
 
     // if (isDeleted) return <Redirect to="/" />;
 
-    const openDeleteModal = () =>
-        openConfirmModal({
-            title: "Hapus Post",
-            centered: true,
-            children: (
-                <Text size="sm">
-                    {`Apakah Anda yakin ingin menghapus post ${postDetail?.title}?`}
-                </Text>
-            ),
-            labels: { confirm: "Hapus", cancel: "Kembali" },
-            confirmProps: { color: "red" },
-            onCancel: () => {
-                showNotification({
-                    title: "Batal",
-                    message: "Aksi dibatalkan",
-                    color: "red",
-                });
-            },
-            onConfirm: () => {
-                setTimeout(() => {
-                    dispatch(deletePostAction(postDetail?._id));
-                    showNotification({
-                        title: "Hapus",
-                        message: "Post berhasil dihapus",
-                    });
-                }, 1500);
-            },
-        });
+    const breadcrumbsItem = [
+        { title: "Home", href: "/" },
+        { title: "Informasi", href: "#" },
+        { title: "Berita & Kegiatan", href: "/berita" },
+        { title: postDetail.title, href: "#" },
+    ].map((item, index) => (
+        <Anchor
+            href={item.href}
+            key={index}
+            size={"sm"}
+            underline={false}
+            truncate="end"
+        >
+            {item.title}
+        </Anchor>
+    ));
 
     return (
         <Paper style={{ minHeight: "92vh" }}>
-            <Container mt={20}>
+            <Container mt={20} size="lg">
+                <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
+
+                <Space h="xl" />
+
                 {loading ? (
                     <Center>
                         <Loader mt={300} size="xl" variant="dots" />
                     </Center>
                 ) : (
                     <>
-                        <Text>{appError || serverError}</Text>
+                        <Grid>
+                            <Grid.Col>
+                                <Text>{appError || serverError}</Text>
 
-                        {/* <Image
-                            src={postDetail?.image}
-                            radius="xl"
-                            height={500}
-                            fit="contain"
-                        /> */}
+                                <Title my="xs" order={2}>
+                                    {postDetail?.title}
+                                </Title>
 
-                        {/* <Divider my="xl" variant="dotted" /> */}
+                                <Space h="xl" />
 
-                        <Title my="sm" order={1}>
-                            {postDetail?.title}
-                        </Title>
+                                <Group position="apart">
+                                    <Group mb={5}>
+                                        <ThemeIcon color="gray" variant="light">
+                                            <IconCalendar size={12} />
+                                        </ThemeIcon>
+                                        <Text fz="xs" color="dimmed">
+                                            <DateFormatter
+                                                date={postDetail?.createdAt}
+                                            />
+                                        </Text>
 
-                        <Group position="apart">
-                            <Text fz="sm">{postDetail?.user?.fullName}</Text>
-                            <DateFormatter date={postDetail?.createdAt} />
-                        </Group>
+                                        <Divider orientation="vertical" />
 
-                        <Text fz="sm">Kategori: {postDetail?.category}</Text>
-                        <Text fz="sm">Views: {postDetail?.numViews}</Text>
+                                        <ThemeIcon
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                            color="gray"
+                                            variant="light"
+                                        >
+                                            <IconUser size={12} />
+                                        </ThemeIcon>
+                                        <Text
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                            fz="xs"
+                                            color="dimmed"
+                                        >
+                                            {postDetail?.user?.fullName}
+                                        </Text>
 
-                        <Group>
-                            {/* {isCreatedBy ? (
-                                <>
-                                    <ActionIcon
-                                        component={Link}
-                                        to={`/posts/update/${postDetail?._id}`}
-                                        color="blue"
+                                        <Divider
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                            orientation="vertical"
+                                        />
+
+                                        <ThemeIcon color="gray" variant="light">
+                                            <IconCategory2 size={12} />
+                                        </ThemeIcon>
+                                        <Text fz="xs" color="dimmed">
+                                            {postDetail?.category}
+                                        </Text>
+
+                                        <Divider orientation="vertical" />
+
+                                        <ThemeIcon color="gray" variant="light">
+                                            <IconEye size={12} />
+                                        </ThemeIcon>
+                                        <Text fz="xs" color="dimmed">
+                                            {postDetail?.numViews}
+                                        </Text>
+                                    </Group>
+
+                                    <CopyButton
+                                        value={`/berita/${postDetail?.id}`}
+                                        timeout={2000}
                                     >
-                                        <IconPencil size={16} stroke={1.5} />
-                                    </ActionIcon>
-                                    <ActionIcon
-                                        color="red"
-                                        loading={loading}
-                                        onClick={openDeleteModal}
-                                    >
-                                        <IconTrash size={16} stroke={1.5} />
-                                    </ActionIcon>
-                                </>
-                            ) : null} */}
-                            {/* <>
-                                <ActionIcon
-                                    component={Link}
-                                    to={`/posts/update/${postDetail?._id}`}
-                                    color="blue"
-                                >
-                                    <IconPencil size={16} stroke={1.5} />
-                                </ActionIcon>
-                                <ActionIcon
-                                    color="red"
-                                    loading={loading}
-                                    onClick={openDeleteModal}
-                                >
-                                    <IconTrash size={16} stroke={1.5} />
-                                </ActionIcon>
-                            </> */}
-                        </Group>
+                                        {({ copied, copy }) => (
+                                            <Tooltip
+                                                label={
+                                                    copied
+                                                        ? "URL disalin"
+                                                        : "Salin URL"
+                                                }
+                                                withArrow
+                                                position="right"
+                                            >
+                                                <ActionIcon
+                                                    color={
+                                                        copied ? "teal" : "gray"
+                                                    }
+                                                    onClick={copy}
+                                                >
+                                                    {copied ? (
+                                                        <IconCheck size={16} />
+                                                    ) : (
+                                                        <IconCopy size={16} />
+                                                    )}
+                                                </ActionIcon>
+                                            </Tooltip>
+                                        )}
+                                    </CopyButton>
+                                </Group>
 
-                        <Divider my="xl" variant="dotted" />
+                                <Divider my="xl" size="xs" />
 
-                        {/* <Text ta="justify" fz="lg">
-                            {postDetail?.description}
-                        </Text> */}
+                                <TypographyStylesProvider>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: postDetail?.description,
+                                        }}
+                                    />
+                                </TypographyStylesProvider>
+                            </Grid.Col>
 
-                        <TypographyStylesProvider>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: postDetail?.description,
-                                }}
-                            />
-                        </TypographyStylesProvider>
+                            <Grid.Col md={4} lg={2} offset={1}>
+                                <Text>{appError || serverError}</Text>
+
+                                <Title my="sm" order={3}>
+                                    {/* Baca Juga... */}
+                                </Title>
+
+                                {/* <NavLink label="AAA">aaa</NavLink> */}
+
+                                {/* <ReadMore /> */}
+
+                                {/* <Divider variant="dotted" /> */}
+                            </Grid.Col>
+                        </Grid>
                     </>
                 )}
             </Container>

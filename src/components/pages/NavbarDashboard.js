@@ -23,16 +23,17 @@ const mockdata = [
     {
         label: "Dashboard",
         icon: IconGauge,
+        // initiallyOpened: true,
         links: [
             { label: "Home", link: "/" },
             { label: "Dashboard", link: "/dashboard" },
         ],
     },
     {
-        label: "Post",
+        label: "Berita & Kegiatan",
         icon: IconNotes,
         initiallyOpened: true,
-        links: [{ label: "Tambah Post", link: "/dashboard/tambah-post" }],
+        links: [{ label: "Tambah", link: "/dashboard/tambah-post" }],
     },
     {
         label: "Kategori",
@@ -45,6 +46,7 @@ const mockdata = [
     {
         label: "Dokumen",
         icon: IconFile,
+        initiallyOpened: true,
         links: [
             { label: "Daftar Dokumen", link: "/dashboard/documents" },
             { label: "Tambah Dokumen", link: "/dashboard/tambah-document" },
@@ -56,17 +58,19 @@ const mockdata = [
         links: [
             // { label: "Album", link: "/dashboard/gallery" },
             // { label: "Tambah Galeri", link: "/dashboard/tambah-gallery" },
+            { label: "Album", link: "#" },
+            { label: "Tambah Galeri", link: "#" },
         ],
     },
 
-    {
-        label: "Video",
-        icon: IconVideo,
-        links: [
-            { label: "Daftar Video", link: "/video" },
-            { label: "Tambah Video", link: "#" },
-        ],
-    },
+    // {
+    //     label: "Video",
+    //     icon: IconVideo,
+    //     links: [
+    //         // { label: "Daftar Video", link: "/video" },
+    //         // { label: "Tambah Video", link: "#" },
+    //     ],
+    // },
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -116,7 +120,7 @@ export default function NavbarDashboard() {
         <LinksGroup {...item} key={item.label} />
     ));
 
-    // const withouSidebarRoutes = [
+    // const withoutSidebarRoutes = [
     //     "/",
     //     "404",
     //     "/signin",
@@ -125,24 +129,11 @@ export default function NavbarDashboard() {
     // ];
 
     // const { pathname } = useLocation();
-    // if (withouSidebarRoutes.some((item) => pathname.includes(item)))
+    // if (withoutSidebarRoutes.some((item) => pathname.includes(item)))
     //     return null;
 
     return (
-        <Navbar
-            // height={600}
-            width={{ sm: 150, lg: 280 }}
-            p="md"
-            className={classes.navbar}
-        >
-            <Navbar.Section className={classes.header}>
-                <Group position="apart">
-                    {/* <Logo width={120} /> */}
-                    LOGO
-                    <Code sx={{ fontWeight: 700 }}>v1.0.0</Code>
-                </Group>
-            </Navbar.Section>
-
+        <Navbar width={{ sm: 150, lg: 280 }} p="md" className={classes.navbar}>
             <Navbar.Section
                 grow
                 className={classes.links}
@@ -152,11 +143,6 @@ export default function NavbarDashboard() {
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
-                {/* <UserButton
-                    image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-                    name="Ann Nullpointer"
-                    email="anullpointer@yahoo.com"
-                /> */}
                 <MenuMantine />
             </Navbar.Section>
         </Navbar>

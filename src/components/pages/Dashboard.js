@@ -42,8 +42,6 @@ function Dashboard(/*{ children }*/) {
 
     return (
         <AppShell
-            // layout="alt"
-            // hidden
             styles={{
                 main: {
                     background:
@@ -55,38 +53,14 @@ function Dashboard(/*{ children }*/) {
             navbarOffsetBreakpoint="sm"
             asideOffsetBreakpoint="sm"
             navbar={
-                // <Navbar
-                //     p="lg"
-                //     // fixed={false}
-                //     hiddenBreakpoint="sm"
-                //     hidden={!opened}
-                //     width={{ sm: 150, lg: 250 }}
-                //     // height={600}
-                // >
-                //     <Text>Navbar</Text>
-                //     <Divider />
-
-                //     <ScrollArea>
-                //         <Navbar.Section mt="xs">First section</Navbar.Section>
-
-                //         <Navbar.Section grow mt="md">
-                //             Grow section
-                //         </Navbar.Section>
-
-                //         <Navbar.Section>Last section</Navbar.Section>
-                //     </ScrollArea>
-                // </Navbar>
-
                 <Navbar
                     p="sm"
                     width={{ sm: 150, lg: 280 }}
                     hiddenBreakpoint="sm"
                     hidden={!opened}
                 >
-                    <Navbar.Section mt="xs">Brand</Navbar.Section>
-
                     <Divider mt={10} />
-                    {/* <ScrollArea></ScrollArea> */}
+
                     <Navbar.Section
                         grow
                         component={ScrollArea}
@@ -96,9 +70,6 @@ function Dashboard(/*{ children }*/) {
                         <Box py="md">
                             <NavbarDashboard />
                         </Box>
-                    </Navbar.Section>
-                    <Navbar.Section>
-                        <MenuMantine />
                     </Navbar.Section>
                 </Navbar>
             }
@@ -144,10 +115,8 @@ function Dashboard(/*{ children }*/) {
                 </Header>
             }
         >
-            {/* <ScrollArea> */}
             {/* <TableMantine /> */}
             <PostList />
-            {/* </ScrollArea> */}
         </AppShell>
     );
 }

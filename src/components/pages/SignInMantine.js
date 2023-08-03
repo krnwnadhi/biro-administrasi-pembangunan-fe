@@ -85,7 +85,7 @@ export default function SignInMantine(props) {
             <Paper mt={50} shadow="xl" radius="md" p="xl" withBorder {...props}>
                 <form onSubmit={formOnSubmit}>
                     <Stack>
-                        {type === "register" && (
+                        {/* {type === "register" && (
                             <TextInput
                                 label="Name"
                                 placeholder="Your name"
@@ -97,7 +97,7 @@ export default function SignInMantine(props) {
                                     )
                                 }
                             />
-                        )}
+                        )} */}
 
                         {appError || serverError ? (
                             <Alert
@@ -114,12 +114,14 @@ export default function SignInMantine(props) {
                             withAsterisk
                             autoComplete="false"
                             label="Email"
+                            radius="md"
                             placeholder="xxx@mail.com"
                             {...form.getInputProps("email")}
                         />
 
                         <PasswordInput
                             withAsterisk
+                            radius="md"
                             label="Password"
                             placeholder="Min. 6 Karakter"
                             {...form.getInputProps("password")}
@@ -138,7 +140,7 @@ export default function SignInMantine(props) {
                             />
                         )}
 
-                        {type === "register" && (
+                        {/* {type === "register" && (
                             <Checkbox
                                 label="I accept terms and conditions"
                                 checked={form.values.terms}
@@ -149,7 +151,7 @@ export default function SignInMantine(props) {
                                     )
                                 }
                             />
-                        )}
+                        )} */}
                     </Stack>
 
                     <Group position="right" mt="xl">

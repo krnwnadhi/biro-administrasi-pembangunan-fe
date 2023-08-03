@@ -12,6 +12,7 @@ import {
     Loader,
     Pagination,
     Paper,
+    Space,
     Table,
     Text,
     TextInput,
@@ -52,7 +53,7 @@ const PostList = (req, res) => {
     const post = useSelector((state) => state?.post);
 
     const { postList = [], loading, appError, serverError } = post;
-    // console.log(postList);
+    console.log(postList);
 
     const category = useSelector((state) => state?.category);
     const {
@@ -129,7 +130,7 @@ const PostList = (req, res) => {
     ));
 
     return (
-        <Paper p="md">
+        <Paper p="md" style={{ minHeight: "78vh" }}>
             <Breadcrumbs mb={20}>{items}</Breadcrumbs>
             <Group mb={30} position="center">
                 <TextInput
@@ -154,7 +155,7 @@ const PostList = (req, res) => {
                     variant="outline"
                     color="red"
                 >
-                    Reset
+                    Hapus
                 </Button>
             </Group>
             <div>
@@ -207,7 +208,7 @@ const PostList = (req, res) => {
                                     <th style={{ width: "15%" }}>Judul</th>
                                     <th style={{ width: "45%" }}>Deskripsi</th>
                                     <th>Kategori</th>
-                                    <th>Gambar</th>
+                                    <th>Dilihat</th>
                                     <th>Dibuat</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -216,10 +217,17 @@ const PostList = (req, res) => {
                                 {postItem &&
                                     postItem?.map((post) => (
                                         <tr key={post.id}>
-                                            <td>{post.title}</td>
+                                            <td>
+                                                <Text lineClamp={2} size="sm">
+                                                    {post.title}{" "}
+                                                </Text>
+                                            </td>
                                             <td>
                                                 <TypographyStylesProvider>
-                                                    <Text lineClamp={1}>
+                                                    <Text
+                                                        lineClamp={2}
+                                                        size="sm"
+                                                    >
                                                         <div
                                                             dangerouslySetInnerHTML={{
                                                                 __html: post?.description,
@@ -242,12 +250,21 @@ const PostList = (req, res) => {
                                                 </Badge>
                                             </td>
                                             <td>
-                                                <Image
+                                                {/* <Image
                                                     src={post?.image}
                                                     width={50}
                                                     fit="contain"
                                                     alt="Gambar Rusak"
-                                                />
+                                                    withPlaceholder
+                                                /> */}
+                                                <Text
+                                                    size="sm"
+                                                    style={{
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {post.numViews}
+                                                </Text>
                                             </td>
                                             <td>
                                                 <DateFormatter
@@ -264,8 +281,8 @@ const PostList = (req, res) => {
                                                         // to={`/update-kategori/${post?._id}`}
                                                         // to={`/posts/update/${post?._id}`}
                                                         to={`/posts/${post?._id}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
+                                                        // target="_blank"
+                                                        // rel="noopener noreferrer"
                                                         color="blue"
                                                     >
                                                         <IconPencil
@@ -281,8 +298,8 @@ const PostList = (req, res) => {
                         </Table>
                         <p>
                             Halaman {rows ? page : 0} dari {rows}
-                            <br />
-                            Total : {pages}
+                            <Space h="xs" />
+                            Total : {pages} Halaman
                         </p>
                     </>
                 )}

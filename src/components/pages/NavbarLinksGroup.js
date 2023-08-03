@@ -79,7 +79,6 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
             className={classes.link}
             to={link.link}
             key={link.label}
-            // onClick={(event) => event.preventDefault()}
         >
             {link.label}
         </Text>
@@ -119,15 +118,15 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
     );
 }
 
-const mockdata = {
-    label: "Releases",
-    icon: IconCalendarStats,
-    links: [
-        { label: "Upcoming releases", link: "/" },
-        { label: "Previous releases", link: "/" },
-        { label: "Releases schedule", link: "/" },
-    ],
-};
+// const mockdata = {
+//     label: "Releases",
+//     icon: IconCalendarStats,
+//     links: [
+//         { label: "Upcoming releases", link: "/" },
+//         { label: "Previous releases", link: "/" },
+//         { label: "Releases schedule", link: "/" },
+//     ],
+// };
 
 export function NavbarLinksGroup() {
     return (
@@ -141,7 +140,7 @@ export function NavbarLinksGroup() {
                         : theme.white,
             })}
         >
-            <LinksGroup {...mockdata} />
+            <LinksGroup />
         </Box>
     );
 }

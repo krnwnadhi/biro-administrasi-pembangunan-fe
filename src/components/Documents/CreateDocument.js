@@ -1,10 +1,20 @@
 import {
+    AppShell,
+    Aside,
+    Box,
+    Burger,
     Button,
     Container,
     Divider,
     FileInput,
+    Footer,
     Group,
+    Header,
+    MediaQuery,
+    Navbar,
     Paper,
+    ScrollArea,
+    Space,
     Text,
     TextInput,
     useMantineTheme,
@@ -12,8 +22,10 @@ import {
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
 import { useEffect, useRef, useState } from "react";
 
+import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import NavbarDashboard from "../pages/NavbarDashboard";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
@@ -22,6 +34,7 @@ export default function CreateDocument(props) {
     const [errorMsg, setErrorMsg] = useState("");
 
     const theme = useMantineTheme();
+    const [opened, setOpened] = useState(false);
 
     const history = useHistory();
 
@@ -76,73 +89,139 @@ export default function CreateDocument(props) {
     });
 
     return (
-        <Paper radius="md" p="xl">
-            <Container>
-                <Text
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                    size="lg"
-                    weight={500}
+        <AppShell
+            styles={{
+                main: {
+                    background:
+                        theme.colorScheme === "dark"
+                            ? theme.colors.dark[8]
+                            : theme.colors.gray[0],
+                },
+            }}
+            navbarOffsetBreakpoint="sm"
+            asideOffsetBreakpoint="sm"
+            navbar={
+                <Navbar
+                    p="sm"
+                    width={{ sm: 150, lg: 280 }}
+                    hiddenBreakpoint="sm"
+                    hidden={!opened}
                 >
-                    Tambah Dokumen
-                </Text>
-
-                <Divider labelPosition="center" my="xl" />
-
-                <form onSubmit={formOnSubmit}>
-                    <TextInput
-                        withAsterisk
-                        label="Judul"
-                        aria-label="Judul"
-                        placeholder="Judul Artikel"
-                        {...form.getInputProps("title")}
-                    />
-
-                    <TextInput
-                        withAsterisk
-                        label="Deskripsi"
-                        aria-label="Deskripsi"
-                        placeholder="Deskripsi"
-                        {...form.getInputProps("description")}
-                    />
-
-                    <FileInput
-                        label="Files"
-                        description="Input files berekstensi pdf/excel."
-                        placeholder="Silahkan Pilih Files"
-                        clearable
-                        required
-                        withAsterisk
-                        accept=".pdf, .xls, .xlsx"
-                        error={errorMsg}
-                        {...form.getInputProps("files")}
-                    />
-
-                    <Group position="apart" mt="xl">
-                        <Button
-                            compact
-                            component={Link}
-                            color="gray"
-                            to="/dashboard/documents"
-                            variant="subtle"
-                            leftIcon={<IconChevronLeft size={12} />}
-                            size="xs"
+                    <Divider mt={10} />
+                    <Navbar.Section
+                        grow
+                        component={ScrollArea}
+                        mx="-xs"
+                        px="xs"
+                    >
+                        <Box py="md">
+                            <NavbarDashboard />
+                        </Box>
+                    </Navbar.Section>
+                </Navbar>
+            }
+            footer={
+                <Footer
+                    sx={{ display: "flex", justifyContent: "center" }}
+                    height={60}
+                    p="md"
+                >
+                    <Text size="sm">
+                        Copyright © 2023{" "}
+                        <Text component={Link} to="/" weight="bold">
+                            Biro Adminitrasi Pembangunan Provinsi Jambi
+                        </Text>
+                    </Text>
+                </Footer>
+            }
+            header={
+                <Header height={{ base: 50, md: 70 }} p="md">
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            height: "100%",
+                        }}
+                    >
+                        <MediaQuery
+                            largerThan="sm"
+                            styles={{ display: "none" }}
                         >
-                            <Text>Dokumen</Text>
-                        </Button>
+                            <Burger
+                                opened={opened}
+                                onClick={() => setOpened((o) => !o)}
+                                size="sm"
+                                color={theme.colors.gray[6]}
+                                mr="xl"
+                            />
+                        </MediaQuery>
+                        <Text ml={10}>Biro Administrasi Pembangunan</Text>
+                        <DarkModeBtn />
+                    </div>
+                </Header>
+            }
+        >
+            <Paper radius="md" p="md">
+                <Container my={90}>
+                    <Text
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                        size="lg"
+                        weight={500}
+                    >
+                        Tambah Dokumen
+                    </Text>
 
-                        <Button
-                            disabled={!form.isValid()}
-                            type="submit"
-                            compact
-                        >
-                            Tambah
-                        </Button>
-                    </Group>
-                </form>
-            </Container>
-        </Paper>
+                    <Divider labelPosition="center" my="xl" />
+
+                    <form onSubmit={formOnSubmit}>
+                        <TextInput
+                            withAsterisk
+                            label="Judul"
+                            aria-label="Judul"
+                            placeholder="Judul Dokumen"
+                            {...form.getInputProps("title")}
+                        />
+
+                        <Space h="xl" />
+
+                        <TextInput
+                            withAsterisk
+                            label="Deskripsi"
+                            aria-label="Deskripsi"
+                            placeholder="Deskripsi"
+                            {...form.getInputProps("description")}
+                        />
+
+                        <Space h="xl" />
+
+                        <FileInput
+                            label="Files"
+                            description="Input files berekstensi pdf/excel berukuran kurang dari 1MB!"
+                            placeholder="Silahkan Pilih Files"
+                            clearable
+                            required
+                            withAsterisk
+                            accept=".pdf, .xls, .xlsx"
+                            error={errorMsg}
+                            {...form.getInputProps("files")}
+                        />
+
+                        <Group position="center" mt="xl">
+                            <Button
+                                disabled={!form.isValid()}
+                                type="submit"
+                                // compact
+                            >
+                                Tambah
+                            </Button>
+                        </Group>
+                    </form>
+                </Container>
+            </Paper>
+        </AppShell>
     );
 }

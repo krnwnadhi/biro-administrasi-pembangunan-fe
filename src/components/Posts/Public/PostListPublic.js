@@ -1,15 +1,21 @@
 import {
+    ActionIcon,
+    Anchor,
     Avatar,
+    Badge,
     Box,
+    Breadcrumbs,
     Button,
     Card,
     Center,
     CloseButton,
+    Container,
     Group,
     Image,
     Loader,
     Pagination,
     SimpleGrid,
+    Space,
     Text,
     TextInput,
     createStyles,
@@ -19,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import DateFormatter from "../../../utils/dateFormatter";
+import { IconSearch } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { basePostURL } from "../../../utils/baseURL";
@@ -38,7 +45,7 @@ const useStyles = createStyles((theme) => ({
     title: {
         fontWeight: 700,
         fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-        lineHeight: 1.2,
+        lineHeight: 1.7,
     },
 
     body: {
@@ -73,7 +80,9 @@ export default function PostListPublic() {
         const abortController = new AbortController();
 
         getPost();
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        setTimeout(() => setLoad(false), 2000);
 
         return () => {
             abortController.abort();
@@ -103,77 +112,90 @@ export default function PostListPublic() {
             setPage(0);
             setKeyword(query);
             setLoad(false);
-        }, 1000);
+        }, 2500);
     };
 
-    const resetData = (e) => {
-        e.preventDefault();
-        setQuery("");
-    };
+    // const resetData = (e) => {
+    //     e.preventDefault();
+    //     setQuery("");
+    // };
 
     const handleTextInput = (e) => {
         setQuery(e.target.value);
     };
 
     const theme = useMantineTheme();
-    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
+
+    const breadcrumbsItem = [
+        { title: "Home", href: "/" },
+        { title: "Informasi", href: "#" },
+        { title: "Berita & Kegiatan", href: "/berita" },
+    ].map((item, index) => (
+        <Anchor
+            href={item.href}
+            key={index}
+            size="sm"
+            underline={false}
+            truncate="end"
+        >
+            {item.title}
+        </Anchor>
+    ));
 
     return (
         <>
-            {/* <Container> */}
-            <Box
-                sx={(theme) => ({
-                    backgroundColor:
-                        theme.colorScheme === "dark"
-                            ? theme.colors.dark[6]
-                            : theme.colors.gray[1],
-                    // textAlign: "center",
-                    margin: theme.spacing.lg,
-                    padding: theme.spacing.xl,
-                    borderRadius: theme.radius.md,
-                    // cursor: "pointer",
-                })}
-            >
-                <Text mb={20}>Home / Berita</Text>
+            <Container size="lg" mt={20}>
+                <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
+
+                <Space h="xl" />
+
                 <Group mb={30} position="center">
-                    <div style={{ width: 200 }}>
+                    <div style={{ width: "100%" }}>
                         <TextInput
-                            placeholder="Cari Artikel Berita"
+                            placeholder="Cari..."
                             value={query}
                             onChange={handleTextInput}
                             rightSection={
-                                query ? (
-                                    <CloseButton
-                                        onClick={resetData}
-                                        disabled={!query}
-                                        aria-label="Close modal"
+                                load ? (
+                                    <ActionIcon
+                                        loading={
+                                            load ? (
+                                                <Loader
+                                                    size="sm"
+                                                    variant="dots"
+                                                />
+                                            ) : null
+                                        }
                                     />
-                                ) : null
+                                ) : (
+                                    <ActionIcon
+                                        color="blue"
+                                        variant="transparent"
+                                        onClick={searchData}
+                                    >
+                                        <IconSearch size={18} stroke={1.5} />
+                                    </ActionIcon>
+                                )
                             }
                         />
                     </div>
-                    {load ? (
-                        <Button
-                            loading={
-                                load ? (
-                                    <Loader size="md" variant="dots" />
-                                ) : null
-                            }
-                        >
-                            Mencari
-                        </Button>
-                    ) : (
-                        <Button onClick={searchData}>Cari Berita</Button>
-                    )}
+                    {/* <CloseButton
+                        variant="transparent"
+                        onClick={resetData}
+                        disabled={!query}
+                        aria-label="Close modal"
+                        loading={load}
+                    /> */}
                 </Group>
                 <SimpleGrid
-                    p="xl"
+                    // p="xl"
                     verticalSpacing="xl"
                     cols={2}
                     breakpoints={[
                         { maxWidth: 1050, cols: 1, spacing: "md" },
                         // { maxWidth: 755, cols: 2, spacing: "sm" },
-                        { maxWidth: 600, cols: 1, spacing: "sm" },
+                        // { maxWidth: 400, cols: 1, spacing: "sm" },
                     ]}
                 >
                     {loading ? (
@@ -185,95 +207,131 @@ export default function PostListPublic() {
                             {appError}
                             {serverError}
                         </h2>
-                    ) : postItem?.length <= 0 ? (
-                        <h2>Tidak ada Post</h2>
-                    ) : (
-                        postItem
-                            // .sort((a, b) => (a > b ? 1 : -1))
-                            ?.map((item, index) => {
-                                if (item.length !== 0) {
-                                    return (
-                                        <Card
-                                            key={index}
-                                            withBorder
-                                            radius="md"
-                                            className={classes.card}
-                                            shadow="xl"
-                                        >
-                                            <Group noWrap spacing={0}>
-                                                <Image
-                                                    src={item?.image}
-                                                    height={mobile ? 140 : 240}
-                                                    width={mobile ? 140 : 240}
-                                                    radius="xl"
-                                                />
-                                                <div className={classes.body}>
-                                                    <Text
-                                                        transform="uppercase"
-                                                        color="dimmed"
-                                                        weight={700}
-                                                        size="xs"
-                                                    >
-                                                        {item?.category}
-                                                    </Text>
-                                                    <Text
-                                                        component={Link}
-                                                        to={`/berita/${item._id}`}
-                                                        className={
-                                                            classes.title
+                    ) : null}
+                    {
+                        // loading ? (
+                        //     <Center style={{ minHeight: "70vh" }}>
+                        //         <Loader size="xl" variant="dots" />
+                        //     </Center>
+                        // ) : appError || serverError ? (
+                        //     <h2>
+                        //         {appError}
+                        //         {serverError}
+                        //     </h2>
+                        // ) :
+                        postItem?.length <= 0 ? (
+                            <h2>Tidak ada Post</h2>
+                        ) : (
+                            postItem
+                                // .sort((a, b) => (a > b ? 1 : -1))
+                                ?.map((item, index) => {
+                                    if (item.length !== 0) {
+                                        return (
+                                            <Card
+                                                key={index}
+                                                withBorder
+                                                radius="md"
+                                                className={classes.card}
+                                                shadow="lg"
+                                            >
+                                                <Group
+                                                    noWrap={
+                                                        mobile ? false : true
+                                                    }
+                                                    spacing={1}
+                                                >
+                                                    <Image
+                                                        src={item?.image}
+                                                        height={
+                                                            mobile ? 220 : 210
                                                         }
-                                                        mt="xs"
-                                                        mb="md"
+                                                        width={
+                                                            mobile ? 220 : 210
+                                                        }
+                                                        radius="md"
+                                                        alt="Gambar Rusak"
+                                                        // fit="contain"
+                                                        withPlaceholder
+                                                        mx={mobile ? "auto" : 0}
+                                                    />
+                                                    <div
+                                                        className={classes.body}
                                                     >
-                                                        {item?.title}
-                                                    </Text>
-                                                    {/* <Divider /> */}
-                                                    <Group
-                                                        noWrap
-                                                        spacing="xs"
-                                                        mt={20}
-                                                    >
-                                                        {/* <Group spacing="xs" noWrap> */}
-                                                        <Avatar
-                                                            size={20}
-                                                            src={
-                                                                item?.user
-                                                                    ?.profilePhoto
+                                                        <Badge
+                                                            variant={
+                                                                theme.colorScheme ===
+                                                                "dark"
+                                                                    ? "light"
+                                                                    : "outline"
                                                             }
-                                                        />
-                                                        <Text size="xs">
-                                                            {
-                                                                item?.user
-                                                                    ?.fullName
+                                                        >
+                                                            {item?.category}
+                                                        </Badge>
+
+                                                        <Space h="xl" />
+
+                                                        <Text
+                                                            component={Link}
+                                                            to={`/berita/${item._id}`}
+                                                            className={
+                                                                classes.title
                                                             }
-                                                        </Text>
-                                                        {/* </Group> */}
-                                                        <Text
-                                                            size="xs"
-                                                            color="dimmed"
+                                                            size={
+                                                                mobile
+                                                                    ? "sm"
+                                                                    : "md"
+                                                            }
+                                                            lineClamp={4}
                                                         >
-                                                            •
+                                                            {item?.title}
                                                         </Text>
-                                                        <Text
-                                                            size="xs"
-                                                            color="dimmed"
+
+                                                        <Group
+                                                            // noWrap
+                                                            spacing="xs"
+                                                            mt={20}
                                                         >
-                                                            <DateFormatter
-                                                                date={
-                                                                    item?.createdAt
+                                                            <Avatar
+                                                                size={20}
+                                                                src={
+                                                                    item?.user
+                                                                        ?.profilePhoto
                                                                 }
                                                             />
-                                                        </Text>
-                                                    </Group>
-                                                </div>
-                                            </Group>
-                                        </Card>
-                                    );
-                                } else {
-                                    return console.log(" ");
-                                }
-                            })
-                    )}
+                                                            <Text size="xs">
+                                                                {
+                                                                    item?.user
+                                                                        ?.fullName
+                                                                }
+                                                            </Text>
+
+                                                            <Text
+                                                                size="xs"
+                                                                color="dimmed"
+                                                            >
+                                                                •
+                                                            </Text>
+                                                            <Text
+                                                                size="xs"
+                                                                color="dimmed"
+                                                            >
+                                                                <DateFormatter
+                                                                    date={
+                                                                        item?.createdAt
+                                                                    }
+                                                                />
+                                                            </Text>
+                                                        </Group>
+                                                    </div>
+                                                </Group>
+                                            </Card>
+                                        );
+                                    } else {
+                                        return console.log(" ");
+                                    }
+                                })
+                        )
+                    }
                 </SimpleGrid>
                 <Center>
                     <Box p={20}>
@@ -313,8 +371,7 @@ export default function PostListPublic() {
                         />
                     </AspectRatio>
                 </SimpleGrid> */}
-            </Box>
-            {/* </Container> */}
+            </Container>
         </>
     );
 }

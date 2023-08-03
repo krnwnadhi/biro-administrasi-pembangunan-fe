@@ -1,19 +1,11 @@
-import {
-    Button,
-    Container,
-    Overlay,
-    Text,
-    Title,
-    createStyles,
-} from "@mantine/core";
+import { Container, Overlay, Text, Title, createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
     hero: {
         position: "relative",
         backgroundImage:
-            "url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80)",
+            "url(https://images.unsplash.com/photo-1690446142957-124a5800e656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80)",
         // backgroundImage: "url(https://source.unsplash.com/random)",
-
         backgroundSize: "cover",
         backgroundPosition: "center",
     },
@@ -24,13 +16,13 @@ const useStyles = createStyles((theme) => ({
         flexDirection: "column",
         justifyContent: "flex-end",
         alignItems: "flex-start",
-        paddingBottom: theme.spacing.xl * 10,
+        paddingBottom: theme.spacing.xl * 11,
         zIndex: 1,
         position: "relative",
 
         [theme.fn.smallerThan("sm")]: {
-            height: 500,
-            paddingBottom: theme.spacing.xl * 3,
+            height: 750,
+            marginTop: theme.spacing.xl * -1,
         },
     },
 
@@ -38,7 +30,6 @@ const useStyles = createStyles((theme) => ({
         color: theme.white,
         fontSize: 50,
         fontWeight: 900,
-        // lineHeight: 1.1,
 
         [theme.fn.smallerThan("sm")]: {
             fontSize: 40,
@@ -46,8 +37,8 @@ const useStyles = createStyles((theme) => ({
         },
 
         [theme.fn.smallerThan("xs")]: {
-            fontSize: 28,
-            lineHeight: 1.3,
+            fontSize: 35,
+            lineHeight: 1.4,
         },
     },
 
@@ -57,15 +48,7 @@ const useStyles = createStyles((theme) => ({
 
         [theme.fn.smallerThan("sm")]: {
             maxWidth: "100%",
-            fontSize: theme.fontSizes.sm,
-        },
-    },
-
-    control: {
-        marginTop: theme.spacing.xl * 1.5,
-
-        [theme.fn.smallerThan("sm")]: {
-            width: "100%",
+            fontSize: theme.fontSizes.md,
         },
     },
 }));
@@ -84,21 +67,14 @@ export default function HeroHeaderMantine() {
                 <Title className={classes.title}>
                     Biro Administrasi Pembangunan Provinsi Jambi
                 </Title>
+
                 <Text className={classes.description} size="xl" mt="xl">
                     Selamat Datang di Website
                 </Text>
+
                 <Text className={classes.description} size="xl">
                     Biro Administrasi Pembangunan Provinsi Jambi
                 </Text>
-
-                {/* <Button
-                    variant="gradient"
-                    size="xl"
-                    radius="xl"
-                    className={classes.control}
-                >
-                    Get started
-                </Button> */}
             </Container>
         </div>
     );

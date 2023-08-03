@@ -136,77 +136,115 @@ export default function Contact() {
         }, 2000);
     };
 
-    const mainItems = mainLinks.map((item, index) => (
-        <Anchor
-            href={item.link}
-            key={item.label}
-            className={cx(classes.mainLink, {
-                [classes.mainLinkActive]: index === active,
-            })}
-            onClick={(event) => {
-                event.preventDefault();
-                setActive(index);
-            }}
-        >
-            {item.label}
-        </Anchor>
-    ));
+    // const mainItems = mainLinks.map((item, index) => (
+    //     <Anchor
+    //         href={item.link}
+    //         key={item.label}
+    //         className={cx(classes.mainLink, {
+    //             [classes.mainLinkActive]: index === active,
+    //         })}
+    //         onClick={(event) => {
+    //             event.preventDefault();
+    //             setActive(index);
+    //         }}
+    //     >
+    //         {item.label}
+    //     </Anchor>
+    // ));
 
-    const secondaryItems = userLinks.map((item) => (
-        <Anchor
-            href={item.link}
-            key={item.label}
-            onClick={(event) => event.preventDefault()}
-            className={classes.secondaryLink}
-        >
-            {item.label}
-        </Anchor>
-    ));
+    // const secondaryItems = userLinks.map((item) => (
+    //     <Anchor
+    //         href={item.link}
+    //         key={item.label}
+    //         onClick={(event) => event.preventDefault()}
+    //         className={classes.secondaryLink}
+    //     >
+    //         {item.label}
+    //     </Anchor>
+    // ));
 
     return (
-        <Header height={HEADER_HEIGHT} mb={120}>
+        <>
+            {/* <Header height={HEADER_HEIGHT} mb={120}>
+                <Container className={classes.inner}>
+                    <div className={classes.links}>
+                        <Group position="right">{secondaryItems}</Group>
+                        <Group
+                            spacing={0}
+                            position="right"
+                            className={classes.mainLinks}
+                        >
+                            {mainItems}
+                        </Group>
+                    </div>
+                    <Burger
+                        opened={opened}
+                        onClick={toggle}
+                        className={classes.burger}
+                        size="sm"
+                    />
+                </Container>
+            </Header> */}
             <Container className={classes.inner}>
-                <div className={classes.links}>
-                    <Group position="right">{secondaryItems}</Group>
-                    <Group
-                        spacing={0}
-                        position="right"
-                        className={classes.mainLinks}
+                {loading ? (
+                    <Button
+                        onClick={handleClick}
+                        loading={loading}
+                        disabled
+                        loaderProps={{ variant: "dots" }}
+                        styles={(theme) => ({
+                            root: {
+                                backgroundColor: "#00acee",
+                                border: 0,
+                                height: 42,
+                                paddingLeft: 20,
+                                paddingRight: 20,
+
+                                "&:hover": {
+                                    backgroundColor: theme.fn.darken(
+                                        "#00acee",
+                                        0.05
+                                    ),
+                                },
+                            },
+
+                            leftIcon: {
+                                marginRight: 15,
+                            },
+                        })}
                     >
-                        {mainItems}
-                    </Group>
-                </div>
-                <Burger
-                    opened={opened}
-                    onClick={toggle}
-                    className={classes.burger}
-                    size="sm"
-                />
+                        Menyimpan
+                    </Button>
+                ) : (
+                    <Button
+                        onClick={handleClick}
+                        loading={loading}
+                        loaderProps={{ variant: "dots" }}
+                        styles={(theme) => ({
+                            root: {
+                                backgroundColor: "#00acee",
+                                border: 0,
+                                height: 42,
+                                paddingLeft: 20,
+                                paddingRight: 20,
+
+                                "&:hover": {
+                                    backgroundColor: theme.fn.darken(
+                                        "#00acee",
+                                        0.05
+                                    ),
+                                },
+                            },
+
+                            leftIcon: {
+                                marginRight: 15,
+                            },
+                        })}
+                    >
+                        Simpan
+                    </Button>
+                )}
             </Container>
-            <Button
-                onClick={handleClick}
-                loading={loading}
-                loaderProps={{ variant: "dots" }}
-                styles={(theme) => ({
-                    root: {
-                        backgroundColor: "#00acee",
-                        border: 0,
-                        height: 42,
-                        paddingLeft: 20,
-                        paddingRight: 20,
-
-                        "&:hover": {
-                            backgroundColor: theme.fn.darken("#00acee", 0.05),
-                        },
-                    },
-
-                    leftIcon: {
-                        marginRight: 15,
-                    },
-                })}
-            >
-                Simpan
-            </Button>
-        </Header>
+        </>
     );
 }
