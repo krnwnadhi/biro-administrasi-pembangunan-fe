@@ -10,6 +10,7 @@ import {
     Center,
     CloseButton,
     Container,
+    Divider,
     Group,
     Image,
     Loader,
@@ -74,7 +75,9 @@ export default function PostListPublic() {
     const [keyword, setKeyword] = useState("");
     const [query, setQuery] = useState("");
 
-    // console.log(postItem);
+    // const [show, setShow] = useState(false);
+
+    console.log(postItem);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -93,11 +96,11 @@ export default function PostListPublic() {
         const response = await axios.get(
             `${basePostURL}?search_query=${keyword}&page=${page}&limit=${limit}`
         );
-        // console.log(response);
-        setPostItem(response.data.result);
-        setPage(response.data.page);
-        setPages(response.data.totalItem);
-        setRows(response.data.totalPage);
+        console.log(response);
+        // setPostItem(response.data.result);
+        // setPage(response.data.page);
+        // setPages(response.data.totalItem);
+        // setRows(response.data.totalPage);
     };
 
     const handlePageChange = (event) => {
@@ -150,44 +153,41 @@ export default function PostListPublic() {
 
                 <Space h="xl" />
 
-                <Group mb={30} position="center">
-                    <div style={{ width: "100%" }}>
-                        <TextInput
-                            placeholder="Cari..."
-                            value={query}
-                            onChange={handleTextInput}
-                            rightSection={
-                                load ? (
-                                    <ActionIcon
-                                        loading={
-                                            load ? (
-                                                <Loader
-                                                    size="sm"
-                                                    variant="dots"
-                                                />
-                                            ) : null
-                                        }
-                                    />
-                                ) : (
-                                    <ActionIcon
-                                        color="blue"
-                                        variant="transparent"
-                                        onClick={searchData}
-                                    >
-                                        <IconSearch size={18} stroke={1.5} />
-                                    </ActionIcon>
-                                )
-                            }
-                        />
-                    </div>
-                    {/* <CloseButton
+                <div style={{ width: "100%", marginBottom: 30 }}>
+                    <TextInput
+                        placeholder="Cari..."
+                        value={query}
+                        onChange={handleTextInput}
+                        rightSection={
+                            load ? (
+                                <ActionIcon
+                                    loading={
+                                        load ? (
+                                            <Loader size="sm" variant="dots" />
+                                        ) : null
+                                    }
+                                />
+                            ) : (
+                                <ActionIcon
+                                    color="blue"
+                                    variant="transparent"
+                                    onClick={searchData}
+                                >
+                                    <IconSearch size={18} stroke={1.5} />
+                                </ActionIcon>
+                            )
+                        }
+                    />
+                </div>
+
+                {/* <CloseButton
                         variant="transparent"
                         onClick={resetData}
                         disabled={!query}
                         aria-label="Close modal"
                         loading={load}
                     /> */}
-                </Group>
+
                 <SimpleGrid
                     // p="xl"
                     verticalSpacing="xl"
@@ -264,6 +264,7 @@ export default function PostListPublic() {
                                                                     ? "light"
                                                                     : "outline"
                                                             }
+                                                            fullWidth
                                                         >
                                                             {item?.category}
                                                         </Badge>
@@ -311,6 +312,7 @@ export default function PostListPublic() {
                                                             >
                                                                 •
                                                             </Text>
+
                                                             <Text
                                                                 size="xs"
                                                                 color="dimmed"

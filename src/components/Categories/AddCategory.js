@@ -129,8 +129,8 @@ export default function AddCategory() {
                 </Header>
             }
         >
-            <Paper radius="md" p="xl" style={{ minHeight: "78vh" }}>
-                <Container mt={140}>
+            <>
+                <Container mt={140} size="lg">
                     <Text
                         sx={{
                             display: "flex",
@@ -138,6 +138,7 @@ export default function AddCategory() {
                         }}
                         size="lg"
                         weight={500}
+                        mt={30}
                     >
                         Tambah Kategori
                     </Text>
@@ -185,7 +186,7 @@ export default function AddCategory() {
                         </Group>
                     </form>
                 </Container>
-            </Paper>
+            </>
         </AppShell>
     );
 }

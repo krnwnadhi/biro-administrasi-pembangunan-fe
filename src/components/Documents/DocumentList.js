@@ -14,6 +14,7 @@ import {
     Pagination,
     Paper,
     ScrollArea,
+    Space,
     Table,
     Text,
     useMantineTheme,
@@ -171,8 +172,22 @@ const DocumentList = () => {
                 </Header>
             }
         >
-            <Paper radius="md" p="md">
-                <Container my={150}>
+            <>
+                <Container size="lg">
+                    <Text
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                        size="lg"
+                        weight={500}
+                        mt={30}
+                    >
+                        Daftar Dokumen
+                    </Text>
+
+                    <Divider labelPosition="center" my="xl" />
+
                     <Button
                         mb={20}
                         component={Link}
@@ -181,7 +196,9 @@ const DocumentList = () => {
                     >
                         Tambah
                     </Button>
+
                     {errorMsg && <Text c="red">{errorMsg}</Text>}
+
                     <Table
                         highlightOnHover
                         withBorder
@@ -191,7 +208,6 @@ const DocumentList = () => {
                     >
                         <thead>
                             <tr>
-                                {/* <th style={{ textAlign: "center" }}>No. </th> */}
                                 <th style={{ textAlign: "center" }}>
                                     Tanggal Upload
                                 </th>
@@ -280,6 +296,14 @@ const DocumentList = () => {
                         </tbody>
                     </Table>
 
+                    <Space h="xl" />
+
+                    <Text size="sm">
+                        Halaman {rows ? page : 0} dari {rows}
+                        <Space h="xs" />
+                        Total : {pages} Item
+                    </Text>
+
                     <Center>
                         <Box p={20}>
                             <Pagination
@@ -291,7 +315,7 @@ const DocumentList = () => {
                         </Box>
                     </Center>
                 </Container>
-            </Paper>
+            </>
         </AppShell>
     );
 };

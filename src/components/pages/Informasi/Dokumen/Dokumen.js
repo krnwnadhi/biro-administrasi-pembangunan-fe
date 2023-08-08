@@ -10,6 +10,7 @@ import {
     Group,
     Loader,
     Pagination,
+    Paper,
     Space,
     Table,
     Text,
@@ -111,7 +112,7 @@ const Dokumen = () => {
     ));
 
     return (
-        <div>
+        <Paper sx={{ minHeight: "75vh" }}>
             <Container size="lg" mt={20}>
                 <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
 
@@ -252,7 +253,7 @@ const Dokumen = () => {
                     </Box>
                 </Center>
             </Container>
-        </div>
+        </Paper>
     );
 };
 

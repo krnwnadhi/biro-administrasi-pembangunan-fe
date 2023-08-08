@@ -6,6 +6,8 @@ import {
     Breadcrumbs,
     Button,
     Center,
+    Container,
+    Divider,
     Group,
     Image,
     List,
@@ -19,7 +21,7 @@ import {
     TypographyStylesProvider,
     useMantineTheme,
 } from "@mantine/core";
-import { IconPencil, IconPlus, IconX } from "@tabler/icons-react";
+import { IconPencil, IconPlus, IconTrash, IconX } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -80,6 +82,8 @@ const PostList = (req, res) => {
     const [keyword, setKeyword] = useState("");
     const [query, setQuery] = useState("");
 
+    const [show, setShow] = useState(false);
+
     const getPost = async () => {
         const response = await axios.get(
             `${basePostURL}?search_query=${keyword}&page=${page}&limit=${limit}`
@@ -120,48 +124,52 @@ const PostList = (req, res) => {
         setQuery(e.target.value);
     };
 
-    const items = [
-        { title: "Dashboard", href: "#" },
-        { title: "Daftar Post", href: "#" },
-    ].map((item, index) => (
-        <Anchor underline={false} href={item.href} key={index}>
-            {item.title}
-        </Anchor>
-    ));
-
     return (
-        <Paper p="md" style={{ minHeight: "78vh" }}>
-            <Breadcrumbs mb={20}>{items}</Breadcrumbs>
+        <Container size="lg">
+            <Text
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+                size="lg"
+                weight={500}
+                mt={30}
+            >
+                Daftar Berita & Kegiatan
+            </Text>
+
+            <Divider labelPosition="center" my="xl" />
+
             <Group mb={30} position="center">
                 <TextInput
-                    placeholder="Cari Artikel Berita"
+                    placeholder="Cari Berdasarkan Judul"
                     value={query}
                     onChange={handleTextInput}
+                    sx={!query ? { width: "60%" } : { width: "50%" }}
                 />
                 {load ? (
                     <Button
                         loading={
                             load ? <Loader size="md" variant="dots" /> : null
                         }
-                    >
-                        Mencari
-                    </Button>
+                    />
                 ) : (
-                    <Button onClick={searchData}>Cari Berita</Button>
+                    <Button onClick={searchData}>Cari </Button>
                 )}
-                <Button
+                <ActionIcon
                     onClick={resetData}
                     disabled={!query}
-                    variant="outline"
+                    variant="subtle"
                     color="red"
+                    sx={!query ? { display: "none" } : null}
                 >
-                    Hapus
-                </Button>
+                    <IconTrash size={14} />
+                </ActionIcon>
             </Group>
             <div>
                 {loading ? (
                     <Center style={{ minHeight: "70vh" }}>
-                        <Loader size="xl" variant="dots" />
+                        <Loader size="xl" />
                     </Center>
                 ) : appError || serverError ? (
                     <h2>
@@ -296,11 +304,14 @@ const PostList = (req, res) => {
                                     ))}
                             </tbody>
                         </Table>
-                        <p>
+
+                        <Space h="xl" />
+
+                        <Text size="sm">
                             Halaman {rows ? page : 0} dari {rows}
                             <Space h="xs" />
-                            Total : {pages} Halaman
-                        </p>
+                            Total : {pages} Item
+                        </Text>
                     </>
                 )}
                 <Center>
@@ -314,7 +325,7 @@ const PostList = (req, res) => {
                     </Box>
                 </Center>
             </div>
-        </Paper>
+        </Container>
     );
 };
 

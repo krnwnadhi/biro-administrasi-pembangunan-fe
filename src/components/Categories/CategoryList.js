@@ -6,6 +6,7 @@ import {
     Box,
     Burger,
     Button,
+    Container,
     Divider,
     Footer,
     Group,
@@ -118,9 +119,21 @@ const CategoryList = () => {
                 </Header>
             }
         >
-            <Paper p="xl" radius={0} style={{ minHeight: "78vh" }}>
-                {/* <Container size={420} my={170}> */}
-                <Text mb={30}>Daftar Kategori</Text>
+            <Container size="lg">
+                <Text
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                    size="lg"
+                    weight={500}
+                    mt={30}
+                >
+                    Daftar Kategori
+                </Text>
+
+                <Divider labelPosition="center" my="xl" />
+
                 <Button
                     component={Link}
                     to="/dashboard/tambah-kategori"
@@ -233,8 +246,7 @@ const CategoryList = () => {
                         </Table>
                     )}
                 </div>
-                {/* </Container> */}
-            </Paper>
+            </Container>
         </AppShell>
     );
 };

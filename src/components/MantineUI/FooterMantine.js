@@ -243,7 +243,7 @@ const data = [
         title: "Kontak",
         links: [
             {
-                label: "No. Telp.",
+                label: "(0741) 66269",
                 link: "#",
             },
         ],

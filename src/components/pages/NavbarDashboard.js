@@ -56,21 +56,10 @@ const mockdata = [
         label: "Galeri",
         icon: IconPhotoSearch,
         links: [
-            // { label: "Album", link: "/dashboard/gallery" },
-            // { label: "Tambah Galeri", link: "/dashboard/tambah-gallery" },
-            { label: "Album", link: "#" },
-            { label: "Tambah Galeri", link: "#" },
+            { label: "Album", link: "/dashboard/gallery" },
+            { label: "Tambah Galeri", link: "/dashboard/tambah-gallery" },
         ],
     },
-
-    // {
-    //     label: "Video",
-    //     icon: IconVideo,
-    //     links: [
-    //         // { label: "Daftar Video", link: "/video" },
-    //         // { label: "Tambah Video", link: "#" },
-    //     ],
-    // },
 ];
 
 const useStyles = createStyles((theme) => ({

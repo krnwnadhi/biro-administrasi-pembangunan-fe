@@ -17,7 +17,6 @@ export const createGalleryAction = createAsyncThunk(
         const { userAuth } = user;
         const config = {
             headers: {
-                // "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${userAuth?.token}`,
             },
         };
@@ -25,20 +24,14 @@ export const createGalleryAction = createAsyncThunk(
         try {
             const formData = new FormData();
             formData.append("title", gallery?.title);
-            // formData.append("images[]", gallery?.images);
-            // for (let i = 0; i < gallery.length; i++) {
-            //     formData.append("images[]", gallery[i].images);
-            // }
-            Array.from(gallery).forEach((item) => {
-                formData.append("images[]", item);
-            });
+            formData.append("image", gallery?.image);
 
             const { data } = await axios.post(baseGalleryURL, formData, config);
 
             //dispatch action
             dispatch(resetGalleryAction());
 
-            console.log(data);
+            // console.log(data);
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -54,8 +47,12 @@ export const fetchAllGalleryAction = createAsyncThunk(
     "gallery/fetchAll",
     async (gallery, { rejectWithValue, getState, dispatch }) => {
         // get user token
+
         const user = getState()?.users;
         const { userAuth } = user;
+        axios.defaults.headers.common[
+            "Authorization"
+        ] = `Bearer ${userAuth?.token}`;
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,

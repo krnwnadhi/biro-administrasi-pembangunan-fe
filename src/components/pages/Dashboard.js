@@ -115,7 +115,6 @@ function Dashboard(/*{ children }*/) {
                 </Header>
             }
         >
-            {/* <TableMantine /> */}
             <PostList />
         </AppShell>
     );

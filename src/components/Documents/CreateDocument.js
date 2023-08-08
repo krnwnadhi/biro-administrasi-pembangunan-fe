@@ -162,8 +162,8 @@ export default function CreateDocument(props) {
                 </Header>
             }
         >
-            <Paper radius="md" p="md">
-                <Container my={90}>
+            <>
+                <Container size="lg">
                     <Text
                         sx={{
                             display: "flex",
@@ -171,6 +171,7 @@ export default function CreateDocument(props) {
                         }}
                         size="lg"
                         weight={500}
+                        mt={30}
                     >
                         Tambah Dokumen
                     </Text>
@@ -221,7 +222,7 @@ export default function CreateDocument(props) {
                         </Group>
                     </form>
                 </Container>
-            </Paper>
+            </>
         </AppShell>
     );
 }

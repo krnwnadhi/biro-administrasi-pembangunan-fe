@@ -130,7 +130,11 @@ const PostDetailsPublic = (props) => {
                                         <ThemeIcon color="gray" variant="light">
                                             <IconCalendar size={12} />
                                         </ThemeIcon>
-                                        <Text fz="xs" color="dimmed">
+                                        <Text
+                                            fz="xs"
+                                            // size={mobile ? 4 : 20}
+                                            color="dimmed"
+                                        >
                                             <DateFormatter
                                                 date={postDetail?.createdAt}
                                             />
@@ -164,14 +168,31 @@ const PostDetailsPublic = (props) => {
                                             orientation="vertical"
                                         />
 
-                                        <ThemeIcon color="gray" variant="light">
+                                        <ThemeIcon
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                            color="gray"
+                                            variant="light"
+                                        >
                                             <IconCategory2 size={12} />
                                         </ThemeIcon>
-                                        <Text fz="xs" color="dimmed">
+                                        <Text
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                            fz="xs"
+                                            color="dimmed"
+                                        >
                                             {postDetail?.category}
                                         </Text>
 
-                                        <Divider orientation="vertical" />
+                                        <Divider
+                                            orientation="vertical"
+                                            sx={{
+                                                display: mobile ? "none" : null,
+                                            }}
+                                        />
 
                                         <ThemeIcon color="gray" variant="light">
                                             <IconEye size={12} />
