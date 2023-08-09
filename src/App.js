@@ -47,6 +47,7 @@ import SelayangPandang from "./components/pages/Profil/IndexProfile";
 import SignInMantine from "./components/pages/SignInMantine";
 import Struktur from "./components/pages/Profil/Struktur";
 import UpdateCategory from "./components/Categories/UpdateCategory";
+import UpdateGallery from "./components/Gallery/UpdateGallery";
 import UpdatePost from "./components/Posts/UpdatePost";
 import VideoList from "./components/video/VideoList";
 import VisiMisi from "./components/pages/Profil/VisiMisi";
@@ -268,6 +269,12 @@ const App = () => {
                                                 exact
                                                 path="/dashboard/gallery/:id"
                                                 component={GalleryDetails}
+                                            />
+
+                                            <AdminRoute
+                                                exact
+                                                path="/dashboard/update-gallery/:id"
+                                                component={UpdateGallery}
                                             />
 
                                             <Route

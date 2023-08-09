@@ -77,7 +77,7 @@ export default function PostListPublic() {
 
     // const [show, setShow] = useState(false);
 
-    console.log(postItem);
+    // console.log(postItem);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -96,16 +96,16 @@ export default function PostListPublic() {
         const response = await axios.get(
             `${basePostURL}?search_query=${keyword}&page=${page}&limit=${limit}`
         );
-        console.log(response);
-        // setPostItem(response.data.result);
-        // setPage(response.data.page);
-        // setPages(response.data.totalItem);
-        // setRows(response.data.totalPage);
+        // console.log(response);
+        setPostItem(response.data.result);
+        setPage(response.data.page);
+        setPages(response.data.totalItem);
+        setRows(response.data.totalPage);
     };
 
     const handlePageChange = (event) => {
         setPage(event);
-        console.log(event);
+        // console.log(event);
     };
 
     const searchData = (e) => {

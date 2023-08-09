@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 
+import CarouselGallery from "./CarouselGallery";
 import CarouselOne from "../MantineUI/CarouselOne";
 import HeroHeaderMantine from "../MantineUI/HeroHeaderMantine";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
@@ -208,7 +209,9 @@ const HomePage = () => {
                             fz="xl"
                             fw={700}
                         />
-                        <Center>GALERI</Center>
+                        <Center>
+                            <CarouselGallery />
+                        </Center>
                     </Container>
                 </Box>
 

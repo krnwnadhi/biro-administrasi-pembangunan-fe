@@ -59,7 +59,7 @@ const PostDetailsPublic = (props) => {
     }, [id, dispatch]);
 
     const post = useSelector((state) => state?.post);
-    console.log("postAll", post);
+    // console.log("postAll", post);
     // const postAll = useSelector((state) => state?.post);
     // console.log("postAll", postAll);
 

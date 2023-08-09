@@ -96,6 +96,37 @@ export const fetchDetailGalleryAction = createAsyncThunk(
     }
 );
 
+//update gallery
+export const updateGalleryAction = createAsyncThunk(
+    "gallery/update",
+    async (gallery, { rejectWithValue, getState, dispatch }) => {
+        // get user token
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            const { data } = await axios.put(
+                `${baseGalleryURL}/${gallery?.id}`,
+                { title: gallery?.title },
+                config
+            );
+            //dispatch action to reset the updated category
+            dispatch(resetGalleryEditAction());
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
 //delete post action
 export const deleteGalleryAction = createAsyncThunk(
     "gallery/deletePost",
@@ -110,7 +141,10 @@ export const deleteGalleryAction = createAsyncThunk(
         };
 
         try {
-            const { data } = await axios.delete(`${basePostURL}/${id}`, config);
+            const { data } = await axios.delete(
+                `${baseGalleryURL}/${id}`,
+                config
+            );
             //dispatch
             dispatch(resetGalleryDeleteAction());
             return data;
@@ -179,6 +213,27 @@ const gallerySlices = createSlice({
             state.serverError = action?.error?.message;
         });
 
+        //update gallery
+        builder.addCase(updateGalleryAction.pending, (state, action) => {
+            state.loading = true;
+        });
+        ////dispatch action category update
+        builder.addCase(resetGalleryEditAction, (state, action) => {
+            state.isEdited = true;
+        });
+        builder.addCase(updateGalleryAction.fulfilled, (state, action) => {
+            state.updatedGallery = action?.payload;
+            state.isEdited = false;
+            state.loading = false;
+            state.appError = undefined;
+            state.serverError = undefined;
+        });
+        builder.addCase(updateGalleryAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appError = action?.payload?.message;
+            state.serverError = action?.error?.message;
+        });
+
         //delete gallery
         builder.addCase(deleteGalleryAction.pending, (state, action) => {
             state.loading = true;
@@ -187,7 +242,7 @@ const gallerySlices = createSlice({
             state.isDeleted = true;
         });
         builder.addCase(deleteGalleryAction.fulfilled, (state, action) => {
-            state.galleryUpdated = action?.payload;
+            state.galleryDeleted = action?.payload;
             state.isDeleted = false;
             state.loading = false;
             state.appError = undefined;

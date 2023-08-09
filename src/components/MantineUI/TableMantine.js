@@ -38,7 +38,7 @@ const TableMantine = () => {
     const post = useSelector((state) => state?.post);
 
     const { postList = [], loading, appError, serverError } = post;
-    console.log(postList);
+    // console.log(postList);
 
     return (
         <>

@@ -121,10 +121,10 @@ export default function CarouselMantine() {
 
     const post = useSelector((state) => state?.post);
     const { postList = [], loading, appError, serverError } = post;
-    console.log(postList);
+    // console.log(postList);
 
     const { result = [] } = postList;
-    console.log(result);
+    // console.log(result);
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);

@@ -179,6 +179,7 @@ export default function AddCategory() {
                                     disabled={!form.isValid()}
                                     type="submit"
                                     // compact
+                                    fullWidth
                                 >
                                     Tambah
                                 </Button>

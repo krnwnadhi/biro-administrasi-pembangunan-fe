@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import DateFormatter from "../../utils/dateFormatter";
+import { IconPlus } from "@tabler/icons-react";
 import { IconTrash } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import NavbarDashboard from "../pages/NavbarDashboard";
@@ -30,9 +31,12 @@ import React from "react";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import download from "downloadjs";
+import { useMediaQuery } from "@mantine/hooks";
 
 const DocumentList = () => {
     const theme = useMantineTheme();
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
+
     const [opened, setOpened] = useState(false);
 
     const [filesList, setFilesList] = useState([]);
@@ -74,7 +78,7 @@ const DocumentList = () => {
 
     const handlePageChange = (event) => {
         setPage(event);
-        console.log(event);
+        // console.log(event);
     };
 
     const downloadFile = async (id, file_path, mimetype) => {
@@ -191,6 +195,7 @@ const DocumentList = () => {
                     <Button
                         mb={20}
                         component={Link}
+                        leftIcon={<IconPlus size={14} />}
                         to="/dashboard/tambah-document"
                         // size="xs"
                     >
@@ -214,7 +219,12 @@ const DocumentList = () => {
                                 <th style={{ textAlign: "center" }}>
                                     Nama Dokumen
                                 </th>
-                                <th style={{ textAlign: "center" }}>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                        display: mobile ? "none" : "block",
+                                    }}
+                                >
                                     Deskripsi
                                 </th>
                                 <th style={{ textAlign: "center" }}>
@@ -243,7 +253,16 @@ const DocumentList = () => {
                                                 />
                                             </td>
                                             <td>{title}</td>
-                                            <td>{description}</td>
+                                            <td
+                                                style={{
+                                                    textAlign: "center",
+                                                    display: mobile
+                                                        ? "none"
+                                                        : "block",
+                                                }}
+                                            >
+                                                {description}
+                                            </td>
                                             <td style={{ textAlign: "center" }}>
                                                 <a
                                                     href="#/"

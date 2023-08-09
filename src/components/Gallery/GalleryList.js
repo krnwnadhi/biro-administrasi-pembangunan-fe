@@ -1,4 +1,5 @@
 import {
+    ActionIcon,
     AppShell,
     Avatar,
     Box,
@@ -31,6 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
+import { IconTrash } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import React from "react";
@@ -113,7 +115,7 @@ const GalleryList = () => {
 
     const handlePageChange = (event) => {
         setPage(event);
-        console.log(event);
+        // console.log(event);
     };
 
     const searchData = (e) => {
@@ -126,10 +128,10 @@ const GalleryList = () => {
         }, 2500);
     };
 
-    // const resetData = (e) => {
-    //     e.preventDefault();
-    //     setQuery("");
-    // };
+    const resetData = (e) => {
+        e.preventDefault();
+        setQuery("");
+    };
 
     const handleTextInput = (e) => {
         setQuery(e.target.value);
@@ -224,8 +226,34 @@ const GalleryList = () => {
 
                 <Divider labelPosition="center" my="xl" />
 
-                <Space h="xl" />
-                <Space h="xl" />
+                <Group mb={30} position="center">
+                    <TextInput
+                        placeholder="Cari Berdasarkan Judul"
+                        value={query}
+                        onChange={handleTextInput}
+                        sx={!query ? { width: "54%" } : { width: "50%" }}
+                    />
+                    {load ? (
+                        <Button
+                            loading={
+                                load ? (
+                                    <Loader size="md" variant="dots" />
+                                ) : null
+                            }
+                        />
+                    ) : (
+                        <Button onClick={searchData}>Cari </Button>
+                    )}
+                    <ActionIcon
+                        onClick={resetData}
+                        disabled={!query}
+                        variant="subtle"
+                        color="red"
+                        sx={!query ? { display: "none" } : null}
+                    >
+                        <IconTrash size={14} />
+                    </ActionIcon>
+                </Group>
 
                 <SimpleGrid
                     cols={4}
@@ -253,7 +281,12 @@ const GalleryList = () => {
                     {
                         galleryItem?.map((item, index) => {
                             return (
-                                <Center key={index}>
+                                <Center
+                                    key={index}
+                                    component={Link}
+                                    to={`/dashboard/update-gallery/${item?._id}`}
+                                    sx={{ textDecoration: "none" }}
+                                >
                                     <Image
                                         key={index}
                                         radius="md"

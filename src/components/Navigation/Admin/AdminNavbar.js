@@ -154,7 +154,7 @@ const dataInformasi = [
         icon: IconPhotoCheck,
         title: "Galeri",
         description: "Galeri Biro Adminsistrasi Pembangunan Provinsi Jambi",
-        link: "/galeri",
+        link: "/gallery",
     },
 ];
 

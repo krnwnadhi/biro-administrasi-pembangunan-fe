@@ -161,15 +161,14 @@ export default function CarouselOne() {
 
     const post = useSelector((state) => state?.post);
     const { postList = [], loading, appError, serverError } = post;
-    console.log(postList);
+    // console.log(postList);
 
     const { result = [] } = postList;
-    console.log(result);
+    // console.log(result);
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
     const slides = [...result]
-        // .sort((a, b) => (a > b ? 1 : -1))
         .map((item) => (
             <Carousel.Slide key={item._id}>
                 <Cards {...item} />

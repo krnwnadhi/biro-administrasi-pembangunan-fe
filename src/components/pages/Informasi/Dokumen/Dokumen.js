@@ -70,7 +70,7 @@ const Dokumen = () => {
 
     const handlePageChange = (event) => {
         setPage(event);
-        console.log(event);
+        // console.log(event);
     };
 
     const downloadFile = async (id, file_path, mimetype) => {

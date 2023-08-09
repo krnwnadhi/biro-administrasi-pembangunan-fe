@@ -215,6 +215,7 @@ export default function CreateDocument(props) {
                             <Button
                                 disabled={!form.isValid()}
                                 type="submit"
+                                fullWidth
                                 // compact
                             >
                                 Tambah

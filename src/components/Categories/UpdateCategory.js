@@ -147,77 +147,76 @@ export default function UpdateCategory() {
                 </Header>
             }
         >
-            <Paper radius="md" p="xl">
-                <Container size={420} my={170}>
-                    <Text
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                        size="lg"
-                        weight={500}
-                    >
-                        Update Kategori
-                    </Text>
+            <Container size="lg">
+                <Text
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                    size="lg"
+                    weight={500}
+                    mt={30}
+                >
+                    Update Kategori
+                </Text>
 
-                    <Divider labelPosition="center" my="xl" />
+                <Divider labelPosition="center" my="xl" />
 
-                    <form onSubmit={formOnSubmit}>
-                        {appError || serverError ? (
-                            <Alert
-                                icon={<IconAlertCircle size={16} />}
-                                title="Error!"
-                                color="red"
-                            >
-                                Tidak ada Token! Silahkan login kembali.
-                            </Alert>
-                        ) : null}
-                        <TextInput
-                            withAsterisk
-                            label="Kategori"
-                            placeholder="Contoh: Teknologi"
-                            value={form.values.title}
-                            onChange={(event) =>
-                                form.setFieldValue(
-                                    "title",
-                                    event.currentTarget.value
-                                )
-                            }
-                            disabled
-                            // onChange={form.setValues((prev) => ({ ...prev }))}
+                <form onSubmit={formOnSubmit}>
+                    {appError || serverError ? (
+                        <Alert
+                            icon={<IconAlertCircle size={16} />}
+                            title="Error!"
+                            color="red"
+                        >
+                            Tidak ada Token! Silahkan login kembali.
+                        </Alert>
+                    ) : null}
+                    <TextInput
+                        withAsterisk
+                        label="Kategori"
+                        placeholder="Contoh: Teknologi"
+                        value={form.values.title}
+                        onChange={(event) =>
+                            form.setFieldValue(
+                                "title",
+                                event.currentTarget.value
+                            )
+                        }
+                        disabled
+                        // onChange={form.setValues((prev) => ({ ...prev }))}
 
-                            // {...form.getInputProps("title")}
-                        />
+                        // {...form.getInputProps("title")}
+                    />
 
-                        <Group position="center" mt="xl">
-                            {loading ? (
-                                <Button disabled compact loading>
-                                    Loading...
+                    <Group position="center" mt="xl">
+                        {loading ? (
+                            <Button disabled compact loading>
+                                Loading...
+                            </Button>
+                        ) : (
+                            <Group>
+                                <Button
+                                    // disabled={!form.isValid()}
+                                    type="submit"
+                                    color="green"
+                                    disabled
+                                >
+                                    Update
                                 </Button>
-                            ) : (
-                                <Group>
-                                    <Button
-                                        // disabled={!form.isValid()}
-                                        type="submit"
-                                        color="green"
-                                        disabled
-                                    >
-                                        Update
-                                    </Button>
-                                    <ActionIcon
-                                        color="red"
-                                        onClick={() =>
-                                            dispatch(deleteCategoryAction(id))
-                                        }
-                                    >
-                                        <IconTrash size={16} stroke={1.5} />
-                                    </ActionIcon>
-                                </Group>
-                            )}
-                        </Group>
-                    </form>
-                </Container>
-            </Paper>
+                                <ActionIcon
+                                    color="red"
+                                    onClick={() =>
+                                        dispatch(deleteCategoryAction(id))
+                                    }
+                                >
+                                    <IconTrash size={16} stroke={1.5} />
+                                </ActionIcon>
+                            </Group>
+                        )}
+                    </Group>
+                </form>
+            </Container>
         </AppShell>
     );
 }

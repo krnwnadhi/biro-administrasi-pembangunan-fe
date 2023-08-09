@@ -46,7 +46,7 @@ const mockdata = [
     {
         label: "Dokumen",
         icon: IconFile,
-        initiallyOpened: true,
+        // initiallyOpened: true,
         links: [
             { label: "Daftar Dokumen", link: "/dashboard/documents" },
             { label: "Tambah Dokumen", link: "/dashboard/tambah-document" },
@@ -56,7 +56,7 @@ const mockdata = [
         label: "Galeri",
         icon: IconPhotoSearch,
         links: [
-            { label: "Album", link: "/dashboard/gallery" },
+            { label: "List Gallery", link: "/dashboard/gallery" },
             { label: "Tambah Galeri", link: "/dashboard/tambah-gallery" },
         ],
     },

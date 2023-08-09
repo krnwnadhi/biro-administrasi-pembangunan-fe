@@ -55,7 +55,7 @@ const PostList = (req, res) => {
     const post = useSelector((state) => state?.post);
 
     const { postList = [], loading, appError, serverError } = post;
-    console.log(postList);
+    // console.log(postList);
 
     const category = useSelector((state) => state?.category);
     const {
@@ -145,7 +145,7 @@ const PostList = (req, res) => {
                     placeholder="Cari Berdasarkan Judul"
                     value={query}
                     onChange={handleTextInput}
-                    sx={!query ? { width: "60%" } : { width: "50%" }}
+                    sx={!query ? { width: "54%" } : { width: "50%" }}
                 />
                 {load ? (
                     <Button
@@ -166,6 +166,7 @@ const PostList = (req, res) => {
                     <IconTrash size={14} />
                 </ActionIcon>
             </Group>
+
             <div>
                 {loading ? (
                     <Center style={{ minHeight: "70vh" }}>
