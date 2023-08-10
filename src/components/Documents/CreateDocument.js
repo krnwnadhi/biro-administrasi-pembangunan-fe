@@ -1,6 +1,5 @@
 import {
     AppShell,
-    Aside,
     Box,
     Burger,
     Button,
@@ -12,7 +11,6 @@ import {
     Header,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
     Space,
     Text,
@@ -20,15 +18,14 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
-import { useEffect, useRef, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
-import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useState } from "react";
 
 export default function CreateDocument(props) {
     const [errorMsg, setErrorMsg] = useState("");

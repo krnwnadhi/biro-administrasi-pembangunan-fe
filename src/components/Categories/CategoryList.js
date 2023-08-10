@@ -14,7 +14,6 @@ import {
     Loader,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
     Table,
     Text,
@@ -42,8 +41,6 @@ const CategoryList = () => {
     const category = useSelector((state) => state?.category);
 
     const { categoryList = [], loading, appError, serverError } = category;
-
-    // console.log(category);
 
     return (
         <AppShell

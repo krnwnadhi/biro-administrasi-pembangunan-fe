@@ -1,8 +1,6 @@
 import {
     Alert,
-    Anchor,
     AppShell,
-    Aside,
     Box,
     Burger,
     Button,
@@ -13,17 +11,16 @@ import {
     Header,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
     Text,
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
-import { IconAlertCircle, IconChevronLeft } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
+import { IconAlertCircle } from "@tabler/icons-react";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import { createCategoryAction } from "../redux/slices/category/categorySlice";
 import { useForm } from "@mantine/form";
@@ -46,7 +43,7 @@ export default function AddCategory() {
 
     //get data from store
     const state = useSelector((state) => state?.category);
-    const { appError, loading, serverError, category, isCreated } = state;
+    const { appError, loading, serverError, isCreated } = state;
 
     const formOnSubmit = form.onSubmit((values) =>
         dispatch(createCategoryAction(values))

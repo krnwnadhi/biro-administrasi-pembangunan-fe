@@ -21,6 +21,7 @@ import { IconDownload, IconTrash } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
 import DateFormatter from "../../../../utils/dateFormatter";
+import { Fade } from "react-awesome-reveal";
 import React from "react";
 import axios from "axios";
 import { baseDocumentURL } from "../../../../utils/baseURL";
@@ -112,95 +113,103 @@ const Dokumen = () => {
     ));
 
     return (
-        <Paper sx={{ minHeight: "75vh" }}>
-            <Container size="lg" mt={20}>
-                <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
+        <Fade delay={500}>
+            <Paper sx={{ minHeight: "75vh" }}>
+                <Container size="lg" mt={20}>
+                    <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
 
-                <Space h="xl" />
+                    <Space h="xl" />
 
-                {errorMsg && <Text c="red">{errorMsg}</Text>}
-                <Table
-                    highlightOnHover
-                    withBorder
-                    withColumnBorders
-                    horizontalSpacing="xl"
-                    verticalSpacing="xl"
-                >
-                    <thead>
-                        <tr>
-                            <th style={{ textAlign: "center" }}>
-                                Tanggal Upload
-                            </th>
-                            <th style={{ textAlign: "center" }}>
-                                Nama Dokumen
-                            </th>
-                            <th
-                                style={{
-                                    textAlign: "center",
-                                    display: mobile ? "none" : "block",
-                                }}
-                            >
-                                Deskripsi
-                            </th>
-                            <th style={{ textAlign: "center", width: "10%" }}>
-                                Download
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filesList?.length > 0 ? (
-                            filesList.map(
-                                ({
-                                    _id,
-                                    title,
-                                    description,
-                                    file_path,
-                                    file_mimetype,
-                                    createdAt,
-                                    // index,
-                                }) => (
-                                    <tr key={_id}>
-                                        {/* <td>{index}</td> */}
-                                        <td style={{ textAlign: "center" }}>
-                                            <DateFormatter date={createdAt} />
-                                        </td>
-                                        <td
-                                            style={{
-                                                textAlign: "center",
-                                            }}
-                                        >
-                                            {title}
-                                        </td>
-                                        <td
-                                            style={{
-                                                textAlign: "center",
-                                                display: mobile
-                                                    ? "none"
-                                                    : "block",
-                                            }}
-                                        >
-                                            {description}
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="#/"
-                                                onClick={() =>
-                                                    downloadFile(
-                                                        _id,
-                                                        file_path,
-                                                        file_mimetype
-                                                    )
-                                                }
+                    {errorMsg && <Text c="red">{errorMsg}</Text>}
+                    <Table
+                        highlightOnHover
+                        withBorder
+                        withColumnBorders
+                        horizontalSpacing="xl"
+                        verticalSpacing="xl"
+                    >
+                        <thead>
+                            <tr>
+                                <th style={{ textAlign: "center" }}>
+                                    Tanggal Upload
+                                </th>
+                                <th style={{ textAlign: "center" }}>
+                                    Nama Dokumen
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                        display: mobile ? "none" : "block",
+                                    }}
+                                >
+                                    Deskripsi
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                        width: "10%",
+                                    }}
+                                >
+                                    Download
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filesList?.length > 0 ? (
+                                filesList.map(
+                                    ({
+                                        _id,
+                                        title,
+                                        description,
+                                        file_path,
+                                        file_mimetype,
+                                        createdAt,
+                                        // index,
+                                    }) => (
+                                        <tr key={_id}>
+                                            {/* <td>{index}</td> */}
+                                            <td style={{ textAlign: "center" }}>
+                                                <DateFormatter
+                                                    date={createdAt}
+                                                />
+                                            </td>
+                                            <td
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
                                             >
-                                                <ActionIcon>
-                                                    <IconDownload
-                                                        color="blue"
-                                                        size="20"
-                                                    />
-                                                </ActionIcon>
-                                            </a>
-                                        </td>
-                                        {/* <td
+                                                {title}
+                                            </td>
+                                            <td
+                                                style={{
+                                                    textAlign: "center",
+                                                    display: mobile
+                                                        ? "none"
+                                                        : "block",
+                                                }}
+                                            >
+                                                {description}
+                                            </td>
+                                            <td>
+                                                <a
+                                                    href="#/"
+                                                    onClick={() =>
+                                                        downloadFile(
+                                                            _id,
+                                                            file_path,
+                                                            file_mimetype
+                                                        )
+                                                    }
+                                                >
+                                                    <ActionIcon>
+                                                        <IconDownload
+                                                            color="blue"
+                                                            size="20"
+                                                        />
+                                                    </ActionIcon>
+                                                </a>
+                                            </td>
+                                            {/* <td
                                             style={{
                                                 display: "flex",
                                                 justifyContent: "center",
@@ -230,30 +239,31 @@ const Dokumen = () => {
                                                 />
                                             </ActionIcon>
                                         </td> */}
-                                    </tr>
+                                        </tr>
+                                    )
                                 )
-                            )
-                        ) : (
-                            <tr>
-                                <td style={{ fontWeight: "300" }}>
-                                    Tidak ada file. Silahkan tambah file.
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
-                <Center>
-                    <Box p={20}>
-                        <Pagination
-                            onChange={handlePageChange}
-                            total={rows}
-                            withControls
-                            withEdges
-                        />
-                    </Box>
-                </Center>
-            </Container>
-        </Paper>
+                            ) : (
+                                <tr>
+                                    <td style={{ fontWeight: "300" }}>
+                                        Tidak ada file. Silahkan tambah file.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                    <Center>
+                        <Box p={20}>
+                            <Pagination
+                                onChange={handlePageChange}
+                                total={rows}
+                                withControls
+                                withEdges
+                            />
+                        </Box>
+                    </Center>
+                </Container>
+            </Paper>
+        </Fade>
     );
 };
 

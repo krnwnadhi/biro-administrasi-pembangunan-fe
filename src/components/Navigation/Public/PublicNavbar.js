@@ -158,14 +158,7 @@ const dataInformasi = [
         icon: IconPhotoCheck,
         title: "Galeri",
         description: "Galeri Biro Adminsistrasi Pembangunan Provinsi Jambi",
-        link: "/galeri",
-    },
-    {
-        icon: IconVideo,
-        title: "Video",
-        description:
-            "Video Lambang Biro Adminsistrasi Pembangunan Provinsi Jambi",
-        link: "/https://www.youtube.com/c/KotaJambi",
+        link: "/gallery",
     },
 ];
 
@@ -174,7 +167,7 @@ const dataLayanan = [
         icon: IconBuildingArch,
         title: "SIMANTAP",
         description: "SIMANTAP Biro Adminsistrasi Pembangunan Provinsi Jambi",
-        link: "/profil",
+        link: "#",
     },
 ];
 

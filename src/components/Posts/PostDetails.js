@@ -1,13 +1,15 @@
 import {
-    ActionIcon,
+    Anchor,
+    Breadcrumbs,
+    Button,
     Center,
     Container,
     Divider,
     Grid,
     Group,
-    Image,
     Loader,
     Paper,
+    Space,
     Text,
     ThemeIcon,
     Title,
@@ -34,9 +36,7 @@ import { openConfirmModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 
 const PostDetails = (props) => {
-    // console.log(props);
     const id = props.computedMatch.params.id;
-    // const id = props.match.params.id;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const PostDetails = (props) => {
 
     //get login user
     const user = useSelector((state) => state?.users);
-    // console.log(user);
+
     const {
         userAuth: { _id },
     } = user;
@@ -68,7 +68,7 @@ const PostDetails = (props) => {
                     {`Apakah Anda yakin ingin menghapus berita "${postDetail?.title}" ?`}
                 </Text>
             ),
-            labels: { confirm: "Hapus", cancel: "Kembali" },
+            labels: { confirm: "Hapus", cancel: "Batal" },
             confirmProps: { color: "red" },
             onCancel: () => {
                 showNotification({
@@ -88,9 +88,30 @@ const PostDetails = (props) => {
             },
         });
 
+    const breadcrumbsItem = [
+        { title: "Home", href: "/" },
+        { title: "Informasi", href: "#" },
+        { title: "Berita & Kegiatan", href: "/berita" },
+        { title: postDetail.title, href: "#" },
+    ].map((item, index) => (
+        <Anchor
+            href={item.href}
+            key={index}
+            size={"sm"}
+            underline={false}
+            truncate="end"
+        >
+            {item.title}
+        </Anchor>
+    ));
+
     return (
         <Paper style={{ minHeight: "92vh" }}>
             <Container mt={20} size="lg">
+                <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
+
+                <Space h="xl" />
+
                 {loading ? (
                     <Center>
                         <Loader mt={300} size="xl" variant="dots" />
@@ -98,7 +119,7 @@ const PostDetails = (props) => {
                 ) : (
                     <>
                         <Grid>
-                            <Grid.Col md={6} lg={8}>
+                            <Grid.Col>
                                 <Text>{appError || serverError}</Text>
 
                                 <Title my="sm" order={2}>
@@ -137,32 +158,45 @@ const PostDetails = (props) => {
                                     </Text>
                                 </Group>
 
-                                <Group>
-                                    {isCreatedBy ? (
-                                        <>
-                                            <ActionIcon
+                                <Space h="xl" />
+
+                                {isCreatedBy ? (
+                                    <>
+                                        <Button.Group>
+                                            <Button
                                                 component={Link}
                                                 to={`/posts/update/${postDetail?._id}`}
                                                 color="blue"
+                                                leftIcon={
+                                                    <IconPencil
+                                                        size={16}
+                                                        stroke={1.5}
+                                                    />
+                                                }
+                                                fullWidth
+                                                variant="light"
                                             >
-                                                <IconPencil
-                                                    size={16}
-                                                    stroke={1.5}
-                                                />
-                                            </ActionIcon>
-                                            <ActionIcon
+                                                Edit
+                                            </Button>
+
+                                            <Button
                                                 color="red"
                                                 loading={loading}
                                                 onClick={openDeleteModal}
+                                                leftIcon={
+                                                    <IconTrash
+                                                        size={16}
+                                                        stroke={1.5}
+                                                    />
+                                                }
+                                                fullWidth
+                                                variant="outline"
                                             >
-                                                <IconTrash
-                                                    size={16}
-                                                    stroke={1.5}
-                                                />
-                                            </ActionIcon>
-                                        </>
-                                    ) : null}
-                                </Group>
+                                                Hapus
+                                            </Button>
+                                        </Button.Group>
+                                    </>
+                                ) : null}
 
                                 <Divider my="xl" variant="dotted" />
 
@@ -173,33 +207,6 @@ const PostDetails = (props) => {
                                         }}
                                     />
                                 </TypographyStylesProvider>
-                            </Grid.Col>
-
-                            <Grid.Col md={4} lg={3} offset={1}>
-                                <Text>{appError || serverError}</Text>
-
-                                <Title my="sm" order={3}>
-                                    Baca Juga...
-                                </Title>
-
-                                {/* <Group position="apart">
-                                    <Text fz="sm">
-                                        {postDetail?.user?.fullName}
-                                    </Text>
-                                    <DateFormatter
-                                        date={postDetail?.createdAt}
-                                    />
-                                </Group>
-
-                                <Text fz="sm">
-                                    Kategori: {postDetail?.category}
-                                </Text>
-
-                                <Text fz="sm">
-                                    Views: {postDetail?.numViews}
-                                </Text> */}
-
-                                <Divider my="xl" variant="dotted" />
                             </Grid.Col>
                         </Grid>
                     </>

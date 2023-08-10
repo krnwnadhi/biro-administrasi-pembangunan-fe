@@ -19,18 +19,13 @@ import CreateDocument from "./components/Documents/CreateDocument";
 import CreateGallery from "./components/Gallery/CreateGallery";
 import CreatePost from "./components/Posts/CreatePost";
 import Dashboard from "./components/pages/Dashboard";
-import DocumentDetails from "./components/Documents/DocumentDetails";
 import DocumentList from "./components/Documents/DocumentList";
-import DocumentListPublic from "./components/Documents/public/DocumentListPublic";
 import Dokumen from "./components/pages/Informasi/Dokumen/Dokumen";
 import FooterMantine from "./components/MantineUI/FooterMantine";
-import GalleryDetails from "./components/Gallery/GalleryDetails";
-import GalleryDetailsPublic from "./components/Gallery/public/GalleryDetailsPublic";
 import GalleryList from "./components/Gallery/GalleryList";
 import GalleryListPublic from "./components/Gallery/public/GalleryListPublic";
 import HomePage from "./components/pages/HomePage";
 import IndexProfile from "./components/pages/Profil/IndexProfile";
-import Informasi from "./components/pages/Informasi";
 import { ModalsProvider } from "@mantine/modals";
 import Navbar from "./components/Navigation/Navbar";
 import NavbarDashboard from "./components/pages/NavbarDashboard";
@@ -41,8 +36,6 @@ import PostDetails from "./components/Posts/PostDetails";
 import PostDetailsPublic from "./components/Posts/Public/PostDetailsPublic";
 import PostList from "./components/Posts/PostList";
 import PostListPublic from "./components/Posts/Public/PostListPublic";
-import PrivateProtectRoute from "./components/Navigation/ProtectedRoutes/PrivateProtectRoute";
-// import Profile from "./components/pages/Profile";
 import SelayangPandang from "./components/pages/Profil/IndexProfile";
 import SignInMantine from "./components/pages/SignInMantine";
 import Struktur from "./components/pages/Profil/Struktur";
@@ -163,12 +156,6 @@ const App = () => {
                                                 component={Dokumen}
                                             />
 
-                                            <Route
-                                                exact
-                                                path="/informasi"
-                                                component={Informasi}
-                                            />
-
                                             {/* <Route
                                             exact
                                             path="/kontak"
@@ -267,12 +254,6 @@ const App = () => {
 
                                             <AdminRoute
                                                 exact
-                                                path="/dashboard/gallery/:id"
-                                                component={GalleryDetails}
-                                            />
-
-                                            <AdminRoute
-                                                exact
                                                 path="/dashboard/update-gallery/:id"
                                                 component={UpdateGallery}
                                             />
@@ -281,18 +262,6 @@ const App = () => {
                                                 exact
                                                 path="/gallery"
                                                 component={GalleryListPublic}
-                                            />
-
-                                            <Route
-                                                exact
-                                                path="/gallery/:id"
-                                                component={GalleryDetailsPublic}
-                                            />
-
-                                            <AdminRoute
-                                                exact
-                                                path="/dashboard/documents/:id"
-                                                component={DocumentDetails}
                                             />
 
                                             <AdminRoute
@@ -306,18 +275,6 @@ const App = () => {
                                                 path="/dashboard/tambah-document"
                                                 component={CreateDocument}
                                             />
-
-                                            <Route
-                                                exact
-                                                path="/documents"
-                                                component={DocumentListPublic}
-                                            />
-
-                                            {/* <Route
-                                            exact
-                                            path="/video"
-                                            component={VideoList}
-                                        /> */}
 
                                             {/* <Route
                                             exact

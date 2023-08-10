@@ -5,7 +5,6 @@ import "react-quill/dist/quill.snow.css";
 import {
     Alert,
     AppShell,
-    Aside,
     Box,
     Burger,
     Button,
@@ -15,16 +14,13 @@ import {
     Footer,
     Group,
     Header,
-    Image,
     Loader,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
     Select,
     Text,
     TextInput,
-    Textarea,
     useMantineTheme,
 } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
@@ -241,43 +237,6 @@ export default function CreatePost() {
                             />
                         </Box>
 
-                        {/* <Viewer value={editorMarkdownValue} /> */}
-
-                        {/* <div
-                        style={{
-                            minHeight: "300px",
-                            border: "1px solid lightgray",
-                            marginTop: "10px",
-                            padding: "5px",
-                        }}
-                    >
-                        <Editor
-                            editorState={editorState}
-                            onEditorStateChange={(newState) => {
-                                setEditorState(newState);
-                            }}
-                            // onEditorStateChange={setEditorState}
-                            // {...form.getInputProps("description")}
-                        />
-                    </div>
-
-                    <div>
-                        <Textarea
-                            value={draftToHtml(
-                                convertToRaw(editorState.getCurrentContent())
-                            )}
-                            onChange={(event) => {
-                                setEditorState(event.currentTarget.value);
-                                // console.log(event);
-                            }}
-                        />
-                    </div> */}
-
-                        {/* {loading ? (
-                            <Center>
-                                <Loader mt={20} size="lg" variant="dots" />
-                            </Center>
-                        ) : ( */}
                         <Select
                             mt={10}
                             // required
@@ -367,19 +326,8 @@ export default function CreatePost() {
                                 : null}
                         </Text>
                         <Group position="apart" mt="xl">
-                            {/* <Button
-                            compact
-                            component={Link}
-                            color="gray"
-                            to="/posts"
-                            variant="subtle"
-                            leftIcon={<IconChevronLeft size={12} />}
-                            size="xs"
-                        >
-                            <Text>Post</Text>
-                        </Button> */}
                             {loadingPost ? (
-                                <Button disabled compact loading>
+                                <Button disabled loading fullWidth>
                                     Loading...
                                 </Button>
                             ) : (

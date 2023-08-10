@@ -9,43 +9,28 @@ import {
     Divider,
     FileInput,
     Footer,
-    Group,
     Header,
-    Image,
     Loader,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
-    Select,
     Space,
     Text,
     TextInput,
-    Textarea,
     useMantineTheme,
 } from "@mantine/core";
-import {
-    IconAlertCircle,
-    IconChevronLeft,
-    IconPhoto,
-    IconUpload,
-    IconX,
-} from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
+import { IconAlertCircle } from "@tabler/icons-react";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import { createGalleryAction } from "../redux/slices/gallery/gallerySlice";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
-
-// import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useState } from "react";
 
 export default function CreateGallery() {
-    const [value, setValue] = useState("");
-
     const [opened, setOpened] = useState(false);
 
     const history = useHistory();

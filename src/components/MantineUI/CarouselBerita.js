@@ -150,7 +150,7 @@ function Cards({ image, title, category, description, createdAt, _id, user }) {
     );
 }
 
-export default function CarouselOne() {
+export default function CarouselBerita() {
     const dispatch = useDispatch();
 
     const autoplay = useRef(Autoplay({ delay: 2000 }));
@@ -168,6 +168,7 @@ export default function CarouselOne() {
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+
     const slides = [...result]
         .map((item) => (
             <Carousel.Slide key={item._id}>
@@ -177,41 +178,44 @@ export default function CarouselOne() {
         .slice(0, 5);
 
     return (
-        <Carousel
-            // sx={{ maxWidth: 320 }}
-            mx="auto"
-            withIndicators //
-            slideSize="33%"
-            breakpoints={[
-                { maxWidth: "md", slideSize: "50%" },
-                { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
-            ]}
-            slideGap="xl"
-            align="start"
-            // slidesToScroll={mobile ? 1 : 1}
-            loop
-            plugins={[autoplay.current]}
-            onMouseEnter={autoplay.current.stop}
-            onMouseLeave={autoplay.current.reset}
-            styles={{
-                control: {
-                    "&[data-inactive]": {
-                        opacity: 0,
-                        cursor: "default",
+        <Container size="lg">
+            <Carousel
+                // sx={{ maxWidth: 320 }}
+                mx="auto"
+                withIndicators //
+                slideSize="33%"
+                breakpoints={[
+                    { maxWidth: "md", slideSize: "50%" },
+                    { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
+                ]}
+                slideGap="xl"
+                align="start"
+                // slidesToScroll={mobile ? 1 : 1}
+                loop
+                plugins={[autoplay.current]}
+                onMouseEnter={autoplay.current.stop}
+                onMouseLeave={autoplay.current.reset}
+                styles={{
+                    control: {
+                        "&[data-inactive]": {
+                            opacity: 0,
+                            cursor: "default",
+                        },
                     },
-                },
-                indicator: {
-                    width: 12,
-                    height: 6,
-                    transition: "width 250ms ease",
+                    indicator: {
+                        marginTop: -35,
+                        width: 12,
+                        height: 8,
+                        transition: "width 250ms ease",
 
-                    "&[data-active]": {
-                        width: 30,
+                        "&[data-active]": {
+                            width: 24,
+                        },
                     },
-                },
-            }}
-        >
-            {slides}
-        </Carousel>
+                }}
+            >
+                {slides}
+            </Carousel>
+        </Container>
     );
 }

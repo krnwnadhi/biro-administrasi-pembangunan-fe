@@ -1,8 +1,9 @@
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-import { Center, Paper, useMantineTheme } from "@mantine/core";
+import { Center, useMantineTheme } from "@mantine/core";
 import React, { useEffect } from "react";
 
+import { Fade } from "react-awesome-reveal";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useMediaQuery } from "@mantine/hooks";
 
@@ -15,7 +16,7 @@ const Struktur = () => {
     }, []);
 
     return (
-        <Paper>
+        <Fade>
             <Center p={20}>
                 <LazyLoadImage
                     src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"
@@ -25,7 +26,7 @@ const Struktur = () => {
                     effect="blur"
                 />
             </Center>
-        </Paper>
+        </Fade>
     );
 };
 

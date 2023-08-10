@@ -1,26 +1,22 @@
 import {
     Alert,
-    Anchor,
     Button,
     Checkbox,
     Container,
-    Divider,
     Group,
     Paper,
     PasswordInput,
     Stack,
-    Text,
     TextInput,
     Title,
 } from "@mantine/core";
-import { IconAlertCircle, IconCheck, IconX } from "@tabler/icons-react";
-import { upperFirst, useToggle } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
 
+import { IconAlertCircle } from "@tabler/icons-react";
 import { Redirect } from "react-router-dom";
 import { loginUserAction } from "../redux/slices/users/usersSlices";
-import { showNotification } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
+import { useToggle } from "@mantine/hooks";
 
 export default function SignInMantine(props) {
     const [type, toggle] = useToggle(["login", "register"]);

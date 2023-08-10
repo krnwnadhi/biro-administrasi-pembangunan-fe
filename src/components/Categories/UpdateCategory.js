@@ -2,7 +2,6 @@ import {
     ActionIcon,
     Alert,
     AppShell,
-    Aside,
     Box,
     Burger,
     Button,
@@ -13,17 +12,12 @@ import {
     Header,
     MediaQuery,
     Navbar,
-    Paper,
     ScrollArea,
     Text,
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
-import {
-    IconAlertCircle,
-    IconChevronLeft,
-    IconTrash,
-} from "@tabler/icons-react";
+import { IconAlertCircle, IconTrash } from "@tabler/icons-react";
 import { Link, Redirect, useParams } from "react-router-dom";
 import {
     deleteCategoryAction,
@@ -48,7 +42,6 @@ export default function UpdateCategory() {
     const state = useSelector((state) => state?.category);
     const { appError, loading, serverError, category, isEdited, isDeleted } =
         state;
-    // console.log(updatedCategory);
 
     const form = useForm({
         initialValues: {

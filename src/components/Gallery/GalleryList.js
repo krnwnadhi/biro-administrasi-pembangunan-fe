@@ -1,31 +1,25 @@
 import {
     ActionIcon,
     AppShell,
-    Avatar,
     Box,
     Burger,
     Button,
-    Card,
     Center,
-    CloseButton,
     Container,
     Divider,
     Footer,
     Group,
     Header,
     Image,
-    List,
     Loader,
     MediaQuery,
     Navbar,
     Pagination,
-    Paper,
     ScrollArea,
     SimpleGrid,
     Space,
     Text,
     TextInput,
-    createStyles,
     useMantineTheme,
 } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +33,6 @@ import React from "react";
 import axios from "axios";
 import { baseGalleryURL } from "../../utils/baseURL";
 import { fetchAllGalleryAction } from "../redux/slices/gallery/gallerySlice";
-import { useMediaQuery } from "@mantine/hooks";
 
 // import DateFormatter from "../../../utils/dateFormatter";
 

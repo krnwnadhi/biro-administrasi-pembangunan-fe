@@ -12,7 +12,6 @@ import {
     MediaQuery,
     Navbar,
     Pagination,
-    Paper,
     ScrollArea,
     Space,
     Table,
@@ -65,7 +64,6 @@ const DocumentList = () => {
             const response = await axios.get(
                 `${baseDocumentURL}?search_query=${keyword}&page=${page}&limit=${limit}`
             );
-            // console.log(response);
             setErrorMsg("");
             setFilesList(response.data.result);
             setPage(response.data.page);
@@ -78,7 +76,6 @@ const DocumentList = () => {
 
     const handlePageChange = (event) => {
         setPage(event);
-        // console.log(event);
     };
 
     const downloadFile = async (id, file_path, mimetype) => {

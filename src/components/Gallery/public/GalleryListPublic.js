@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IconSearch } from "@tabler/icons-react";
+import { Zoom } from "react-awesome-reveal";
 import axios from "axios";
 import { baseGalleryURL } from "../../../utils/baseURL";
 import { fetchAllGalleryAction } from "../../redux/slices/gallery/gallerySlice";
@@ -163,24 +164,26 @@ const GalleryListPublic = () => {
 
                 {galleryItem?.map((item, index) => {
                     return (
-                        <Center
-                            key={index}
-                            // component={Link}
-                            // to={`/dashboard/update-gallery/${item?._id}`}
-                            sx={{ textDecoration: "none" }}
-                        >
-                            <Image
+                        <Zoom delay={500}>
+                            <Center
                                 key={index}
-                                radius="md"
-                                height={mobile ? 200 : null}
-                                width={mobile ? 200 : null}
-                                fit="cover"
-                                src={item?.image}
-                                alt="With default placeholder"
-                                withPlaceholder
-                                caption={item?.title}
-                            />
-                        </Center>
+                                // component={Link}
+                                // to={`/dashboard/update-gallery/${item?._id}`}
+                                sx={{ textDecoration: "none" }}
+                            >
+                                <Image
+                                    key={index}
+                                    radius="md"
+                                    height={mobile ? 200 : null}
+                                    width={mobile ? 200 : null}
+                                    fit="cover"
+                                    src={item?.image}
+                                    alt="With default placeholder"
+                                    withPlaceholder
+                                    caption={item?.title}
+                                />
+                            </Center>
+                        </Zoom>
                     );
                 })}
             </SimpleGrid>

@@ -1,5 +1,6 @@
 import {
     Box,
+    Button,
     Card,
     Center,
     Container,
@@ -12,18 +13,16 @@ import {
     createStyles,
     useMantineTheme,
 } from "@mantine/core";
+import { Fade, Flip, Slide, Zoom } from "react-awesome-reveal";
 import { useDispatch, useSelector } from "react-redux";
 
+import CarouselBerita from "../MantineUI/CarouselBerita";
 import CarouselGallery from "./CarouselGallery";
-import CarouselOne from "../MantineUI/CarouselOne";
 import HeroHeaderMantine from "../MantineUI/HeroHeaderMantine";
+import { Link } from "react-router-dom";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useEffect } from "react";
 import { useMediaQuery } from "@mantine/hooks";
-
-// import CarouselMantine from "../MantineUI/CarouselMantine";
-
-// import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -39,8 +38,8 @@ const useStyles = createStyles((theme) => ({
                 ? theme.colors.dark[6]
                 : theme.colors.gray[0],
         padding: theme.spacing.xl,
-        paddingBottom: 50,
-        marginBottom: theme.radius.xl,
+        // paddingBottom: 20,
+        // marginBottom: theme.radius.xl,
 
         "&:hover": {
             backgroundColor:
@@ -51,8 +50,8 @@ const useStyles = createStyles((theme) => ({
     },
     boxTwo: {
         padding: theme.spacing.xl,
-        paddingBottom: 50,
-        marginBottom: theme.radius.xl,
+        // paddingBottom: 20,
+        // marginBottom: theme.radius.xl,
     },
 }));
 
@@ -102,14 +101,16 @@ const HomePage = () => {
 
                 <Box className={classes.boxTwo}>
                     <Container size="xl">
-                        <Divider
-                            my="xs"
-                            label="TENTANG"
-                            color="blue"
-                            fs="italic"
-                            fz="xl"
-                            fw={700}
-                        />
+                        <Slide direction="down">
+                            <Divider
+                                my="xs"
+                                label="TENTANG"
+                                color="blue"
+                                fs="italic"
+                                fz="xl"
+                                fw={700}
+                            />
+                        </Slide>
 
                         <Space h="xl" />
 
@@ -125,99 +126,138 @@ const HomePage = () => {
                             ]}
                         >
                             <Text color="dimmed" size={mobile ? "sm" : "md"}>
-                                <Text
-                                    fs={70}
-                                    fw={900}
-                                    size={mobile ? 30 : 40}
-                                    color={theme.colors.blue[9]}
-                                >
-                                    Biro Adm. Pembangunan
+                                <Fade>
                                     <Text
                                         fs={70}
                                         fw={900}
-                                        size={mobile ? 25 : 35}
+                                        size={mobile ? 30 : 40}
                                         color={theme.colors.blue[9]}
                                     >
-                                        Provinsi Jambi
+                                        Biro Adm. Pembangunan
+                                        <Text
+                                            fs={70}
+                                            fw={900}
+                                            size={mobile ? 25 : 35}
+                                            color={theme.colors.blue[9]}
+                                        >
+                                            Provinsi Jambi
+                                        </Text>
                                     </Text>
-                                </Text>
+                                </Fade>
                                 <Space h="xl" />
-                                Biro Administrasi Pembangunan merupakan salah
-                                satu Biro pada Sekretariat Daerah Prov Jambi
-                                yang bertugas membantu Asisten Perekonomian dan
-                                Pembangunan dalam penyiapan pengoordinasian
-                                perumusan kebijakan daerah, pengoordinasian
-                                pelaksanaan tugas Perangkat Daerah, pemantauan
-                                dan evaluasi pelaksanaan kebijakan daerah di
-                                bidang pengendalian administrasi pelaksanaan
-                                pembangunan daerah, pengendalian administrasi
-                                pelaksanaan pembangunan wilayah, pelaksanaan
-                                tugas Simpul Kerjasama Pemerintah dengan Badan
-                                Usaha (KPBU) dalam penyediaan infrastruktur, dan
-                                pelaporan pelaksanaan pembangunan.
+                                <Fade delay={500}>
+                                    Biro Administrasi Pembangunan merupakan
+                                    salah satu Biro pada Sekretariat Daerah Prov
+                                    Jambi yang bertugas membantu Asisten
+                                    Perekonomian dan Pembangunan dalam penyiapan
+                                    pengoordinasian perumusan kebijakan daerah,
+                                    pengoordinasian pelaksanaan tugas Perangkat
+                                    Daerah, pemantauan dan evaluasi pelaksanaan
+                                    kebijakan daerah di bidang pengendalian
+                                    administrasi pelaksanaan pembangunan daerah,
+                                    pengendalian administrasi pelaksanaan
+                                    pembangunan wilayah, pelaksanaan tugas
+                                    Simpul Kerjasama Pemerintah dengan Badan
+                                    Usaha (KPBU) dalam penyediaan infrastruktur,
+                                    dan pelaporan pelaksanaan pembangunan.
+                                </Fade>
                             </Text>
 
-                            <Card
-                                shadow="lg"
-                                p="lg"
-                                radius="md"
-                                className={classes.card}
-                            >
-                                <Card.Section>
-                                    <Image
-                                        height={mobile ? "auto" : 370}
-                                        radius="md"
-                                        src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"
-                                        alt="With custom placeholder"
-                                        withPlaceholder
-                                        placeholder={
-                                            <Text size="sm">
-                                                Gubernur & Wakil Gubernur
-                                                Provinsi Jambi.png
-                                            </Text>
-                                        }
-                                    />
-                                </Card.Section>
-                            </Card>
+                            <Fade delay={500}>
+                                <Card
+                                    shadow="lg"
+                                    p="lg"
+                                    radius="md"
+                                    className={classes.card}
+                                >
+                                    <Card.Section>
+                                        <Image
+                                            height={mobile ? "auto" : 370}
+                                            radius="md"
+                                            src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"
+                                            alt="With custom placeholder"
+                                            withPlaceholder
+                                            placeholder={
+                                                <Text size="sm">
+                                                    Gubernur & Wakil Gubernur
+                                                    Provinsi Jambi.png
+                                                </Text>
+                                            }
+                                        />
+                                    </Card.Section>
+                                </Card>
+                            </Fade>
                         </SimpleGrid>
                     </Container>
                 </Box>
 
+                <Space h="xl" />
+                <Space h="xl" />
+
                 <Box className={classes.boxOne}>
                     <Container size="xl" px="xs">
-                        <Divider
-                            my="xs"
-                            label="BERITA & KEGIATAN"
-                            color="blue"
-                            fs="italic"
-                            fz="xl"
-                            fw={700}
-                        />
-                        <CarouselOne />
+                        <Slide direction="down">
+                            <Divider
+                                my="xs"
+                                label="BERITA & KEGIATAN"
+                                color="blue"
+                                fs="italic"
+                                fz="xl"
+                                fw={700}
+                            />
+                        </Slide>
+                        <Fade delay={500}>
+                            <CarouselBerita />
+
+                            <Space h="xl" />
+                            <Center>
+                                <Button
+                                    component={Link}
+                                    to="/berita"
+                                    sx={{ width: mobile ? "50%" : "25%" }}
+                                >
+                                    Baca Selengkapnya
+                                </Button>
+                            </Center>
+                            <Space h="xl" />
+                        </Fade>
                     </Container>
                 </Box>
 
                 <Space h="xl" />
+                {/* <Space h="xl" /> */}
 
                 <Box className={classes.boxTwo}>
                     <Container size="xl" px="xs">
-                        <Divider
-                            my="xs"
-                            label="GALERI"
-                            color="blue"
-                            fs="italic"
-                            fz="xl"
-                            fw={700}
-                        />
-                        <Center>
+                        <Slide direction="down">
+                            <Divider
+                                my="xl"
+                                label="GALERI"
+                                color="blue"
+                                fs="italic"
+                                fz="xl"
+                                fw={700}
+                            />
+                        </Slide>
+                        <Fade delay={500}>
                             <CarouselGallery />
-                        </Center>
+                            <Space h="xl" />
+                            <Center>
+                                <Button
+                                    component={Link}
+                                    to="/gallery"
+                                    sx={{ width: mobile ? "50%" : "25%" }}
+                                >
+                                    Lihat Selengkapnya
+                                </Button>
+                            </Center>
+                        </Fade>
                     </Container>
                 </Box>
 
-                <Space h="xl" />
+                {/* <Space h="xl" /> */}
 
-                <Box className={classes.boxOne}>
+                {/* <Box className={classes.boxOne}>
                     <Container size="xl" px="xs">
                         <Divider
                             my="xs"
@@ -229,7 +269,7 @@ const HomePage = () => {
                         />
                         <Center>SIMANTAP</Center>
                     </Container>
-                </Box>
+                </Box> */}
 
                 {/* KATEGORI */}
 

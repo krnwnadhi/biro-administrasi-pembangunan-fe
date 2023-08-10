@@ -4,8 +4,8 @@ import {
     Button,
     Container,
     Paper,
+    Text,
     TextInput,
-    Textarea,
 } from "@mantine/core";
 import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
 import React, { useEffect } from "react";
@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconAlertCircle } from "@tabler/icons-react";
 import ReactQuill from "react-quill";
 import { Redirect } from "react-router-dom";
+import { openConfirmModal } from "@mantine/modals";
+import { showNotification } from "@mantine/notifications";
 
 const UpdatePost = (props) => {
     const {
@@ -26,10 +28,6 @@ const UpdatePost = (props) => {
             params: { id },
         },
     } = props;
-    // console.log(id);
-
-    // const [value, setValue] = useState("");
-    // const [valueDesc, setValueDesc] = useState("");
 
     const dispatch = useDispatch();
 
@@ -41,17 +39,16 @@ const UpdatePost = (props) => {
     //select post
     const postData = useSelector((state) => state?.post);
     const { postDetail } = postData;
-    // console.log(postDetail);
 
     //select updated post
     const updatedPost = useSelector((state) => state?.post);
+    console.log(updatedPost);
     const { appError, loading, serverError, isUpdated } = updatedPost;
 
     const form = useForm({
         initialValues: {
             title: postDetail?.title,
             description: postDetail?.description,
-            // category: "",
         },
 
         validate: {
@@ -67,8 +64,36 @@ const UpdatePost = (props) => {
             id,
         };
         dispatch(updatePostAction(data));
-        // console.log(values);
     });
+
+    // const openUpdateModal = () =>
+    //     openConfirmModal({
+    //         title: "Hapus Berita?",
+    //         centered: true,
+    //         children: (
+    //             <Text size="sm">
+    //                 {`Apakah Anda yakin ingin update berita "${postDetail?.title}" ?`}
+    //             </Text>
+    //         ),
+    //         labels: { confirm: "Hapus", cancel: "Batal" },
+    //         confirmProps: { color: "red" },
+    //         onCancel: () => {
+    //             showNotification({
+    //                 title: "Batal",
+    //                 message: "Aksi dibatalkan",
+    //                 color: "red",
+    //             });
+    //         },
+    //         onConfirm: () => {
+    //             setTimeout(() => {
+    //                 dispatch(updatePostAction(data));
+    //                 showNotification({
+    //                     title: "Hapus",
+    //                     message: "Post berhasil dihapus",
+    //                 });
+    //             }, 1500);
+    //         },
+    //     });
 
     //redirect
     if (isUpdated) return <Redirect to={`/posts/${postDetail?._id}`} />;
@@ -91,33 +116,13 @@ const UpdatePost = (props) => {
                         placeholder="Judul"
                         label="Judul"
                         withAsterisk
-                        // value={value}
-                        // onChange={(e) => {
-                        //     setValue(e.target.value);
-                        // }}
                         {...form.getInputProps("title")}
                     />
-
-                    {/* <Textarea
-                        placeholder="Deskripsi"
-                        label="Deskripsi"
-                        withAsterisk
-                        autosize
-                        minRows={4}
-                        maxRows={8}
-                        // value={valueDesc}
-                        // onChange={(e) => {
-                        //     setValueDesc(e.target.value);
-                        // }}
-                        {...form.getInputProps("description")}
-                    /> */}
 
                     <Box mt={20}>
                         <EditorToolbar toolbarId={"t2"} />
                         <ReactQuill
                             theme="snow"
-                            // value={userInfo.information}
-                            // onChange={oninformation}
                             placeholder={"Tulis sesuatu..."}
                             modules={modules("t2")}
                             formats={formats}

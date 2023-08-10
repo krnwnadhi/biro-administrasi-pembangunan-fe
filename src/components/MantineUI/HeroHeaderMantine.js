@@ -1,4 +1,5 @@
 import { Container, Overlay, Text, Title, createStyles } from "@mantine/core";
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
 
 const useStyles = createStyles((theme) => ({
     hero: {
@@ -57,25 +58,29 @@ export default function HeroHeaderMantine() {
     const { classes } = useStyles();
 
     return (
-        <div className={classes.hero}>
-            <Overlay
-                gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 80%)"
-                opacity={1}
-                zIndex={0}
-            />
-            <Container className={classes.container}>
-                <Title className={classes.title}>
-                    Biro Administrasi Pembangunan Provinsi Jambi
-                </Title>
+        <Fade>
+            <div className={classes.hero}>
+                <Overlay
+                    gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 80%)"
+                    opacity={1}
+                    zIndex={0}
+                />
+                <Container className={classes.container}>
+                    <Slide direction="down">
+                        <Title className={classes.title}>
+                            Biro Administrasi Pembangunan Provinsi Jambi
+                        </Title>
 
-                <Text className={classes.description} size="xl" mt="xl">
-                    Selamat Datang di Website
-                </Text>
+                        <Text className={classes.description} size="xl" mt="xl">
+                            Selamat Datang di Website
+                        </Text>
 
-                <Text className={classes.description} size="xl">
-                    Biro Administrasi Pembangunan Provinsi Jambi
-                </Text>
-            </Container>
-        </div>
+                        <Text className={classes.description} size="xl">
+                            Biro Administrasi Pembangunan Provinsi Jambi
+                        </Text>
+                    </Slide>
+                </Container>
+            </div>
+        </Fade>
     );
 }

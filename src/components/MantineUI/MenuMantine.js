@@ -1,12 +1,7 @@
 import { Avatar, Group, Menu, Text, UnstyledButton } from "@mantine/core";
-import {
-    IconChevronRight,
-    IconList,
-    IconLogout,
-    IconUserCircle,
-} from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { IconLogout } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { forwardRef } from "react";
 import { logoutUserAction } from "../redux/slices/users/usersSlices";

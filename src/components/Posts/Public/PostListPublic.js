@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import DateFormatter from "../../../utils/dateFormatter";
+import { Fade } from "react-awesome-reveal";
 import { IconSearch } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -147,7 +148,7 @@ export default function PostListPublic() {
     ));
 
     return (
-        <>
+        <Fade delay={500}>
             <Container size="lg" mt={20}>
                 <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
 
@@ -374,6 +375,6 @@ export default function PostListPublic() {
                     </AspectRatio>
                 </SimpleGrid> */}
             </Container>
-        </>
+        </Fade>
     );
 }
