@@ -3,25 +3,20 @@ import {
     Anchor,
     Box,
     Breadcrumbs,
-    Button,
     Center,
-    CloseButton,
     Container,
-    Group,
-    Loader,
     Pagination,
     Paper,
     Space,
     Table,
     Text,
-    TextInput,
     useMantineTheme,
 } from "@mantine/core";
-import { IconDownload, IconTrash } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
 import DateFormatter from "../../../../utils/dateFormatter";
 import { Fade } from "react-awesome-reveal";
+import { IconDownload } from "@tabler/icons-react";
 import React from "react";
 import axios from "axios";
 import { baseDocumentURL } from "../../../../utils/baseURL";

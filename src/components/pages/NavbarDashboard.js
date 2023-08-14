@@ -1,23 +1,14 @@
-import { Code, Group, Navbar, ScrollArea, createStyles } from "@mantine/core";
 import {
-    IconAdjustments,
-    IconCalendarStats,
     IconCategory2,
     IconFile,
-    IconFileAnalytics,
     IconGauge,
-    IconLock,
     IconNotes,
     IconPhotoSearch,
-    IconPresentationAnalytics,
-    IconVideo,
 } from "@tabler/icons-react";
+import { Navbar, ScrollArea, createStyles } from "@mantine/core";
 
 import { LinksGroup } from "./NavbarLinksGroup";
 import MenuMantine from "../MantineUI/MenuMantine";
-import { useLocation } from "react-router-dom";
-
-// import { UserButton } from "../UserButton/UserButton";
 
 const mockdata = [
     {
@@ -46,7 +37,6 @@ const mockdata = [
     {
         label: "Dokumen",
         icon: IconFile,
-        // initiallyOpened: true,
         links: [
             { label: "Daftar Dokumen", link: "/dashboard/documents" },
             { label: "Tambah Dokumen", link: "/dashboard/tambah-document" },

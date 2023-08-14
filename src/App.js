@@ -2,7 +2,6 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import {
     Center,
     ColorSchemeProvider,
-    Container,
     Loader,
     MantineProvider,
     Paper,
@@ -14,7 +13,6 @@ import About from "./components/pages/Contact";
 import AddCategory from "./components/Categories/AddCategory";
 import AdminRoute from "./components/Navigation/ProtectedRoutes/AdminRoute";
 import CategoryList from "./components/Categories/CategoryList";
-import Contact from "./components/pages/Contact";
 import CreateDocument from "./components/Documents/CreateDocument";
 import CreateGallery from "./components/Gallery/CreateGallery";
 import CreatePost from "./components/Posts/CreatePost";
@@ -28,8 +26,6 @@ import HomePage from "./components/pages/HomePage";
 import IndexProfile from "./components/pages/Profil/IndexProfile";
 import { ModalsProvider } from "@mantine/modals";
 import Navbar from "./components/Navigation/Navbar";
-import NavbarDashboard from "./components/pages/NavbarDashboard";
-// import { NavigationProgress } from "@mantine/nprogress";
 import NotFound from "./components/pages/NotFound";
 import { NotificationsProvider } from "@mantine/notifications";
 import PostDetails from "./components/Posts/PostDetails";
@@ -42,7 +38,6 @@ import Struktur from "./components/pages/Profil/Struktur";
 import UpdateCategory from "./components/Categories/UpdateCategory";
 import UpdateGallery from "./components/Gallery/UpdateGallery";
 import UpdatePost from "./components/Posts/UpdatePost";
-import VideoList from "./components/video/VideoList";
 import VisiMisi from "./components/pages/Profil/VisiMisi";
 
 const App = () => {

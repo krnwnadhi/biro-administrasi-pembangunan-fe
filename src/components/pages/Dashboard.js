@@ -1,6 +1,5 @@
 import {
     AppShell,
-    Aside,
     Box,
     Burger,
     Divider,
@@ -12,13 +11,11 @@ import {
     Text,
     useMantineTheme,
 } from "@mantine/core";
-import { Link, useLocation } from "react-router-dom";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
-import MenuMantine from "../MantineUI/MenuMantine";
+import { Link } from "react-router-dom";
 import NavbarDashboard from "./NavbarDashboard";
 import PostList from "../Posts/PostList";
-import TableMantine from "../MantineUI/TableMantine";
 import { useState } from "react";
 
 // import NavbarDashboard from "./NavbarDashboard";

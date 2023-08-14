@@ -1,12 +1,4 @@
-import {
-    Anchor,
-    Burger,
-    Button,
-    Container,
-    Group,
-    Header,
-    createStyles,
-} from "@mantine/core";
+import { Button, Container, createStyles } from "@mantine/core";
 
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";

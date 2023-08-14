@@ -1,5 +1,5 @@
 import { Container, Overlay, Text, Title, createStyles } from "@mantine/core";
-import { Fade, Slide, Zoom } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const useStyles = createStyles((theme) => ({
     hero: {

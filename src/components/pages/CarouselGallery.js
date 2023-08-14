@@ -1,4 +1,4 @@
-import { Container, Image, Text, createStyles } from "@mantine/core";
+import { Container, Image, createStyles } from "@mantine/core";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

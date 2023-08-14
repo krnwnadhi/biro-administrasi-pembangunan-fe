@@ -40,7 +40,7 @@ export default function SignInMantine(props) {
 
     //select state from store
     const storeDataLogin = useSelector((store) => store?.users);
-    const { userAuth, loading, appError, serverError } = storeDataLogin;
+    const { userAuth, appError, serverError } = storeDataLogin;
     // console.log("storeDataLogin", storeDataLogin);
 
     //redirect'
@@ -51,20 +51,6 @@ export default function SignInMantine(props) {
     const formOnSubmit = form.onSubmit((values) =>
         dispatch(loginUserAction(values))
     );
-
-    // const notification = () => {
-    //     !appError &&
-    //         showNotification({
-    //             title: "Success!",
-    //             message: "Successfully logged in",
-    //             color: "green",
-    //             icon: <IconCheck size={20} />,
-    //             // closeButtonProps: {
-    //             //     color: "green",
-    //             //     iconSize: 20,
-    //             // },
-    //         });
-    // };
 
     return (
         <Container size={420}>
@@ -81,20 +67,6 @@ export default function SignInMantine(props) {
             <Paper mt={50} shadow="xl" radius="md" p="xl" withBorder {...props}>
                 <form onSubmit={formOnSubmit}>
                     <Stack>
-                        {/* {type === "register" && (
-                            <TextInput
-                                label="Name"
-                                placeholder="Your name"
-                                value={form.values.name}
-                                onChange={(event) =>
-                                    form.setFieldValue(
-                                        "name",
-                                        event.currentTarget.value
-                                    )
-                                }
-                            />
-                        )} */}
-
                         {appError || serverError ? (
                             <Alert
                                 icon={<IconAlertCircle size={16} />}
@@ -135,33 +107,9 @@ export default function SignInMantine(props) {
                                 }
                             />
                         )}
-
-                        {/* {type === "register" && (
-                            <Checkbox
-                                label="I accept terms and conditions"
-                                checked={form.values.terms}
-                                onChange={(event) =>
-                                    form.setFieldValue(
-                                        "terms",
-                                        event.currentTarget.checked
-                                    )
-                                }
-                            />
-                        )} */}
                     </Stack>
 
                     <Group position="right" mt="xl">
-                        {/* <Anchor
-                            component="button"
-                            type="button"
-                            color="dimmed"
-                            onClick={() => toggle()}
-                            size="xs"
-                        >
-                            {type === "register"
-                                ? "Already have an account? Login"
-                                : "Don't have an account? Register"}
-                        </Anchor> */}
                         <Button
                             disabled={!form.isValid()}
                             type="submit"

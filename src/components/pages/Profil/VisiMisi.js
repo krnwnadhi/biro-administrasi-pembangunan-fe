@@ -1,7 +1,6 @@
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 import {
-    Button,
     Center,
     Container,
     List,
@@ -17,7 +16,6 @@ import { Fade, Slide } from "react-awesome-reveal";
 import { React, useEffect } from "react";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { startNavigationProgress } from "@mantine/nprogress";
 import { useMediaQuery } from "@mantine/hooks";
 
 const useStyles = createStyles((theme) => ({

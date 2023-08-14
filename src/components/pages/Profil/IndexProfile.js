@@ -1,17 +1,12 @@
 import {
     Center,
     Container,
-    Divider,
     Loader,
     Paper,
     Tabs,
     useMantineTheme,
 } from "@mantine/core";
-import {
-    IconBinaryTree,
-    IconBuilding,
-    IconBuildingArch,
-} from "@tabler/icons-react";
+import { IconBinaryTree, IconBuildingArch } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 

@@ -1,12 +1,4 @@
-import {
-    Alert,
-    Box,
-    Button,
-    Container,
-    Paper,
-    Text,
-    TextInput,
-} from "@mantine/core";
+import { Alert, Box, Button, Container, Paper, TextInput } from "@mantine/core";
 import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
 import React, { useEffect } from "react";
 import {
@@ -19,8 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconAlertCircle } from "@tabler/icons-react";
 import ReactQuill from "react-quill";
 import { Redirect } from "react-router-dom";
-import { openConfirmModal } from "@mantine/modals";
-import { showNotification } from "@mantine/notifications";
 
 const UpdatePost = (props) => {
     const {

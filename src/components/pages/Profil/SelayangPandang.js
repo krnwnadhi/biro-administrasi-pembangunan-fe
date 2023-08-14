@@ -9,9 +9,9 @@ import {
     TypographyStylesProvider,
     useMantineTheme,
 } from "@mantine/core";
-import { Fade, Slide } from "react-awesome-reveal";
 import React, { useEffect } from "react";
 
+import { Fade } from "react-awesome-reveal";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useMediaQuery } from "@mantine/hooks";
 

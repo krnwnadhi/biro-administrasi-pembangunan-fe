@@ -1,19 +1,14 @@
 import {
     ActionIcon,
-    Anchor,
     Badge,
     Box,
-    Breadcrumbs,
     Button,
     Center,
     Container,
     Divider,
     Group,
-    Image,
-    List,
     Loader,
     Pagination,
-    Paper,
     Space,
     Table,
     Text,
@@ -21,7 +16,7 @@ import {
     TypographyStylesProvider,
     useMantineTheme,
 } from "@mantine/core";
-import { IconPencil, IconPlus, IconTrash, IconX } from "@tabler/icons-react";
+import { IconPencil, IconTrash } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,7 +27,6 @@ import { basePostURL } from "../../utils/baseURL";
 import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useEffect } from "react";
-import { usePagination } from "@mantine/hooks";
 
 const PostList = (req, res) => {
     const dispatch = useDispatch();

@@ -11,7 +11,6 @@ import {
     Center,
     Container,
     Divider,
-    FileButton,
     FileInput,
     Footer,
     Group,
@@ -26,15 +25,8 @@ import {
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
-import {
-    IconAlertCircle,
-    IconCheck,
-    IconPhoto,
-    IconUpload,
-    IconX,
-} from "@tabler/icons-react";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
 import { showNotification, updateNotification } from "@mantine/notifications";
@@ -86,9 +78,6 @@ export default function CreatePost() {
     //get post data
     const post = useSelector((state) => state?.post);
     const { appError: appErrorPost, loading: loadingPost, isCreated } = post;
-
-    // console.log(appErrorPost);
-    // console.log(loadingPost);
 
     const form = useForm({
         initialValues: {

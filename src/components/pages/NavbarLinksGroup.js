@@ -7,11 +7,7 @@ import {
     UnstyledButton,
     createStyles,
 } from "@mantine/core";
-import {
-    IconCalendarStats,
-    IconChevronLeft,
-    IconChevronRight,
-} from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
