@@ -226,7 +226,7 @@ const PostList = (req, res) => {
                                 {postItem &&
                                     postItem?.map((post) => (
                                         <tr key={post.id}>
-                                            <td>
+                                            <td key={post.id}>
                                                 <Text lineClamp={2} size="sm">
                                                     {post.title}{" "}
                                                 </Text>
@@ -259,13 +259,6 @@ const PostList = (req, res) => {
                                                 </Badge>
                                             </td>
                                             <td>
-                                                {/* <Image
-                                                    src={post?.image}
-                                                    width={50}
-                                                    fit="contain"
-                                                    alt="Gambar Rusak"
-                                                    withPlaceholder
-                                                /> */}
                                                 <Text
                                                     size="sm"
                                                     style={{
@@ -287,11 +280,7 @@ const PostList = (req, res) => {
                                                 >
                                                     <ActionIcon
                                                         component={Link}
-                                                        // to={`/update-kategori/${post?._id}`}
-                                                        // to={`/posts/update/${post?._id}`}
                                                         to={`/posts/${post?._id}`}
-                                                        // target="_blank"
-                                                        // rel="noopener noreferrer"
                                                         color="blue"
                                                     >
                                                         <IconPencil

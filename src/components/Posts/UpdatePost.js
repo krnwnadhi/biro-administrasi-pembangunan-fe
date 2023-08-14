@@ -66,35 +66,6 @@ const UpdatePost = (props) => {
         dispatch(updatePostAction(data));
     });
 
-    // const openUpdateModal = () =>
-    //     openConfirmModal({
-    //         title: "Hapus Berita?",
-    //         centered: true,
-    //         children: (
-    //             <Text size="sm">
-    //                 {`Apakah Anda yakin ingin update berita "${postDetail?.title}" ?`}
-    //             </Text>
-    //         ),
-    //         labels: { confirm: "Hapus", cancel: "Batal" },
-    //         confirmProps: { color: "red" },
-    //         onCancel: () => {
-    //             showNotification({
-    //                 title: "Batal",
-    //                 message: "Aksi dibatalkan",
-    //                 color: "red",
-    //             });
-    //         },
-    //         onConfirm: () => {
-    //             setTimeout(() => {
-    //                 dispatch(updatePostAction(data));
-    //                 showNotification({
-    //                     title: "Hapus",
-    //                     message: "Post berhasil dihapus",
-    //                 });
-    //             }, 1500);
-    //         },
-    //     });
-
     //redirect
     if (isUpdated) return <Redirect to={`/posts/${postDetail?._id}`} />;
 

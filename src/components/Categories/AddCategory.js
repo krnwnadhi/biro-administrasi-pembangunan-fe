@@ -16,13 +16,14 @@ import {
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
-import { IconAlertCircle } from "@tabler/icons-react";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import { createCategoryAction } from "../redux/slices/category/categorySlice";
+import { showNotification } from "@mantine/notifications";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 
@@ -30,6 +31,7 @@ export default function AddCategory() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);
     const dispatch = useDispatch();
+
     const form = useForm({
         initialValues: {
             title: "",
@@ -45,9 +47,9 @@ export default function AddCategory() {
     const state = useSelector((state) => state?.category);
     const { appError, loading, serverError, isCreated } = state;
 
-    const formOnSubmit = form.onSubmit((values) =>
-        dispatch(createCategoryAction(values))
-    );
+    const formOnSubmit = form.onSubmit((values) => {
+        dispatch(createCategoryAction(values));
+    });
 
     // Redirect
     if (isCreated) return <Redirect to="/dashboard/kategori" />;
@@ -177,6 +179,19 @@ export default function AddCategory() {
                                     type="submit"
                                     // compact
                                     fullWidth
+                                    onClick={() => {
+                                        setTimeout(() => {
+                                            showNotification({
+                                                id: "load-data",
+                                                color: "teal",
+                                                title: "Sukses",
+                                                message:
+                                                    "Berhasil menambahkan data",
+                                                icon: <IconCheck size={16} />,
+                                                autoClose: 3000,
+                                            });
+                                        }, 500);
+                                    }}
                                 >
                                     Tambah
                                 </Button>

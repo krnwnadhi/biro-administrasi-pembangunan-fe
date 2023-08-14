@@ -11,6 +11,8 @@ import {
     Center,
     Container,
     Divider,
+    FileButton,
+    FileInput,
     Footer,
     Group,
     Header,
@@ -19,6 +21,7 @@ import {
     Navbar,
     ScrollArea,
     Select,
+    Space,
     Text,
     TextInput,
     useMantineTheme,
@@ -27,14 +30,16 @@ import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import EditorToolbar, { formats, modules } from "../pages/EditorToolbar";
 import {
     IconAlertCircle,
+    IconCheck,
     IconPhoto,
     IconUpload,
     IconX,
 } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
+import { showNotification, updateNotification } from "@mantine/notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import NavbarDashboard from "../pages/NavbarDashboard";
@@ -43,9 +48,17 @@ import { createPostAction } from "../redux/slices/posts/postSlice";
 import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
 
 export default function CreatePost() {
+    const [file, setFile] = useState(null);
+    const resetRef = useRef(null);
+
     const [editorMarkdownValue, setEditorMarkdownValue] = useState("");
     const [opened, setOpened] = useState(false);
     const theme = useMantineTheme();
+
+    const clearFile = () => {
+        setFile(null);
+        resetRef.current?.();
+    };
 
     const dispatch = useDispatch();
 
@@ -93,9 +106,9 @@ export default function CreatePost() {
         },
     });
 
-    const formOnSubmit = form.onSubmit((values) =>
+    const formOnSubmit = form.onSubmit(
+        (values) => dispatch(createPostAction(values))
         // console.log(values)
-        dispatch(createPostAction(values))
     );
 
     // Redirect
@@ -212,9 +225,11 @@ export default function CreatePost() {
                             withAsterisk
                             label="Judul"
                             aria-label="My input"
-                            placeholder="Judul Artikel"
+                            placeholder="Min. 3 Huruf"
                             {...form.getInputProps("title")}
                         />
+
+                        <Space h="xl" />
 
                         {/* <Textarea
                         mt={10}
@@ -237,6 +252,8 @@ export default function CreatePost() {
                             />
                         </Box>
 
+                        <Space h="xl" />
+
                         <Select
                             mt={10}
                             // required
@@ -256,7 +273,9 @@ export default function CreatePost() {
                         />
                         {/* )} */}
 
-                        <Dropzone
+                        <Space h="xl" />
+
+                        {/* <Dropzone
                             mt={20}
                             onDrop={(image) => {
                                 form.setFieldValue("image", image[0]);
@@ -319,12 +338,29 @@ export default function CreatePost() {
                                     </Text>
                                 </div>
                             </Group>
-                        </Dropzone>
+                        </Dropzone> */}
+
+                        <FileInput
+                            label="Gambar Carousel"
+                            description="Input gambar berekstensi jpg, jpeg, atau png & berukuran < 1Mb."
+                            placeholder="Silahkan Pilih Gambar Untuk Carousel"
+                            clearable
+                            required
+                            withAsterisk
+                            accept="image/png, image/jpeg, image/jpg"
+                            // value={value}
+                            // onChange={handleFileChange}
+                            {...form.getInputProps("image")}
+                        />
+
                         <Text size="sm" color="red" ta="center">
                             {appErrorPost
                                 ? "File terlalu besar, Silahkan refresh browser dahulu"
                                 : null}
                         </Text>
+
+                        <Space h="xl" />
+
                         <Group position="apart" mt="xl">
                             {loadingPost ? (
                                 <Button disabled loading fullWidth>
@@ -336,6 +372,28 @@ export default function CreatePost() {
                                     type="submit"
                                     // compact
                                     fullWidth
+                                    onClick={() => {
+                                        showNotification({
+                                            id: "load-data",
+                                            loading: true,
+                                            title: "Loading..",
+                                            message: "Menambahkan data",
+                                            autoClose: false,
+                                            disallowClose: true,
+                                        });
+
+                                        setTimeout(() => {
+                                            updateNotification({
+                                                id: "load-data",
+                                                color: "teal",
+                                                title: "Sukses",
+                                                message:
+                                                    "Berhasil menambahkan data",
+                                                icon: <IconCheck size={16} />,
+                                                autoClose: 4500,
+                                            });
+                                        }, 3000);
+                                    }}
                                 >
                                     Tambah
                                 </Button>

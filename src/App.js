@@ -29,7 +29,7 @@ import IndexProfile from "./components/pages/Profil/IndexProfile";
 import { ModalsProvider } from "@mantine/modals";
 import Navbar from "./components/Navigation/Navbar";
 import NavbarDashboard from "./components/pages/NavbarDashboard";
-import { NavigationProgress } from "@mantine/nprogress";
+// import { NavigationProgress } from "@mantine/nprogress";
 import NotFound from "./components/pages/NotFound";
 import { NotificationsProvider } from "@mantine/notifications";
 import PostDetails from "./components/Posts/PostDetails";
@@ -100,7 +100,7 @@ const App = () => {
                             // },
                         }}
                     >
-                        <NavigationProgress />
+                        {/* <NavigationProgress /> */}
                         <ModalsProvider>
                             <NotificationsProvider limit={5}>
                                 <BrowserRouter>

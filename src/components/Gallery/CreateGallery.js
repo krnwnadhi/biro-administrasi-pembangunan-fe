@@ -19,12 +19,13 @@ import {
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
 import { Link, Redirect } from "react-router-dom";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
+import { showNotification, updateNotification } from "@mantine/notifications";
 import { useDispatch, useSelector } from "react-redux";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
-import { IconAlertCircle } from "@tabler/icons-react";
 import NavbarDashboard from "../pages/NavbarDashboard";
 import { createGalleryAction } from "../redux/slices/gallery/gallerySlice";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
@@ -57,6 +58,7 @@ export default function CreateGallery() {
 
     const formOnSubmit = form.onSubmit((values) => {
         dispatch(createGalleryAction(values));
+        // console.log(values);
         setTimeout(() => {
             history.push("/dashboard/gallery");
         }, 3000);
@@ -217,6 +219,28 @@ export default function CreateGallery() {
                                     disabled={!form.isValid()}
                                     type="submit"
                                     fullWidth
+                                    onClick={() => {
+                                        showNotification({
+                                            id: "load-data",
+                                            loading: true,
+                                            title: "Loading..",
+                                            message: "Menambahkan data",
+                                            autoClose: false,
+                                            disallowClose: true,
+                                        });
+
+                                        setTimeout(() => {
+                                            updateNotification({
+                                                id: "load-data",
+                                                color: "teal",
+                                                title: "Sukses",
+                                                message:
+                                                    "Berhasil menambahkan data",
+                                                icon: <IconCheck size={16} />,
+                                                autoClose: 4500,
+                                            });
+                                        }, 3000);
+                                    }}
                                 >
                                     Tambah
                                 </Button>

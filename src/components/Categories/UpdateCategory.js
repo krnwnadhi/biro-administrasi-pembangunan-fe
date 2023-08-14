@@ -17,18 +17,20 @@ import {
     TextInput,
     useMantineTheme,
 } from "@mantine/core";
-import { IconAlertCircle, IconTrash } from "@tabler/icons-react";
+import { IconAlertCircle, IconCheck, IconTrash } from "@tabler/icons-react";
 import { Link, Redirect, useParams } from "react-router-dom";
 import {
     deleteCategoryAction,
     fetchCategoryAction,
     updateCategoryAction,
 } from "../redux/slices/category/categorySlice";
+import { showNotification, updateNotification } from "@mantine/notifications";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import NavbarDashboard from "../pages/NavbarDashboard";
+import { openConfirmModal } from "@mantine/modals";
 import { useForm } from "@mantine/form";
 
 export default function UpdateCategory() {
@@ -61,6 +63,47 @@ export default function UpdateCategory() {
     const formOnSubmit = form.onSubmit((values) =>
         dispatch(updateCategoryAction({ title: values.title, id }))
     );
+
+    const openDeleteModal = () =>
+        openConfirmModal({
+            title: "Hapus?",
+            centered: true,
+            children: (
+                <Text size="sm">
+                    {`Apakah Anda yakin ingin menghapus kategori "${category?.title}" ?`}
+                </Text>
+            ),
+            labels: { confirm: "Hapus", cancel: "Batal" },
+            confirmProps: { color: "red" },
+            onCancel: () => {
+                showNotification({
+                    title: "Batal",
+                    message: "Aksi dibatalkan",
+                    color: "red",
+                });
+            },
+            onConfirm: () => {
+                showNotification({
+                    id: "load-data",
+                    loading: true,
+                    title: "Loading..",
+                    message: "Menghapus data",
+                    autoClose: false,
+                    disallowClose: true,
+                });
+                setTimeout(() => {
+                    dispatch(deleteCategoryAction(id));
+                    updateNotification({
+                        id: "load-data",
+                        color: "teal",
+                        title: "Sukses",
+                        message: "Berhasil menghapus data",
+                        icon: <IconCheck size={16} />,
+                        autoClose: 3000,
+                    });
+                }, 2000);
+            },
+        });
 
     //redirect
     if (isEdited || isDeleted)
@@ -199,9 +242,7 @@ export default function UpdateCategory() {
                                 </Button>
                                 <ActionIcon
                                     color="red"
-                                    onClick={() =>
-                                        dispatch(deleteCategoryAction(id))
-                                    }
+                                    onClick={openDeleteModal}
                                 >
                                     <IconTrash size={16} stroke={1.5} />
                                 </ActionIcon>

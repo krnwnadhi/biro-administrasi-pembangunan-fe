@@ -18,6 +18,7 @@ import {
 import {
     IconCalendar,
     IconCategory2,
+    IconCheck,
     IconEye,
     IconPencil,
     IconTrash,
@@ -29,11 +30,11 @@ import {
     deletePostAction,
     fetchDetailPostAction,
 } from "../redux/slices/posts/postSlice";
+import { showNotification, updateNotification } from "@mantine/notifications";
 import { useDispatch, useSelector } from "react-redux";
 
 import DateFormatter from "../../utils/dateFormatter";
 import { openConfirmModal } from "@mantine/modals";
-import { showNotification } from "@mantine/notifications";
 
 const PostDetails = (props) => {
     const id = props.computedMatch.params.id;
@@ -78,11 +79,24 @@ const PostDetails = (props) => {
                 });
             },
             onConfirm: () => {
+                showNotification({
+                    id: "load-data",
+                    loading: true,
+                    title: "Loading..",
+                    message: "Menghapus data",
+                    autoClose: false,
+                    disallowClose: true,
+                });
+
                 setTimeout(() => {
                     dispatch(deletePostAction(postDetail?._id));
-                    showNotification({
-                        title: "Hapus",
-                        message: "Post berhasil dihapus",
+                    updateNotification({
+                        id: "load-data",
+                        color: "teal",
+                        title: "Sukses",
+                        message: "Berhasil menghapus data",
+                        icon: <IconCheck size={16} />,
+                        autoClose: 3000,
                     });
                 }, 1500);
             },
