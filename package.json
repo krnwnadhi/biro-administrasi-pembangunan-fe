@@ -1,6 +1,7 @@
 {
     "name": "fe",
     "version": "0.1.0",
+    "homepage": "adpem.jambiprov.go.id",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.10.5",
