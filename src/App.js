@@ -71,37 +71,15 @@ const App = () => {
                         theme={{
                             colorScheme,
                             loader: "dots",
-                            // components: {
-                            //     Container: {
-                            //         defaultProps: {
-                            //             sizes: {
-                            //                 xs: 540,
-                            //                 sm: 720,
-                            //                 md: 960,
-                            //                 lg: 1140,
-                            //                 xl: 1320,
-                            //             },
-                            //         },
-                            //     },
-                            // },
-                            // fontFamily: "Open Sans",
+
                             fontFamily: "Arial, sans-serif",
-                            // fontSizes: { lg: 90 },
-                            // radius: { sm: 200 },
-                            // components: {
-                            //     Button: {
-                            //         defaultProps: { color: "green" },
-                            //     },
-                            // },
                         }}
                     >
-                        {/* <NavigationProgress /> */}
                         <ModalsProvider>
                             <NotificationsProvider limit={5}>
                                 <BrowserRouter>
                                     <Paper>
                                         <Navbar />
-                                        {/* <NavbarDashboard /> */}
                                         <Switch>
                                             <Route
                                                 exact
@@ -114,12 +92,6 @@ const App = () => {
                                                 path="/"
                                                 component={HomePage}
                                             />
-
-                                            {/* <Route
-                                                exact
-                                                path="/profil"
-                                                component={Profile}
-                                            /> */}
 
                                             <Route
                                                 exact
@@ -151,12 +123,6 @@ const App = () => {
                                                 component={Dokumen}
                                             />
 
-                                            {/* <Route
-                                            exact
-                                            path="/kontak"
-                                            component={Contact}
-                                        /> */}
-
                                             <Route
                                                 exact
                                                 path="/about"
@@ -174,12 +140,6 @@ const App = () => {
                                                 path="/dashboard/tambah-post"
                                                 component={CreatePost}
                                             />
-
-                                            {/* <AdminRoute
-                                            exact
-                                            path="/dashboard/posts"
-                                            component={PostList}
-                                        /> */}
 
                                             <AdminRoute
                                                 exact
@@ -271,20 +231,6 @@ const App = () => {
                                                 component={CreateDocument}
                                             />
 
-                                            {/* <Route
-                                            exact
-                                            path="/documents/:id"
-                                            component={DocumentDetailsPublic}
-                                        /> */}
-
-                                            {/* {isAdmin && ( */}
-                                            {/* <Route
-                                    exact
-                                    path="/dashboard"
-                                    component={Dashboard}
-                                /> */}
-                                            {/* )} */}
-
                                             <Route
                                                 exact
                                                 path="/404"
@@ -302,11 +248,9 @@ const App = () => {
                     </MantineProvider>
                 </ColorSchemeProvider>
             ) : (
-                // <Container size="xl">
                 <Center style={{ width: "auto", height: 600 }}>
                     <Loader variant="dots" size="xl" />
                 </Center>
-                // </Container>
             )}
         </>
     );
