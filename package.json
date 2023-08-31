@@ -1,7 +1,6 @@
 {
     "name": "fe",
     "version": "0.1.0",
-    "homepage": "adpem.jambiprov.go.id",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.10.5",
@@ -14,7 +13,6 @@
         "@mantine/hooks": "^5.10.4",
         "@mantine/modals": "^5.10.4",
         "@mantine/notifications": "^5.10.4",
-        "@mantine/nprogress": "^5.10.5",
         "@mantine/spotlight": "^5.10.4",
         "@mantine/tiptap": "^5.10.4",
         "@mui/icons-material": "^5.11.0",
@@ -40,7 +38,7 @@
         "react-quill": "^2.0.0",
         "react-redux": "^8.0.5",
         "react-router-dom": "^5.2.0",
-        "react-scripts": "5.0.1",
+        "react-scripts": "^5.0.1",
         "web-vitals": "^2.1.4"
     },
     "scripts": {

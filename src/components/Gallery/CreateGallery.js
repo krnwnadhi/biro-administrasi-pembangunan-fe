@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import NavbarDashboard from "../pages/NavbarDashboard";
+import React from "react";
 import { createGalleryAction } from "../redux/slices/gallery/gallerySlice";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useState } from "react";

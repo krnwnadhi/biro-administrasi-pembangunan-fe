@@ -10,6 +10,7 @@ import {
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import { Link } from "react-router-dom";
+import React from "react";
 import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({

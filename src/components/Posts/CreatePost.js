@@ -35,6 +35,7 @@ import { useEffect, useRef, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import NavbarDashboard from "../pages/NavbarDashboard";
+import React from "react";
 import ReactQuill from "react-quill";
 import { createPostAction } from "../redux/slices/posts/postSlice";
 import { fetchAllCategoryAction } from "../redux/slices/category/categorySlice";
@@ -47,10 +48,10 @@ export default function CreatePost() {
     const [opened, setOpened] = useState(false);
     const theme = useMantineTheme();
 
-    const clearFile = () => {
-        setFile(null);
-        resetRef.current?.();
-    };
+    // const clearFile = () => {
+    //     setFile(null);
+    //     resetRef.current?.();
+    // };
 
     const dispatch = useDispatch();
 

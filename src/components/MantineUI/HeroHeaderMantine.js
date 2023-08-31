@@ -1,6 +1,8 @@
 import { Container, Overlay, Text, Title, createStyles } from "@mantine/core";
 import { Fade, Slide } from "react-awesome-reveal";
 
+import React from "react";
+
 const useStyles = createStyles((theme) => ({
     hero: {
         position: "relative",

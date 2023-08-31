@@ -24,6 +24,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
 import DateFormatter from "../../utils/dateFormatter";
 import { Link } from "react-router-dom";
+import React from "react";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useMediaQuery } from "@mantine/hooks";
 

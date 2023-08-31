@@ -20,6 +20,7 @@ import CarouselBerita from "../MantineUI/CarouselBerita";
 import CarouselGallery from "./CarouselGallery";
 import HeroHeaderMantine from "../MantineUI/HeroHeaderMantine";
 import { Link } from "react-router-dom";
+import React from "react";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
 import { useEffect } from "react";
 import { useMediaQuery } from "@mantine/hooks";

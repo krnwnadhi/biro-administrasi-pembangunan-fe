@@ -15,6 +15,8 @@ import {
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 
+import React from "react";
+
 const useStyles = createStyles((theme) => ({
     footer: {
         marginTop: 120,

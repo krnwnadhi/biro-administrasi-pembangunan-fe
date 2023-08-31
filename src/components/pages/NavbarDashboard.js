@@ -9,6 +9,7 @@ import { Navbar, ScrollArea, createStyles } from "@mantine/core";
 
 import { LinksGroup } from "./NavbarLinksGroup";
 import MenuMantine from "../MantineUI/MenuMantine";
+import React from "react";
 
 const mockdata = [
     {

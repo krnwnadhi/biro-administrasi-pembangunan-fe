@@ -16,6 +16,7 @@ import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import { Link } from "react-router-dom";
 import NavbarDashboard from "./NavbarDashboard";
 import PostList from "../Posts/PostList";
+import React from "react";
 import { useState } from "react";
 
 // import NavbarDashboard from "./NavbarDashboard";

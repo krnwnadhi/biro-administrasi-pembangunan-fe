@@ -32,6 +32,7 @@ import PostDetails from "./components/Posts/PostDetails";
 import PostDetailsPublic from "./components/Posts/Public/PostDetailsPublic";
 import PostList from "./components/Posts/PostList";
 import PostListPublic from "./components/Posts/Public/PostListPublic";
+import React from "react";
 import SelayangPandang from "./components/pages/Profil/IndexProfile";
 import SignInMantine from "./components/pages/SignInMantine";
 import Struktur from "./components/pages/Profil/Struktur";

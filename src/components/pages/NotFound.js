@@ -8,6 +8,7 @@ import {
 } from "@mantine/core";
 
 import { Link } from "react-router-dom";
+import React from "react";
 
 const useStyles = createStyles((theme) => ({
     root: {

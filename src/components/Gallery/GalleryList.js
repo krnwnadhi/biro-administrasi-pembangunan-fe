@@ -271,30 +271,29 @@ const GalleryList = () => {
                         <h2>Tidak ada Post</h2>
                     ) : null}
 
-                    {
-                        galleryItem?.map((item, index) => {
-                            return (
-                                <Center
+                    {galleryItem?.map((item, index) => {
+                        return (
+                            <Center
+                                key={index}
+                                component={Link}
+                                to={`/dashboard/update-gallery/${item?._id}`}
+                                sx={{ textDecoration: "none" }}
+                            >
+                                <Image
                                     key={index}
-                                    component={Link}
-                                    to={`/dashboard/update-gallery/${item?._id}`}
-                                    sx={{ textDecoration: "none" }}
-                                >
-                                    <Image
-                                        key={index}
-                                        radius="md"
-                                        // height={200}
-                                        // width={200}
-                                        fit="cover"
-                                        src={item?.image}
-                                        alt="With default placeholder"
-                                        withPlaceholder
-                                        caption={item?.title}
-                                    />
-                                </Center>
-                            );
-                        })
-                        // .sort((a, b) => (a > b ? 1 : -1))
+                                    radius="md"
+                                    // height={200}
+                                    // width={200}
+                                    fit="cover"
+                                    src={item?.image}
+                                    alt="With default placeholder"
+                                    withPlaceholder
+                                    caption={item?.title}
+                                />
+                            </Center>
+                        );
+                    })
+                    // .sort((a, b) => (a > b ? 1 : -1))
                     }
 
                     {/* {galleryList.length > 0 ? (

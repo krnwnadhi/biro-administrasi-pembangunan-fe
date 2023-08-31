@@ -30,6 +30,7 @@ import { useEffect, useState } from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import NavbarDashboard from "../pages/NavbarDashboard";
+import React from "react";
 import { openConfirmModal } from "@mantine/modals";
 import { useForm } from "@mantine/form";
 
@@ -42,8 +43,14 @@ export default function UpdateCategory() {
 
     //get data from store
     const state = useSelector((state) => state?.category);
-    const { appError, loading, serverError, category, isEdited, isDeleted } =
-        state;
+    const {
+        appError,
+        loading,
+        serverError,
+        category,
+        isEdited,
+        isDeleted,
+    } = state;
 
     const form = useForm({
         initialValues: {
