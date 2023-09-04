@@ -165,17 +165,21 @@ export default function CarouselBerita() {
     // console.log(postList);
 
     const { result = [] } = postList;
-    // console.log(result);
+    console.log(result);
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
     const slides = [...result]
-        .map((item) => (
-            <Carousel.Slide key={item._id}>
-                <Cards {...item} />
-            </Carousel.Slide>
-        ))
+        .map((item) => {
+            return (
+                <>
+                    <Carousel.Slide key={item.id}>
+                        <Cards {...item} />
+                    </Carousel.Slide>
+                </>
+            );
+        })
         .slice(0, 5);
 
     return (
@@ -215,7 +219,15 @@ export default function CarouselBerita() {
                     },
                 }}
             >
-                {slides}
+                {slides === 0 ? (
+                    <>
+                        <Container my={10}>
+                            <Text ta="center">Belum ada Berita Kegiatan</Text>
+                        </Container>
+                    </>
+                ) : (
+                    slides
+                )}
             </Carousel>
         </Container>
     );

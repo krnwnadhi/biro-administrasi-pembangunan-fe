@@ -1,4 +1,4 @@
-import { Container, Image, createStyles } from "@mantine/core";
+import { Container, Image, Text, createStyles } from "@mantine/core";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -87,7 +87,15 @@ const CarouselGallery = () => {
                     },
                 }}
             >
-                {slides}
+                {slides === 0 ? (
+                    <>
+                        <Container my={10}>
+                            <Text>Belum ada Foto/Galeri</Text>
+                        </Container>
+                    </>
+                ) : (
+                    slides
+                )}
             </Carousel>
         </Container>
     );

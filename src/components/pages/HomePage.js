@@ -13,8 +13,7 @@ import {
     createStyles,
     useMantineTheme,
 } from "@mantine/core";
-import { Fade, Flip, Slide, Zoom } from "react-awesome-reveal";
-import { useDispatch, useSelector } from "react-redux";
+import { Fade, Slide } from "react-awesome-reveal";
 
 import CarouselBerita from "../MantineUI/CarouselBerita";
 import CarouselGallery from "./CarouselGallery";
@@ -22,6 +21,7 @@ import HeroHeaderMantine from "../MantineUI/HeroHeaderMantine";
 import { Link } from "react-router-dom";
 import React from "react";
 import { fetchAllPostAction } from "../redux/slices/posts/postSlice";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 

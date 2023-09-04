@@ -210,120 +210,132 @@ export default function PostListPublic() {
                             {serverError}
                         </h2>
                     ) : null}
-                    {// loading ? (
-                    //     <Center style={{ minHeight: "70vh" }}>
-                    //         <Loader size="xl" variant="dots" />
-                    //     </Center>
-                    // ) : appError || serverError ? (
-                    //     <h2>
-                    //         {appError}
-                    //         {serverError}
-                    //     </h2>
-                    // ) :
-                    postItem?.length <= 0 ? (
-                        <h2>Tidak ada Post</h2>
-                    ) : (
-                        postItem
-                            // .sort((a, b) => (a > b ? 1 : -1))
-                            ?.map((item, index) => {
-                                if (item.length !== 0) {
-                                    return (
-                                        <Card
-                                            key={index}
-                                            withBorder
-                                            radius="md"
-                                            className={classes.card}
-                                            shadow="lg"
-                                        >
-                                            <Group
-                                                noWrap={mobile ? false : true}
-                                                spacing={1}
+                    {
+                        // loading ? (
+                        //     <Center style={{ minHeight: "70vh" }}>
+                        //         <Loader size="xl" variant="dots" />
+                        //     </Center>
+                        // ) : appError || serverError ? (
+                        //     <h2>
+                        //         {appError}
+                        //         {serverError}
+                        //     </h2>
+                        // ) :
+                        postItem?.length === 0 ? (
+                            <h2>Tidak ada Post</h2>
+                        ) : (
+                            postItem
+                                // .sort((a, b) => (a > b ? 1 : -1))
+                                ?.map((item, index) => {
+                                    if (item.length !== 0) {
+                                        return (
+                                            <Card
+                                                key={index}
+                                                withBorder
+                                                radius="md"
+                                                className={classes.card}
+                                                shadow="lg"
                                             >
-                                                <Image
-                                                    src={item?.image}
-                                                    height={mobile ? 220 : 210}
-                                                    width={mobile ? 220 : 210}
-                                                    radius="md"
-                                                    alt="Gambar Rusak"
-                                                    // fit="contain"
-                                                    withPlaceholder
-                                                    mx={mobile ? "auto" : 0}
-                                                />
-                                                <div className={classes.body}>
-                                                    <Badge
-                                                        variant={
-                                                            theme.colorScheme ===
-                                                            "dark"
-                                                                ? "light"
-                                                                : "outline"
+                                                <Group
+                                                    noWrap={
+                                                        mobile ? false : true
+                                                    }
+                                                    spacing={1}
+                                                >
+                                                    <Image
+                                                        src={item?.image}
+                                                        height={
+                                                            mobile ? 220 : 210
                                                         }
-                                                        fullWidth
-                                                    >
-                                                        {item?.category}
-                                                    </Badge>
-
-                                                    <Space h="xl" />
-
-                                                    <Text
-                                                        component={Link}
-                                                        to={`/berita/${item._id}`}
-                                                        className={
-                                                            classes.title
+                                                        width={
+                                                            mobile ? 220 : 210
                                                         }
-                                                        size={
-                                                            mobile ? "sm" : "md"
-                                                        }
-                                                        lineClamp={4}
+                                                        radius="md"
+                                                        alt="Gambar Rusak"
+                                                        // fit="contain"
+                                                        withPlaceholder
+                                                        mx={mobile ? "auto" : 0}
+                                                    />
+                                                    <div
+                                                        className={classes.body}
                                                     >
-                                                        {item?.title}
-                                                    </Text>
-
-                                                    <Group
-                                                        // noWrap
-                                                        spacing="xs"
-                                                        mt={20}
-                                                    >
-                                                        <Avatar
-                                                            size={20}
-                                                            src={
-                                                                item?.user
-                                                                    ?.profilePhoto
+                                                        <Badge
+                                                            variant={
+                                                                theme.colorScheme ===
+                                                                "dark"
+                                                                    ? "light"
+                                                                    : "outline"
                                                             }
-                                                        />
-                                                        <Text size="xs">
-                                                            {
-                                                                item?.user
-                                                                    ?.fullName
-                                                            }
-                                                        </Text>
+                                                            fullWidth
+                                                        >
+                                                            {item?.category}
+                                                        </Badge>
+
+                                                        <Space h="xl" />
 
                                                         <Text
-                                                            size="xs"
-                                                            color="dimmed"
+                                                            component={Link}
+                                                            to={`/berita/${item._id}`}
+                                                            className={
+                                                                classes.title
+                                                            }
+                                                            size={
+                                                                mobile
+                                                                    ? "sm"
+                                                                    : "md"
+                                                            }
+                                                            lineClamp={4}
                                                         >
-                                                            •
+                                                            {item?.title}
                                                         </Text>
 
-                                                        <Text
-                                                            size="xs"
-                                                            color="dimmed"
+                                                        <Group
+                                                            // noWrap
+                                                            spacing="xs"
+                                                            mt={20}
                                                         >
-                                                            <DateFormatter
-                                                                date={
-                                                                    item?.createdAt
+                                                            <Avatar
+                                                                size={20}
+                                                                src={
+                                                                    item?.user
+                                                                        ?.profilePhoto
                                                                 }
                                                             />
-                                                        </Text>
-                                                    </Group>
-                                                </div>
-                                            </Group>
-                                        </Card>
-                                    );
-                                } else {
-                                    return console.log(" ");
-                                }
-                            })
-                    )}
+                                                            <Text size="xs">
+                                                                {
+                                                                    item?.user
+                                                                        ?.fullName
+                                                                }
+                                                            </Text>
+
+                                                            <Text
+                                                                size="xs"
+                                                                color="dimmed"
+                                                            >
+                                                                •
+                                                            </Text>
+
+                                                            <Text
+                                                                size="xs"
+                                                                color="dimmed"
+                                                            >
+                                                                <DateFormatter
+                                                                    date={
+                                                                        item?.createdAt
+                                                                    }
+                                                                />
+                                                            </Text>
+                                                        </Group>
+                                                    </div>
+                                                </Group>
+                                            </Card>
+                                        );
+                                    } else {
+                                        return console.log(" ");
+                                    }
+                                })
+                        )
+                    }
                 </SimpleGrid>
                 <Center>
                     <Box p={20}>
