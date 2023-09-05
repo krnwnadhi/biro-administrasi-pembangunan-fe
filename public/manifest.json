@@ -18,7 +18,7 @@
             "sizes": "16x16"
         }
     ],
-    "start_url": "/api/v1/",
+    "start_url": ".",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
