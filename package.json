@@ -65,5 +65,5 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://localhost:8888/api/v1/"
+    "proxy": "https://adpem-jambiprov-go-id-backend.up.railway.app"
 }

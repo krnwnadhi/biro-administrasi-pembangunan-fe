@@ -18,11 +18,11 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
-import React from "react";
 
 import DarkModeBtn from "../MantineUI/DarkModeBtn";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import NavbarDashboard from "../pages/NavbarDashboard";
+import React from "react";
 import axios from "axios";
 import { baseDocumentURL } from "../../utils/baseURL";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
@@ -72,6 +72,7 @@ export default function CreateDocument(props) {
                     await axios.post(`${baseDocumentURL}`, formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",
+                            "Access-Control-Allow-Origin": "*",
                         },
                     });
                     history.push("/dashboard/documents");

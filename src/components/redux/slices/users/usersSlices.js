@@ -11,6 +11,7 @@ export const registerUserAction = createAsyncThunk(
             const config = {
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
                 },
             };
 
@@ -37,6 +38,7 @@ export const loginUserAction = createAsyncThunk(
             const config = {
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
                 },
             };
 

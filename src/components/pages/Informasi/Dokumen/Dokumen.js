@@ -73,6 +73,7 @@ const Dokumen = () => {
         try {
             const result = await axios.get(`${baseDocumentURL}/${id}`, {
                 responseType: "blob",
+                "Access-Control-Allow-Origin": "*",
             });
 
             const split = file_path.split("/");

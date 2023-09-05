@@ -18,6 +18,7 @@ export const createCategoryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -51,6 +52,7 @@ export const fetchAllCategoryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -76,6 +78,7 @@ export const updateCategoryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -107,6 +110,7 @@ export const deleteCategoryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -137,6 +141,7 @@ export const fetchCategoryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 

@@ -18,6 +18,7 @@ export const createGalleryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -81,6 +82,7 @@ export const fetchDetailGalleryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -106,6 +108,7 @@ export const updateGalleryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -137,6 +140,7 @@ export const deleteGalleryAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 

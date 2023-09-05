@@ -18,6 +18,7 @@ export const createPostAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -51,6 +52,7 @@ export const fetchAllPostAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -79,6 +81,7 @@ export const fetchDetailPostAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -104,6 +107,7 @@ export const updatePostAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -135,6 +139,7 @@ export const deletePostAction = createAsyncThunk(
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
