@@ -13,9 +13,9 @@ export const basePostURL =
 export const baseCommentURL =
     "https://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/comments";
 export const baseEmailURL =
-    "htthttps://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/email";
+    "https://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/email";
 export const baseCategoryURL =
-    "htthttps://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/category";
+    "https://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/category";
 export const baseGalleryURL =
     "https://adpem-jambiprov-go-id-backend.up.railway.app/api/v1/gallery";
 export const baseDocumentURL =
