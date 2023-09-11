@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 import { baseUserURL } from "../../../../utils/baseURL";
+import secureLocalStorage from "react-secure-storage";
 
 //register action
 export const registerUserAction = createAsyncThunk(
@@ -48,7 +49,7 @@ export const loginUserAction = createAsyncThunk(
                 config
             );
             // save to local storage
-            localStorage.setItem("userInfo", JSON.stringify(data));
+            secureLocalStorage.setItem("logInfo", JSON.stringify(data));
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -60,8 +61,8 @@ export const loginUserAction = createAsyncThunk(
 );
 
 //get user from local storage and place it into the store
-const userLoginFormStorage = localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
+const userLoginFormStorage = secureLocalStorage.getItem("logInfo")
+    ? JSON.parse(secureLocalStorage.getItem("logInfo"))
     : null;
 
 //logout from local storage
@@ -69,8 +70,8 @@ export const logoutUserAction = createAsyncThunk(
     "user/logout",
     async (userData, { rejectWithValue, getState, dispatch }) => {
         try {
-            localStorage.removeItem("userInfo");
-            // localStorage.removeItem("userInfo", JSON.stringify(userData));
+            secureLocalStorage.removeItem("logInfo");
+            // secureLocalStorage.removeItem("logInfo", JSON.stringify(userData));
         } catch (error) {
             if (!error?.response) {
                 throw error;
