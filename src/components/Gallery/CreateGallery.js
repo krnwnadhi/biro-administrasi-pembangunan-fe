@@ -42,7 +42,7 @@ export default function CreateGallery() {
     const dispatch = useDispatch();
 
     const gallery = useSelector((state) => state);
-    // console.log(gallery);
+    console.log(gallery);
     const { appError, loading, serverError, isCreated } = gallery;
 
     const form = useForm({
@@ -141,115 +141,107 @@ export default function CreateGallery() {
                 </Header>
             }
         >
-            <>
-                <Container size="lg">
-                    <Text
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                        size="lg"
-                        weight={500}
-                        mt={30}
-                    >
-                        Tambah Gallery
-                    </Text>
+            <Container size="lg">
+                <Text
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                    size="lg"
+                    weight={500}
+                    mt={30}
+                >
+                    Tambah Gallery
+                </Text>
 
-                    <Divider labelPosition="center" my="xl" />
+                <Divider labelPosition="center" my="xl" />
 
-                    {loading ? (
-                        <Center style={{ minHeight: "80vh" }}>
-                            <Loader mt={20} size="lg" variant="dots" />
-                        </Center>
-                    ) : (
-                        <form
-                            onSubmit={formOnSubmit}
-                            encType="multipart/form-data"
-                            method="POST"
-                        >
-                            {appError || serverError ? (
-                                <Alert
-                                    icon={<IconAlertCircle size={16} />}
-                                    title="Error!"
-                                    color="red"
-                                >
-                                    Tidak ada Token! Silahkan login kembali.
-                                </Alert>
-                            ) : (
-                                <>
-                                    <TextInput
-                                        mb={20}
-                                        withAsterisk
-                                        label="Judul Gambar"
-                                        aria-label="My input"
-                                        placeholder="Min. 3 Huruf"
-                                        {...form.getInputProps("title")}
-                                        // disabled
-                                    />
-                                    <FileInput
-                                        label="Gambar"
-                                        description="Input gambar berekstensi jpg, jpeg, atau png & berukuran < 1Mb."
-                                        placeholder="Silahkan Pilih Gambar"
-                                        // multiple
-                                        clearable
-                                        required
-                                        withAsterisk
-                                        accept="image/png, image/jpeg, image/jpg"
-                                        // value={value}
-                                        // onChange={handleFileChange}
-                                        {...form.getInputProps("image")}
-                                        // disabled
-                                    />
-                                </>
-                            )}
+                {loading ? (
+                    <Center style={{ minHeight: "80vh" }}>
+                        <Loader mt={20} size="lg" variant="dots" />
+                    </Center>
+                ) : (
+                    <form onSubmit={formOnSubmit}>
+                        {appError || serverError ? (
+                            <Alert
+                                icon={<IconAlertCircle size={16} />}
+                                title="Error!"
+                                color="red"
+                            >
+                                Tidak ada Token! Silahkan login kembali.
+                            </Alert>
+                        ) : null}
 
-                            <Text size="sm" color="red" ta="center">
-                                {appError
-                                    ? "File terlalu besar, Silahkan refresh browser dahulu"
-                                    : null}
-                            </Text>
+                        <TextInput
+                            mb={20}
+                            withAsterisk
+                            label="Judul Gambar"
+                            aria-label="My input"
+                            placeholder="Min. 3 Huruf"
+                            {...form.getInputProps("title")}
+                            // disabled
+                        />
+                        <FileInput
+                            label="Gambar"
+                            description="Input gambar berekstensi jpg, jpeg, atau png & berukuran < 1Mb."
+                            placeholder="Silahkan Pilih Gambar"
+                            // multiple
+                            clearable
+                            required
+                            withAsterisk
+                            accept="image/png, image/jpeg, image/jpg"
+                            // value={value}
+                            // onChange={handleFileChange}
+                            {...form.getInputProps("image")}
+                            // disabled
+                        />
 
-                            <Space h="xl" />
+                        <Text size="sm" color="red" ta="center">
+                            {appError
+                                ? "File terlalu besar, Silahkan refresh browser dahulu"
+                                : null}
+                        </Text>
 
-                            {loading ? (
-                                <Button disabled compact loading>
-                                    Loading...
-                                </Button>
-                            ) : (
-                                <Button
-                                    disabled={!form.isValid()}
-                                    type="submit"
-                                    fullWidth
-                                    onClick={() => {
-                                        showNotification({
+                        <Space h="xl" />
+
+                        {loading ? (
+                            <Button disabled compact loading>
+                                Loading...
+                            </Button>
+                        ) : (
+                            <Button
+                                disabled={!form.isValid()}
+                                type="submit"
+                                fullWidth
+                                onClick={() => {
+                                    showNotification({
+                                        id: "load-data",
+                                        loading: true,
+                                        title: "Loading..",
+                                        message: "Menambahkan data",
+                                        autoClose: false,
+                                        disallowClose: true,
+                                    });
+
+                                    setTimeout(() => {
+                                        updateNotification({
                                             id: "load-data",
-                                            loading: true,
-                                            title: "Loading..",
-                                            message: "Menambahkan data",
-                                            autoClose: false,
-                                            disallowClose: true,
+                                            color: "teal",
+                                            title: "Sukses",
+                                            message:
+                                                "Berhasil menambahkan data",
+                                            icon: <IconCheck size={16} />,
+                                            autoClose: 4500,
                                         });
-
-                                        setTimeout(() => {
-                                            updateNotification({
-                                                id: "load-data",
-                                                color: "teal",
-                                                title: "Sukses",
-                                                message:
-                                                    "Berhasil menambahkan data",
-                                                icon: <IconCheck size={16} />,
-                                                autoClose: 4500,
-                                            });
-                                        }, 3000);
-                                    }}
-                                >
-                                    Tambah
-                                </Button>
-                            )}
-                        </form>
-                    )}
-                </Container>
-            </>
+                                    }, 3000);
+                                }}
+                            >
+                                Tambah
+                            </Button>
+                        )}
+                    </form>
+                )}
+            </Container>
         </AppShell>
     );
 }

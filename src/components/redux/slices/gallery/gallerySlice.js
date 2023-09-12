@@ -1,7 +1,7 @@
-import { baseGalleryURL, basePostURL } from "../../../../utils/baseURL";
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import { baseGalleryURL } from "../../../../utils/baseURL";
 
 //action to redirect
 const resetGalleryAction = createAction("gallery/add/reset");

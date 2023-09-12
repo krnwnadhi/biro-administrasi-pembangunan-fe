@@ -102,7 +102,6 @@ export default function CreatePost() {
     );
 
     // Redirect
-    // if (isCreated) return <Redirect to="/posts" />;
     if (isCreated) return <Redirect to="/dashboard" />;
 
     return (
@@ -179,7 +178,6 @@ export default function CreatePost() {
                 </Header>
             }
         >
-            {/* <Paper radius="md" p="xl" style={{ minHeight: "78vh" }}> */}
             <Container size="lg">
                 <Text
                     sx={{
@@ -221,14 +219,9 @@ export default function CreatePost() {
 
                         <Space h="xl" />
 
-                        {/* <Textarea
-                        mt={10}
-                        withAsterisk
-                        label="Deskripsi"
-                        placeholder="Deskripsi Artikel"
-                        {...form.getInputProps("description")}
-                    /> */}
-                        {/* <Text mt={10}>Deskripsi</Text> */}
+                        <Text mt={10} mb={-20} size={14}>
+                            Deskripsi
+                        </Text>
                         <Box mt={20}>
                             <EditorToolbar toolbarId={"t2"} />
                             <ReactQuill
@@ -265,71 +258,6 @@ export default function CreatePost() {
 
                         <Space h="xl" />
 
-                        {/* <Dropzone
-                            mt={20}
-                            onDrop={(image) => {
-                                form.setFieldValue("image", image[0]);
-                            }}
-                            maxSize={1 * 1024 ** 2}
-                            accept={IMAGE_MIME_TYPE}
-                            name={form.values.image}
-                        >
-                            <Group
-                                position="center"
-                                spacing="xl"
-                                style={{
-                                    minHeight: 75,
-                                    pointerEvents: "none",
-                                }}
-                            >
-                                <Dropzone.Accept>
-                                    <IconUpload
-                                        size={50}
-                                        stroke={1.5}
-                                        color={
-                                            theme.colors[theme.primaryColor][
-                                                theme.colorScheme === "dark"
-                                                    ? 4
-                                                    : 6
-                                            ]
-                                        }
-                                    />
-                                </Dropzone.Accept>
-                                <Dropzone.Reject>
-                                    <IconX
-                                        size={50}
-                                        stroke={1.5}
-                                        color={
-                                            theme.colors.red[
-                                                theme.colorScheme === "dark"
-                                                    ? 4
-                                                    : 6
-                                            ]
-                                        }
-                                    />
-                                </Dropzone.Reject>
-                                <Dropzone.Idle>
-                                    <IconPhoto size={50} stroke={1.5} />
-                                </Dropzone.Idle>
-
-                                <div>
-                                    <Text size="md" inline>
-                                        Seret gambar ke sini atau klik untuk
-                                        memilih file
-                                    </Text>
-                                    <Text
-                                        size="xs"
-                                        color="dimmed"
-                                        inline
-                                        mt={7}
-                                    >
-                                        File hanya ber-ektensi JPEG/JPG. File
-                                        tidak boleh lebih dari 1MB.
-                                    </Text>
-                                </div>
-                            </Group>
-                        </Dropzone> */}
-
                         <FileInput
                             label="Gambar Carousel"
                             description="Input gambar berekstensi jpg, jpeg, atau png & berukuran < 1Mb."
@@ -345,11 +273,11 @@ export default function CreatePost() {
 
                         <Text size="sm" color="red" ta="center">
                             {appErrorPost
-                                ? "File terlalu besar, Silahkan refresh browser dahulu"
+                                ? "File terlalu besar. Upload size kurang dari 1mb."
                                 : null}
                         </Text>
 
-                        <Space h="xl" />
+                        {/* <Space h="xl" /> */}
 
                         <Group position="apart" mt="xl">
                             {loadingPost ? (
@@ -362,28 +290,6 @@ export default function CreatePost() {
                                     type="submit"
                                     // compact
                                     fullWidth
-                                    onClick={() => {
-                                        showNotification({
-                                            id: "load-data",
-                                            loading: true,
-                                            title: "Loading..",
-                                            message: "Menambahkan data",
-                                            autoClose: false,
-                                            disallowClose: true,
-                                        });
-
-                                        setTimeout(() => {
-                                            updateNotification({
-                                                id: "load-data",
-                                                color: "teal",
-                                                title: "Sukses",
-                                                message:
-                                                    "Berhasil menambahkan data",
-                                                icon: <IconCheck size={16} />,
-                                                autoClose: 4500,
-                                            });
-                                        }, 3000);
-                                    }}
                                 >
                                     Tambah
                                 </Button>

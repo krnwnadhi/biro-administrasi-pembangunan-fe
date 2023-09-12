@@ -189,7 +189,7 @@ const PostDetailsPublic = (props) => {
                                         </Group>
 
                                         <CopyButton
-                                            value={`/berita/${postDetail?.id}`}
+                                            value={`https://adpem-jambiprov-go-id.vercel.app/berita/${postDetail?.id}`}
                                             timeout={2000}
                                         >
                                             {({ copied, copy }) => (
