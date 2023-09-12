@@ -96,7 +96,7 @@ const PostList = (req, res) => {
 
     const handlePageChange = (event) => {
         setPage(event);
-        console.log(event);
+        // console.log(event);
     };
 
     const searchData = (e) => {

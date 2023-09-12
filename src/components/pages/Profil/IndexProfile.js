@@ -32,7 +32,7 @@ const IndexProfile = () => {
     return (
         <>
             {loading === false ? (
-                <Fade delay={500}>
+                <Fade delay={500} triggerOnce>
                     <Paper style={{ minHeight: "92vh" }}>
                         <Tabs
                             variant="pills"

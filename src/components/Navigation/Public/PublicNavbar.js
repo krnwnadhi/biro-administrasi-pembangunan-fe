@@ -496,10 +496,6 @@ export default function AdminNavbar() {
 
                     <Collapse in={linksOpenedThree}>{linksLayanan}</Collapse>
 
-                    <a href="/kontak" className={classes.link}>
-                        Kontak
-                    </a>
-
                     {/* <a href="/dashboard" className={classes.link}>
                         Dashboard
                     </a> */}

@@ -60,7 +60,7 @@ export default function HeroHeaderMantine() {
     const { classes } = useStyles();
 
     return (
-        <Fade>
+        <Fade triggerOnce>
             <div className={classes.hero}>
                 <Overlay
                     gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 80%)"
@@ -68,7 +68,7 @@ export default function HeroHeaderMantine() {
                     zIndex={0}
                 />
                 <Container className={classes.container}>
-                    <Slide direction="down">
+                    <Slide direction="down" triggerOnce>
                         <Title className={classes.title}>
                             Biro Administrasi Pembangunan Provinsi Jambi
                         </Title>

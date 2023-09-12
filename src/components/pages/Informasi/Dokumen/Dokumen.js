@@ -109,7 +109,7 @@ const Dokumen = () => {
     ));
 
     return (
-        <Fade delay={500}>
+        <Fade delay={500} triggerOnce>
             <Paper sx={{ minHeight: "75vh" }}>
                 <Container size="lg" mt={20}>
                     <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
@@ -186,7 +186,7 @@ const Dokumen = () => {
                                             >
                                                 {description}
                                             </td>
-                                            <td>
+                                            <td style={{ textAlign: "center" }}>
                                                 <a
                                                     href="#/"
                                                     onClick={() =>

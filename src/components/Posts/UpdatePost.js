@@ -32,7 +32,7 @@ const UpdatePost = (props) => {
 
     //select updated post
     const updatedPost = useSelector((state) => state?.post);
-    console.log(updatedPost);
+    // console.log(updatedPost);
     const { appError, loading, serverError, isUpdated } = updatedPost;
 
     const form = useForm({

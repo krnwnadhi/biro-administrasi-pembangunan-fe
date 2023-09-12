@@ -102,7 +102,7 @@ const HomePage = () => {
 
                 <Box className={classes.boxTwo}>
                     <Container size="xl">
-                        <Slide direction="down">
+                        <Slide direction="down" triggerOnce>
                             <Divider
                                 my="xs"
                                 label="TENTANG"
@@ -127,7 +127,7 @@ const HomePage = () => {
                             ]}
                         >
                             <Text color="dimmed" size={mobile ? "sm" : "md"}>
-                                <Fade>
+                                <Fade triggerOnce>
                                     <Text
                                         fs={70}
                                         fw={900}
@@ -146,7 +146,7 @@ const HomePage = () => {
                                     </Text>
                                 </Fade>
                                 <Space h="xl" />
-                                <Fade delay={500}>
+                                <Fade delay={500} triggerOnce>
                                     Biro Administrasi Pembangunan merupakan
                                     salah satu Biro pada Sekretariat Daerah Prov
                                     Jambi yang bertugas membantu Asisten
@@ -164,7 +164,7 @@ const HomePage = () => {
                                 </Fade>
                             </Text>
 
-                            <Fade delay={500}>
+                            <Fade delay={500} triggerOnce>
                                 <Card
                                     shadow="lg"
                                     p="lg"
@@ -197,7 +197,7 @@ const HomePage = () => {
 
                 <Box className={classes.boxOne}>
                     <Container size="xl" px="xs">
-                        <Slide direction="down">
+                        <Slide direction="down" triggerOnce>
                             <Divider
                                 my="xs"
                                 label="BERITA & KEGIATAN"
@@ -207,7 +207,7 @@ const HomePage = () => {
                                 fw={700}
                             />
                         </Slide>
-                        <Fade delay={500}>
+                        <Fade delay={500} triggerOnce>
                             <CarouselBerita />
 
                             <Space h="xl" />

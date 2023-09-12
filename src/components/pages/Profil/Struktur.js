@@ -16,7 +16,7 @@ const Struktur = () => {
     }, []);
 
     return (
-        <Fade>
+        <Fade triggerOnce>
             <Center p={20}>
                 <LazyLoadImage
                     src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"

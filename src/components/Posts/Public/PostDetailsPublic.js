@@ -70,7 +70,7 @@ const PostDetailsPublic = (props) => {
     ));
 
     return (
-        <Fade delay={500}>
+        <Fade delay={500} triggerOnce>
             <Paper style={{ minHeight: "92vh" }}>
                 <Container mt={20} size="lg">
                     <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>

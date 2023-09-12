@@ -165,7 +165,7 @@ export default function CarouselBerita() {
     // console.log(postList);
 
     const { result = [] } = postList;
-    console.log(result);
+    // console.log(result);
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);

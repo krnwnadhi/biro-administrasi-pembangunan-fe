@@ -26,7 +26,7 @@ const SelayangPandang = () => {
     return (
         <Paper style={{ minHeight: "92vh" }}>
             <Container size="md">
-                <Fade>
+                <Fade triggerOnce>
                     <Title my="sm" order={2} align="center">
                         Selayang Pandang Biro Administrasi Pembangunan Provinsi
                         Jambi
@@ -35,7 +35,7 @@ const SelayangPandang = () => {
 
                 <Space h="xl" />
 
-                <Fade>
+                <Fade triggerOnce>
                     <Center p={20}>
                         <LazyLoadImage
                             src="https://res.cloudinary.com/degzbxlnx/image/upload/v1690966461/Untitled_design_3_g4c2d0.png"
@@ -50,7 +50,7 @@ const SelayangPandang = () => {
 
                 <Space h="xl" />
 
-                <Fade>
+                <Fade triggerOnce>
                     <TypographyStylesProvider>
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Porro aliquam quidem illo nobis nostrum veniam
@@ -79,7 +79,7 @@ const SelayangPandang = () => {
 
                 <Space h="xl" />
 
-                <Fade>
+                <Fade triggerOnce>
                     <TypographyStylesProvider>
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Quae, natus amet autem id dolorum libero harum
@@ -107,7 +107,7 @@ const SelayangPandang = () => {
 
                 <Space h="xl" />
 
-                <Fade>
+                <Fade triggerOnce>
                     <TypographyStylesProvider>
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Quae, natus amet autem id dolorum libero harum
@@ -134,7 +134,8 @@ const SelayangPandang = () => {
                 </Fade>
 
                 <Space h="xl" />
-                <Fade>
+
+                <Fade triggerOnce>
                     <TypographyStylesProvider>
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Quae, natus amet autem id dolorum libero harum

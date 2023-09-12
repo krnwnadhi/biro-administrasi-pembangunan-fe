@@ -250,7 +250,9 @@ const DocumentList = () => {
                                                     date={createdAt}
                                                 />
                                             </td>
-                                            <td>{title}</td>
+                                            <td style={{ textAlign: "center" }}>
+                                                {title}
+                                            </td>
                                             <td
                                                 style={{
                                                     textAlign: "center",

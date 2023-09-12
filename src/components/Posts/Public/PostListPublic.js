@@ -149,7 +149,7 @@ export default function PostListPublic() {
     ));
 
     return (
-        <Fade delay={500}>
+        <Fade delay={500} triggerOnce>
             <Container size="lg" mt={20}>
                 <Breadcrumbs>{breadcrumbsItem}</Breadcrumbs>
 
@@ -240,6 +240,7 @@ export default function PostListPublic() {
                                                     noWrap={
                                                         mobile ? false : true
                                                     }
+                                                    position="center"
                                                     spacing={1}
                                                 >
                                                     <Image
@@ -347,34 +348,6 @@ export default function PostListPublic() {
                         />
                     </Box>
                 </Center>
-                {/* <SimpleGrid
-                    p="xl"
-                    verticalSpacing="xl"
-                    cols={2}
-                    breakpoints={[
-                        { maxWidth: 1050, cols: 1, spacing: "md" },
-                        // { maxWidth: 755, cols: 2, spacing: "sm" },
-                        { maxWidth: 600, cols: 1, spacing: "sm" },
-                    ]}
-                >
-                    <AspectRatio ratio={16 / 9} sx={{ maxWidth: 500 }}>
-                        <iframe
-                            src="https://www.youtube.com/embed/Dorf8i6lCuk"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        />
-                    </AspectRatio>
-                    <AspectRatio ratio={16 / 9} sx={{ maxWidth: 500 }}>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d498.53206092129386!2d103.58285755645555!3d-1.6032178220115967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e25885a2db494ab%3A0x867f3a1a856bd41a!2sKantor%20Gubernur%20Jambi!5e0!3m2!1sen!2sru!4v1677471620099!5m2!1sen!2sru"
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Google map"
-                            frameBorder="0"
-                        />
-                    </AspectRatio>
-                </SimpleGrid> */}
             </Container>
         </Fade>
     );

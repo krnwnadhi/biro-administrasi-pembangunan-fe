@@ -164,7 +164,7 @@ const GalleryListPublic = () => {
 
                 {galleryItem?.map((item, index) => {
                     return (
-                        <Zoom delay={500}>
+                        <Zoom delay={500} triggerOnce>
                             <Center
                                 key={index}
                                 // component={Link}
