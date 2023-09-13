@@ -163,7 +163,7 @@ const dataLayanan = [
         icon: IconBuildingArch,
         title: "SIMANTAP",
         description: "SIMANTAP Biro Adminsistrasi Pembangunan Provinsi Jambi",
-        link: "/profil",
+        link: "#",
     },
 ];
 

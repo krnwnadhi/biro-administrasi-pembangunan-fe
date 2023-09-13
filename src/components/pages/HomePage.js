@@ -39,8 +39,6 @@ const useStyles = createStyles((theme) => ({
                 ? theme.colors.dark[6]
                 : theme.colors.gray[0],
         padding: theme.spacing.xl,
-        // paddingBottom: 20,
-        // marginBottom: theme.radius.xl,
 
         "&:hover": {
             backgroundColor:
@@ -51,8 +49,6 @@ const useStyles = createStyles((theme) => ({
     },
     boxTwo: {
         padding: theme.spacing.xl,
-        // paddingBottom: 20,
-        // marginBottom: theme.radius.xl,
     },
 }));
 
@@ -67,31 +63,6 @@ const HomePage = () => {
 
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
-
-    // const jobColors = {
-    //     sosial: "blue",
-    //     ekonomi: "cyan",
-    //     teknologi: "pink",
-    // };
-
-    // const post = useSelector((state) => state?.post);
-    // const { postList = [], loading, appError, serverError } = post;
-
-    // const category = useSelector((state) => state?.category);
-    // const {
-    //     // appError: appErrorCat,
-    //     categoryList = [],
-    //     // loading: loadingCat,
-    //     // serverError: serverErrorCat,
-    // } = category;
-    // // console.log(categoryList);
-
-    // const allCategories = categoryList?.map((category) => {
-    //     return {
-    //         label: category?.title,
-    //         value: category?.title,
-    //     };
-    // });
 
     return (
         <>
