@@ -60,6 +60,59 @@ export const loginUserAction = createAsyncThunk(
     }
 );
 
+//reset password token
+export const passwordResetTokenAction = createAsyncThunk(
+    "password/token",
+    async (email, { rejectWithValue, getState, dispatch }) => {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+            };
+
+            const { data } = await axios.post(
+                `${baseUserURL}/forget-password-token`,
+                { email },
+                config
+            );
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
+//Password reset
+export const passwordResetAction = createAsyncThunk(
+    "password/reset",
+    async (user, { rejectWithValue, getState, dispatch }) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        //http call
+        try {
+            const { data } = await axios.put(
+                `${baseUserURL}/reset-password`,
+                { password: user?.password, token: user?.token },
+                config
+            );
+            return data;
+        } catch (error) {
+            if (!error.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
 //get user from local storage and place it into the store
 const userLoginFormStorage = secureLocalStorage.getItem("logInfo")
     ? JSON.parse(secureLocalStorage.getItem("logInfo"))
@@ -137,6 +190,42 @@ const usersSLices = createSlice({
             state.serverError = undefined;
         });
         builder.addCase(logoutUserAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appError = action?.payload?.message;
+            state.serverError = action?.error?.message;
+        });
+
+        //passwordResetToken
+        builder.addCase(passwordResetTokenAction.pending, (state, action) => {
+            state.loading = true;
+            state.appError = undefined;
+            state.serverError = undefined;
+        });
+        builder.addCase(passwordResetTokenAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.passwordToken = action?.payload;
+            state.appError = undefined;
+            state.serverError = undefined;
+        });
+        builder.addCase(passwordResetTokenAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appError = action?.payload?.message;
+            state.serverError = action?.error?.message;
+        });
+
+        //passwordReset
+        builder.addCase(passwordResetAction.pending, (state, action) => {
+            state.loading = true;
+            state.appError = undefined;
+            state.serverError = undefined;
+        });
+        builder.addCase(passwordResetAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.passwordReset = action?.payload;
+            state.appError = undefined;
+            state.serverError = undefined;
+        });
+        builder.addCase(passwordResetAction.rejected, (state, action) => {
             state.loading = false;
             state.appError = action?.payload?.message;
             state.serverError = action?.error?.message;

@@ -180,6 +180,7 @@ export default function FooterMantine() {
         "/tambah-post",
         "/kategori",
         "/tambah-kategori",
+        "/reset-password",
     ];
 
     const { pathname } = useLocation();

@@ -11,7 +11,7 @@ const store = configureStore({
         post: postReducer,
         gallery: galleryReducer,
     },
-    // devTools: false,
+    devTools: false,
 });
 
 export default store;

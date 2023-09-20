@@ -182,6 +182,7 @@ export default function AdminNavbar() {
         "/signup",
         "/dashboard",
         "/kategori",
+        "/reset-password",
     ];
 
     const { pathname } = useLocation();

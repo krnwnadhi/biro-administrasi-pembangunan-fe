@@ -1,5 +1,6 @@
 import {
     Alert,
+    Anchor,
     Button,
     Checkbox,
     Container,
@@ -13,6 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { IconAlertCircle } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { loginUserAction } from "../redux/slices/users/usersSlices";
@@ -73,7 +75,6 @@ export default function SignInMantine(props) {
                                 icon={<IconAlertCircle size={16} />}
                                 color="red"
                                 radius="lg"
-                                // withCloseButton
                             >
                                 {appError}
                             </Alert>
@@ -97,25 +98,31 @@ export default function SignInMantine(props) {
                         />
 
                         {type === "login" && (
-                            <Checkbox
-                                label="Ingat saya"
-                                checked={form.values.terms}
-                                onChange={(event) =>
-                                    form.setFieldValue(
-                                        "terms",
-                                        event.currentTarget.checked
-                                    )
-                                }
-                            />
+                            <Group position="apart" mt="lg">
+                                <Checkbox
+                                    label="Ingat saya"
+                                    checked={form.values.terms}
+                                    onChange={(event) =>
+                                        form.setFieldValue(
+                                            "terms",
+                                            event.currentTarget.checked
+                                        )
+                                    }
+                                />
+                                <Anchor
+                                    component={Link}
+                                    to="/reset-password"
+                                    underline={false}
+                                    size="sm"
+                                >
+                                    Lupa password?
+                                </Anchor>
+                            </Group>
                         )}
                     </Stack>
 
                     <Group position="right" mt="xl">
-                        <Button
-                            disabled={!form.isValid()}
-                            type="submit"
-                            // onClick={notification}
-                        >
+                        <Button disabled={!form.isValid()} type="submit">
                             Sign In
                         </Button>
                     </Group>

@@ -44,7 +44,6 @@ const CarouselGallery = () => {
                         src={item?.image}
                         alt="With default placeholder"
                         withPlaceholder
-                        // caption={item?.title}
                     />
                 </Carousel.Slide>
             );

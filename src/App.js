@@ -33,6 +33,8 @@ import PostDetailsPublic from "./components/Posts/Public/PostDetailsPublic";
 import PostList from "./components/Posts/PostList";
 import PostListPublic from "./components/Posts/Public/PostListPublic";
 import React from "react";
+import ResetPassword from "./components/pages/resetPassword";
+import ResetPasswordEmail from "./components/pages/resetPasswordEmail";
 import SelayangPandang from "./components/pages/Profil/IndexProfile";
 import SignInMantine from "./components/pages/SignInMantine";
 import Struktur from "./components/pages/Profil/Struktur";
@@ -77,11 +79,29 @@ const App = () => {
                         }}
                     >
                         <ModalsProvider>
-                            <NotificationsProvider limit={5}>
+                            <NotificationsProvider limit={5} autoClose={3000}>
                                 <BrowserRouter>
                                     <Paper>
                                         <Navbar />
                                         <Switch>
+                                            <Route
+                                                exact
+                                                path="/signin"
+                                                component={SignInMantine}
+                                            />
+
+                                            <Route
+                                                exact
+                                                path="/reset-password"
+                                                component={ResetPassword}
+                                            />
+
+                                            <Route
+                                                exact
+                                                path="/reset-password/:token"
+                                                component={ResetPasswordEmail}
+                                            />
+
                                             <Route
                                                 exact
                                                 path="/signin"
