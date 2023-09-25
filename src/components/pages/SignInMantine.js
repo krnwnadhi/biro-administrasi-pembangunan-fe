@@ -22,7 +22,7 @@ import { useForm } from "@mantine/form";
 import { useToggle } from "@mantine/hooks";
 
 export default function SignInMantine(props) {
-    const [type, toggle] = useToggle(["login", "register"]);
+    const [type] = useToggle(["login", "register"]);
     const form = useForm({
         initialValues: {
             email: "",

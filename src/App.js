@@ -79,7 +79,7 @@ const App = () => {
                         }}
                     >
                         <ModalsProvider>
-                            <NotificationsProvider limit={5} autoClose={3000}>
+                            <NotificationsProvider limit={1} autoClose={3000}>
                                 <BrowserRouter>
                                     <Paper>
                                         <Navbar />

@@ -1,10 +1,8 @@
 import {
-    Alert,
     Button,
     Container,
     Group,
     Loader,
-    Notification,
     Paper,
     PasswordInput,
     Space,
@@ -59,7 +57,7 @@ export default function ResetPasswordEmail(props) {
 
     const user = useSelector((state) => state?.users);
     // console.log(user);
-    const { passwordReset, loading, appError, serverError } = user;
+    const { passwordReset, loading } = user;
 
     const formOnSubmit = form.onSubmit((values) => {
         const data = { password: values?.password, token };
