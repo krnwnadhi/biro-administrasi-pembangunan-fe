@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import { Provider } from "react-redux";
 import React from "react";
@@ -9,6 +10,7 @@ root.render(
     <>
         <Provider store={store}>
             <App />
+            <Analytics />
         </Provider>
     </>
 );
